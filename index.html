@@ -50,12 +50,14 @@
         .card-img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
         .card:hover .card-img-container img { transform: scale(1.03); }
         
-        .badge { position: absolute; top: 15px; left: 15px; padding: 0.4rem 0.9rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; z-index: 2; }
+        /* HLAVIČKA TEXTU S ROZMĚRY A ŠTÍTKEM */
+        .card-meta-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; }
+        .badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
         .badge.volne { background: rgba(46, 204, 113, 0.15); color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.3); }
         .badge.prodane { background: rgba(231, 76, 60, 0.15); color: #e74c3c; border: 1px solid rgba(231, 76, 60, 0.3); }
 
         .card-content { padding: 1.8rem; display: flex; flex-direction: column; flex-grow: 1; }
-        .card-category { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-gold); margin-bottom: 0.5rem; font-weight: 600; }
+        .card-category { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-gold); font-weight: 600; }
         .card-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem; font-weight: 600; }
         .card-details { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; }
         .card-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1; line-height: 1.5; }
@@ -274,7 +276,7 @@
                 faqQ1: "Jak probíhá zakoupení nebo rezervace díla?",
                 faqA1: "U vybraného díla stačí kliknout na tlačítko „Mám zájem“ a napsat mi e-mail. Následně se domluvíme na platebních podmínkách, možnostech předání nebo způsobu doručení.",
                 faqQ2: "Je možné vytvořit obraz na zakázku?",
-                faqA2: "Ano! Velmi ráda tvořím osobitá díla přímo na míru vašim přáním nebo barevným preferencím vašeho interiéru. Neváhejte me kontaktovat s vaší představou.",
+                faqA2: "Ano! Velmi ráda tvořím osobitá díla přímo na míru vašim přáním nebo barevním preferencím vašeho interiéru. Neváhejte me kontaktovat s vaší představou.",
                 faqQ3: "Jakým způsobem probíhá doručení obrazů?",
                 faqA3: "Obrazy pečlivě balím tak, aby k vám dorazily v naprostém pořádku. Zasílám po celé ČR i do zahraničí přes ověřené kurýrní služby. Po dohodě je možné i osobní předání.",
                 contactHeading: "Máte zájem o dílo?",
@@ -433,11 +435,13 @@
                 card.onclick = () => openModal(p.id);
                 card.innerHTML = `
                     <div class="card-img-container">
-                        <span class="badge ${!sold ? 'volne' : 'prodane'}">${!sold ? txt.badgeAvailable : txt.badgeSold}</span>
                         ${imageHTML}
                     </div>
                     <div class="card-content">
-                        <div class="card-category">${p.size}</div>
+                        <div class="card-meta-row">
+                            <div class="card-category">${p.size}</div>
+                            <span class="badge ${!sold ? 'volne' : 'prodane'}">${!sold ? txt.badgeAvailable : txt.badgeSold}</span>
+                        </div>
                         <h3 class="card-title">${name}</h3>
                         ${tech ? `<div class="card-details">${tech}</div>` : ''}
                         ${desc ? `<p class="card-desc">${desc}</p>` : ''}
