@@ -23,7 +23,7 @@
         
         nav { display: flex; align-items: center; gap: 2rem; }
         nav a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s; }
-        nav a:hover { color: var(--accent-gold); }
+        nav a:hover, nav a.active-link { color: var(--accent-gold); }
         
         .lang-switch { display: flex; gap: 0.3rem; background: var(--card-bg); border: 1px solid var(--border-color); padding: 0.2rem 0.5rem; border-radius: 20px; font-size: 0.8rem; margin-left: 1rem; }
         .lang-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 12px; font-weight: 600; }
@@ -268,7 +268,6 @@
         let activeProduct = null;
         const EUR_RATE = 25;
 
-        // Ukládání stavu filtrů pro jednotlivé sekce (defaultně 'volne')
         let currentFilters = {
             obrazy: 'volne',
             obleceni: 'volne'
@@ -361,12 +360,9 @@
 
         function setFilter(section, filterType, buttonElement) {
             currentFilters[section] = filterType;
-            
-            // Přepnutí aktivní třídy tlačítek v dané sekci
             const container = buttonElement.parentElement;
             container.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             buttonElement.classList.add('active');
-
             renderAllSections();
         }
 
@@ -438,12 +434,11 @@
             const txt = i18n[currentLang];
             const filter = currentFilters[sectionKey];
 
-            // Filtrování položek podle zvoleného tlačítka
             const filteredItems = items.filter(p => {
                 const sold = isItemSold(p.status);
                 if (filter === 'volne') return !sold;
                 if (filter === 'prodane') return sold;
-                return true; // 'vse'
+                return true;
             });
 
             if (filteredItems.length === 0) {
@@ -488,7 +483,6 @@
 
         function renderAllSections() {
             const txt = i18n[currentLang];
-
             const obrazy = products.filter(p => p.category.includes('obraz') || p.category.includes('paint'));
             const obleceni = products.filter(p => p.category.includes('obleč') || p.category.includes('oblec') || p.category.includes('apparel') || p.category.includes('clothing'));
 
@@ -593,6 +587,30 @@
                 openModal(activeProduct.id);
             }
         }
+
+        // SCROLL SPY - Automatické zvýrazňování sekcí v menu
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section-container');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            
+            let currentSectionId = '';
+            const scrollPos = window.scrollY + 200;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active-link');
+                if (link.getAttribute('href') === `#${currentSectionId}`) {
+                    link.classList.add('active-link');
+                }
+            });
+        });
 
         fetchProducts();
     </script>
