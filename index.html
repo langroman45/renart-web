@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RenArt | Intuitivní umění & móda</title>
+    <title>RenArt | Intuitivní umění</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -137,7 +137,6 @@
         <a href="#" class="logo">RENART</a>
         <nav>
             <a href="#obrazy" id="nav-obrazy">Obrazy</a>
-            <a href="#obleceni" id="nav-obleceni">Oblečení</a>
             <a href="#o-autorce" id="nav-about">O autorce</a>
             <a href="#faq" id="nav-faq">FAQ</a>
             <a href="#kontakt" id="nav-contact">Kontakt</a>
@@ -150,8 +149,8 @@
     </header>
 
     <section class="hero">
-        <h1 id="hero-title">Intuitivní umění & autorská móda</h1>
-        <p id="hero-sub">Prohlédněte si originální malby a ručně malované modely. Každý kousek nese jedinečný příběh a energii.</p>
+        <h1 id="hero-title">Intuitivní umění</h1>
+        <p id="hero-sub">Prohlédněte si originální malby. Každé dílo nese jedinečný příběh a energii.</p>
     </section>
 
     <!-- SEKCE: OBRAZY -->
@@ -167,19 +166,6 @@
         </div>
     </div>
 
-    <!-- SEKCE: OBLEČENÍ -->
-    <div class="section-container" id="obleceni">
-        <h2 class="section-title" id="title-obleceni">Oblečení</h2>
-        <div class="filter-buttons">
-            <button class="filter-btn active" onclick="setFilter('obleceni', 'volne', this)" id="btn-obleceni-volne">K prodeji</button>
-            <button class="filter-btn" onclick="setFilter('obleceni', 'prodane', this)" id="btn-obleceni-prodane">V novém domově (Prodáno)</button>
-            <button class="filter-btn" onclick="setFilter('obleceni', 'vse', this)" id="btn-obleceni-vse">Všechna díla</button>
-        </div>
-        <div class="grid" id="grid-obleceni">
-            <div class="loading">Načítám oblečení...</div>
-        </div>
-    </div>
-
     <!-- SEKCE: O AUTORCE -->
     <div class="section-container" id="o-autorce">
         <h2 class="section-title" id="title-about">O autorce</h2>
@@ -189,8 +175,8 @@
             </div>
             <div class="about-text">
                 <h3 id="about-heading">Vítejte ve světě barev a intuice</h3>
-                <p id="about-p1">Tvorba je pro mě způsobem vyjádření emocí, vnitřního klidu a energie, kterou přenáším na plátna i textil. Každé dílo vzniká intuitivně, bez předem daných pravidel, a zanechává tak v prostoru osobitý otisk.</p>
-                <p id="about-p2">Kromě velkoformátových maleb se věnuji i ruční malbě na džínové bundy a mikiny, čímž vznikají zcela originální nositelné kousky.</p>
+                <p id="about-p1">Tvorba je pro mě způsobem vyjádření emocí, vnitřního klidu a energie, kterou přenáším na plátna. Každé dílo vzniká intuitivně, bez předem daných pravidel, a zanechává tak v prostoru osobitý otisk.</p>
+                <p id="about-p2">Velkoformátové malby odrážejí mé vnitřní prožitky a převádějí je do harmonických i divokých barevných kompozic.</p>
             </div>
         </div>
     </div>
@@ -204,16 +190,12 @@
                 <div class="faq-answer" id="faq-a1">U vybraného díla stačí kliknout na tlačítko „Mám zájem“ a napsat mi e-mail. Následně se domluvíme na platebních podmínkách, možnostech předání nebo způsobu doručení.</div>
             </div>
             <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-question" id="faq-q2">Jak je to s péčí o malované oblečení?</div>
-                <div class="faq-answer" id="faq-a2">Všechny ručně malované oděvy jsou ošetřeny tak, aby byla malba odolná a světlostálá. Doporučuji prát ručně nebo v pračce na šetrný program (max 30 °C) naruby a bez použití sušičky.</div>
+                <div class="faq-question" id="faq-q2">Je možné vytvořit obraz na zakázku?</div>
+                <div class="faq-answer" id="faq-a2">Ano! Velmi ráda tvořím osobitá díla přímo na míru vašim přáním nebo barevným preferencím vašeho interiéru. Neváhejte me kontaktovat s vaší představou.</div>
             </div>
             <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-question" id="faq-q3">Je možné vytvořit obraz nebo oblečení na zakázku?</div>
-                <div class="faq-answer" id="faq-a3">Ano! Velmi ráda tvořím osobitá díla přímo na míru vašim přáním nebo barevným preferencím vašeho interiéru. Neváhejte me kontaktovat s vaší představou.</div>
-            </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-question" id="faq-q4">Jakým způsobem probíhá doručení obrazech a oděvů?</div>
-                <div class="faq-answer" id="faq-a4">Obrazy i oblečení pečlivě balím tak, aby k vám dorazily v naprostém pořádku. Zasílám po celé ČR i do zahraničí přes ověřené kurýrní služby. Po dohodě je možné i osobní předání.</div>
+                <div class="faq-question" id="faq-q3">Jakým způsobem probíhá doručení obrazů?</div>
+                <div class="faq-answer" id="faq-a3">Obrazy pečlivě balím tak, aby k vám dorazily v naprostém pořádku. Zasílám po celé ČR i do zahraničí přes ověřené kurýrní služby. Po dohodě je možné i osobní předání.</div>
             </div>
         </div>
     </div>
@@ -269,22 +251,17 @@
         let activeProduct = null;
         const EUR_RATE = 25;
 
-        let currentFilters = {
-            obrazy: 'volne',
-            obleceni: 'volne'
-        };
+        let currentFilter = 'volne';
 
         const i18n = {
             cz: {
                 navObrazy: "Obrazy",
-                navObleceni: "Oblečení",
                 navAbout: "O autorce",
                 navFaq: "FAQ",
                 navContact: "Kontakt",
-                heroTitle: "Intuitivní umění & autorská móda",
-                heroSub: "Prohlédněte si originální malby a ručně malované modely. Každý kousek nese jedinečný příběh a energii.",
+                heroTitle: "Intuitivní umění",
+                heroSub: "Prohlédněte si originální malby. Každé dílo nese jedinečný příběh a energii.",
                 titleObrazy: "Obrazy",
-                titleObleceni: "Oblečení",
                 titleAbout: "O autorce",
                 titleFaq: "Často kladené otázky",
                 titleContact: "Kontakt",
@@ -292,16 +269,14 @@
                 filterProdane: "V novém domově (Prodáno)",
                 filterVse: "Všechna díla",
                 aboutHeading: "Vítejte ve světě barev a intuice",
-                aboutP1: "Tvorba je pro mě způsobem vyjádření emocí, vnitřního klidu a energie, kterou přenáším na plátna i textil. Každé dílo vzniká intuitivně, bez předem daných pravidel, a zanechává tak v prostoru osobitý otisk.",
-                aboutP2: "Kromě velkoformátových maleb se věnuji i ruční malbě na džínové bundy a mikiny, čímž vznikají zcela originální nositelné kousky.",
+                aboutP1: "Tvorba je pro mě způsobem vyjádření emocí, vnitřního klidu a energie, kterou přenáším na plátna. Každé dílo vzniká intuitivně, bez předem daných pravidel, a zanechává tak v prostoru osobitý otisk.",
+                aboutP2: "Velkoformátové malby odrážejí mé vnitřní prožitky a převádějí je do harmonických i divokých barevných kompozic.",
                 faqQ1: "Jak probíhá zakoupení nebo rezervace díla?",
                 faqA1: "U vybraného díla stačí kliknout na tlačítko „Mám zájem“ a napsat mi e-mail. Následně se domluvíme na platebních podmínkách, možnostech předání nebo způsobu doručení.",
-                faqQ2: "Jak je to s péčí o malované oblečení?",
-                faqA2: "Všechny ručně malované oděvy jsou ošetřeny tak, aby byla malba odolná a světlostálá. Doporučuji prát ručně nebo v pračce na šetrný program (max 30 °C) naruby a bez použití sušičky.",
-                faqQ3: "Je možné vytvořit obraz nebo oblečení na zakázku?",
-                faqA3: "Ano! Velmi ráda tvořím osobitá díla přímo na míru vašim přáním nebo barevným preferencím vašeho interiéru. Neváhejte me kontaktovat s vaší představou.",
-                faqQ4: "Jakým způsobem probíhá doručení obrazech a oděvů?",
-                faqA4: "Obrazy i oblečení pečlivě balím tak, aby k vám dorazily v naprostém pořádku. Zasílám po celé ČR i do zahraničí přes ověřené kurýrní služby. Po dohodě je možné i osobní předání.",
+                faqQ2: "Je možné vytvořit obraz na zakázku?",
+                faqA2: "Ano! Velmi ráda tvořím osobitá díla přímo na míru vašim přáním nebo barevným preferencím vašeho interiéru. Neváhejte me kontaktovat s vaší představou.",
+                faqQ3: "Jakým způsobem probíhá doručení obrazů?",
+                faqA3: "Obrazy pečlivě balím tak, aby k vám dorazily v naprostém pořádku. Zasílám po celé ČR i do zahraničí přes ověřené kurýrní služby. Po dohodě je možné i osobní předání.",
                 contactHeading: "Máte zájem o dílo?",
                 contactSub: "Napište mi a ráda s vámi proberu detaily, osobní předání nebo možnosti dopravy.",
                 badgeAvailable: "Ihned k odběru",
@@ -312,19 +287,16 @@
                 lblTech: "Technika:",
                 lblPrice: "Cena",
                 btnModalInquire: "Poptat toto dílo",
-                emptyObrazy: "V této sekci se momentálně nenacházejí žádná díla odpovídající filtru.",
-                emptyObleceni: "V této sekci se momentálně nenacházejí žádná díla odpovídající filtru."
+                emptyObrazy: "V této sekci se momentálně nenacházejí žádná díla odpovídající filtru."
             },
             en: {
                 navObrazy: "Paintings",
-                navObleceni: "Apparel",
                 navAbout: "About",
                 navFaq: "FAQ",
                 navContact: "Contact",
-                heroTitle: "Intuitive Art & Original Fashion",
-                heroSub: "Explore original paintings and hand-painted fashion pieces. Each creation carries a unique energy and story.",
+                heroTitle: "Intuitive Art",
+                heroSub: "Explore original paintings. Each creation carries a unique energy and story.",
                 titleObrazy: "Paintings",
-                titleObleceni: "Apparel",
                 titleAbout: "About the Artist",
                 titleFaq: "Frequently Asked Questions",
                 titleContact: "Contact",
@@ -332,16 +304,14 @@
                 filterProdane: "In a New Home (Sold)",
                 filterVse: "All Artworks",
                 aboutHeading: "Welcome to the World of Colors & Intuition",
-                aboutP1: "Creation is a way of expressing emotions, inner peace, and energy, which I transfer onto canvas and textiles. Each piece is created intuitively, leaving a distinct personal imprint in your space.",
-                aboutP2: "In addition to large-format paintings, I also focus on hand-painted denim jackets and hoodies, creating truly original wearable art pieces.",
+                aboutP1: "Creation is a way of expressing emotions, inner peace, and energy, which I transfer onto canvas. Each piece is created intuitively, leaving a distinct personal imprint in your space.",
+                aboutP2: "Large-format paintings reflect my inner experiences and translate them into harmonious or wild color compositions.",
                 faqQ1: "How do I purchase or reserve an artwork?",
                 faqA1: "Simply click the 'Inquire' button on your chosen item to send me an email. We will then discuss payment options, pickup details, or shipping methods.",
-                faqQ2: "How do I care for hand-painted apparel?",
-                faqA2: "All hand-painted garments are sealed to ensure durability. I recommend washing gently by hand or in a washing machine on a delicate cycle (max 30°C) inside out, without tumble drying.",
-                faqQ3: "Can I order a custom painting or fashion piece?",
-                faqA3: "Yes! I love creating custom pieces tailored to your personal wishes or interior color palettes. Feel free to contact me with your vision.",
-                faqQ4: "How are artworks and clothing shipped?",
-                faqA4: "All items are carefully packaged to ensure safe arrival. Shipping is available nationwide and internationally via reliable couriers. Personal delivery can also be arranged.",
+                faqQ2: "Can I order a custom painting?",
+                faqA2: "Yes! I love creating custom pieces tailored to your personal wishes or interior color palettes. Feel free to contact me with your vision.",
+                faqQ3: "How are artworks shipped?",
+                faqA3: "All items are carefully packaged to ensure safe arrival. Shipping is available nationwide and internationally via reliable couriers. Personal delivery can also be arranged.",
                 contactHeading: "Interested in an Artwork?",
                 contactSub: "Feel free to reach out and I will gladly discuss details, pickup options, or shipping with you.",
                 badgeAvailable: "Available",
@@ -352,8 +322,7 @@
                 lblTech: "Technique:",
                 lblPrice: "Price",
                 btnModalInquire: "Inquire This Piece",
-                emptyObrazy: "No items found matching this filter.",
-                emptyObleceni: "No items found matching this filter."
+                emptyObrazy: "No items found matching this filter."
             }
         };
 
@@ -361,12 +330,12 @@
             element.classList.toggle('active');
         }
 
-        function setFilter(section, filterType, buttonElement) {
-            currentFilters[section] = filterType;
+        function setFilter(filterType, buttonElement) {
+            currentFilter = filterType;
             const container = buttonElement.parentElement;
             container.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             buttonElement.classList.add('active');
-            renderAllSections();
+            renderObrazy();
         }
 
         function formatImageUrl(rawUrl) {
@@ -401,7 +370,7 @@
                     imageUrl: formatImageUrl(item["URL"])
                 }));
 
-                renderAllSections();
+                renderObrazy();
             } catch (error) {
                 console.error("Chyba při načítání dat:", error);
                 document.getElementById('grid-obrazy').innerHTML = '<p class="loading">Nepodařilo se načíst data.</p>';
@@ -430,22 +399,22 @@
             return status === 'prodané' || status === 'prodano' || status === 'sold';
         }
 
-        function renderGrid(containerId, items, emptyText, sectionKey) {
-            const grid = document.getElementById(containerId);
+        function renderObrazy() {
+            const grid = document.getElementById('grid-obrazy');
             grid.innerHTML = '';
             
             const txt = i18n[currentLang];
-            const filter = currentFilters[sectionKey];
+            const obrazy = products.filter(p => p.category.includes('obraz') || p.category.includes('paint'));
 
-            const filteredItems = items.filter(p => {
+            const filteredItems = obrazy.filter(p => {
                 const sold = isItemSold(p.status);
-                if (filter === 'volne') return !sold;
-                if (filter === 'prodane') return sold;
+                if (currentFilter === 'volne') return !sold;
+                if (currentFilter === 'prodane') return sold;
                 return true;
             });
 
             if (filteredItems.length === 0) {
-                grid.innerHTML = `<p class="loading">${emptyText}</p>`;
+                grid.innerHTML = `<p class="loading">${txt.emptyObrazy}</p>`;
                 return;
             }
 
@@ -482,15 +451,6 @@
                 `;
                 grid.appendChild(card);
             });
-        }
-
-        function renderAllSections() {
-            const txt = i18n[currentLang];
-            const obrazy = products.filter(p => p.category.includes('obraz') || p.category.includes('paint'));
-            const obleceni = products.filter(p => p.category.includes('obleč') || p.category.includes('oblec') || p.category.includes('apparel') || p.category.includes('clothing'));
-
-            renderGrid('grid-obrazy', obrazy, txt.emptyObrazy, 'obrazy');
-            renderGrid('grid-obleceni', obleceni, txt.emptyObleceni, 'obleceni');
         }
 
         function openModal(productId) {
@@ -547,7 +507,6 @@
 
             const txt = i18n[lang];
             document.getElementById('nav-obrazy').textContent = txt.navObrazy;
-            document.getElementById('nav-obleceni').textContent = txt.navObleceni;
             document.getElementById('nav-about').textContent = txt.navAbout;
             document.getElementById('nav-faq').textContent = txt.navFaq;
             document.getElementById('nav-contact').textContent = txt.navContact;
@@ -556,7 +515,6 @@
             document.getElementById('hero-sub').textContent = txt.heroSub;
             
             document.getElementById('title-obrazy').textContent = txt.titleObrazy;
-            document.getElementById('title-obleceni').textContent = txt.titleObleceni;
             document.getElementById('title-about').textContent = txt.titleAbout;
             document.getElementById('title-faq').textContent = txt.titleFaq;
             document.getElementById('title-contact').textContent = txt.titleContact;
@@ -564,10 +522,6 @@
             document.getElementById('btn-obrazy-volne').textContent = txt.filterVolne;
             document.getElementById('btn-obrazy-prodane').textContent = txt.filterProdane;
             document.getElementById('btn-obrazy-vse').textContent = txt.filterVse;
-
-            document.getElementById('btn-obleceni-volne').textContent = txt.filterVolne;
-            document.getElementById('btn-obleceni-prodane').textContent = txt.filterProdane;
-            document.getElementById('btn-obleceni-vse').textContent = txt.filterVse;
             
             document.getElementById('about-heading').textContent = txt.aboutHeading;
             document.getElementById('about-p1').textContent = txt.aboutP1;
@@ -579,13 +533,11 @@
             document.getElementById('faq-a2').textContent = txt.faqA2;
             document.getElementById('faq-q3').textContent = txt.faqQ3;
             document.getElementById('faq-a3').textContent = txt.faqA3;
-            document.getElementById('faq-q4').textContent = txt.faqQ4;
-            document.getElementById('faq-a4').textContent = txt.faqA4;
 
             document.getElementById('contact-heading').textContent = txt.contactHeading;
             document.getElementById('contact-sub').textContent = txt.contactSub;
 
-            renderAllSections();
+            renderObrazy();
             
             if (document.getElementById('product-modal').classList.contains('active') && activeProduct) {
                 openModal(activeProduct.id);
