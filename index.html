@@ -34,7 +34,13 @@
         .hero p { color: var(--text-muted); font-size: 1.15rem; max-width: 650px; margin: 0 auto; }
 
         .section-container { max-width: 1300px; margin: 0 auto; padding: 4rem 5%; border-top: 1px solid var(--border-color); scroll-margin-top: 90px; }
-        .section-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 2.5rem; font-weight: 400; text-align: center; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 400; text-align: center; }
+
+        /* FILTRY */
+        .filter-buttons { display: flex; justify-content: center; gap: 0.8rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+        .filter-btn { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.5rem 1.2rem; border-radius: 20px; font-size: 0.9rem; cursor: pointer; transition: all 0.3s; font-weight: 500; }
+        .filter-btn:hover { border-color: var(--accent-gold); color: var(--text-main); }
+        .filter-btn.active { background: var(--accent-gold); color: #000; border-color: var(--accent-gold); font-weight: 600; }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2rem; }
         .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s, border-color 0.3s; cursor: pointer; }
@@ -151,6 +157,11 @@
     <!-- SEKCE: OBRAZY -->
     <div class="section-container" id="obrazy">
         <h2 class="section-title" id="title-obrazy">Obrazy</h2>
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="setFilter('obrazy', 'volne', this)" id="btn-obrazy-volne">K prodeji</button>
+            <button class="filter-btn" onclick="setFilter('obrazy', 'prodane', this)" id="btn-obrazy-prodane">V novém domově (Prodáno)</button>
+            <button class="filter-btn" onclick="setFilter('obrazy', 'vse', this)" id="btn-obrazy-vse">Všechna díla</button>
+        </div>
         <div class="grid" id="grid-obrazy">
             <div class="loading">Načítám obrazy...</div>
         </div>
@@ -159,6 +170,11 @@
     <!-- SEKCE: OBLEČENÍ -->
     <div class="section-container" id="obleceni">
         <h2 class="section-title" id="title-obleceni">Oblečení</h2>
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="setFilter('obleceni', 'volne', this)" id="btn-obleceni-volne">K prodeji</button>
+            <button class="filter-btn" onclick="setFilter('obleceni', 'prodane', this)" id="btn-obleceni-prodane">V novém domově (Prodáno)</button>
+            <button class="filter-btn" onclick="setFilter('obleceni', 'vse', this)" id="btn-obleceni-vse">Všechna díla</button>
+        </div>
         <div class="grid" id="grid-obleceni">
             <div class="loading">Načítám oblečení...</div>
         </div>
@@ -173,7 +189,7 @@
             </div>
             <div class="about-text">
                 <h3 id="about-heading">Vítejte ve světě barev a intuice</h3>
-                <p id="about-p1">Tvorba je pro mě způsobem vyjádření emocí, vnitřního klidu a energie, kterou přenáším na plátna i textil. Každé dílo vzniká intuitivně, bez předem daných pravidlech, a zanechává tak v prostoru osobitý otisk.</p>
+                <p id="about-p1">Tvorba je pro mě způsobem vyjádření emocí, vnitřního klidu a energie, kterou přenáším na plátna i textil. Každé dílo vzniká intuitivně, bez předem daných pravidel, a zanechává tak v prostoru osobitý otisk.</p>
                 <p id="about-p2">Kromě velkoformátových maleb se věnuji i ruční malbě na džínové bundy a mikiny, čímž vznikají zcela originální nositelné kousky.</p>
             </div>
         </div>
@@ -252,6 +268,12 @@
         let activeProduct = null;
         const EUR_RATE = 25;
 
+        // Ukládání stavu filtrů pro jednotlivé sekce (defaultně 'volne')
+        let currentFilters = {
+            obrazy: 'volne',
+            obleceni: 'volne'
+        };
+
         const i18n = {
             cz: {
                 navObrazy: "Obrazy",
@@ -265,8 +287,11 @@
                 titleObleceni: "Oblečení",
                 titleAbout: "O autorce",
                 titleFaq: "Často kladené otázky",
+                filterVolne: "K prodeji",
+                filterProdane: "V novém domově (Prodáno)",
+                filterVse: "Všechna díla",
                 aboutHeading: "Vítejte ve světě barev a intuice",
-                aboutP1: "Tvorba je pro mě způsobem vyjádření emocí, vnitřního klidu a energie, kterou přenáším na plátna i textil. Každé dílo vzniká intuitivně, bez předem daných pravidlech, a zanechává tak v prostoru osobitý otisk.",
+                aboutP1: "Tvorba je pro mě způsobem vyjádření emocí, vnitřního klidu a energie, kterou přenáším na plátna i textil. Každé dílo vzniká intuitivně, bez předem daných pravidel, a zanechává tak v prostoru osobitý otisk.",
                 aboutP2: "Kromě velkoformátových maleb se věnuji i ruční malbě na džínové bundy a mikiny, čímž vznikají zcela originální nositelné kousky.",
                 faqQ1: "Jak probíhá zakoupení nebo rezervace díla?",
                 faqA1: "U vybraného díla stačí kliknout na tlačítko „Mám zájem“ a napsat mi e-mail. Následně se domluvíme na platebních podmínkách, možnostech předání nebo způsobu doručení.",
@@ -286,8 +311,8 @@
                 lblTech: "Technika:",
                 lblPrice: "Cena",
                 btnModalInquire: "Poptat toto dílo",
-                emptyObrazy: "V této sekci se momentálně nenacházejí žádné obrazy.",
-                emptyObleceni: "V této sekci se momentálně nenachází žádné oblečení."
+                emptyObrazy: "V této sekci se momentálně nenacházejí žádná díla odpovídající filtru.",
+                emptyObleceni: "V této sekci se momentálně nenacházejí žádná díla odpovídající filtru."
             },
             en: {
                 navObrazy: "Paintings",
@@ -301,6 +326,9 @@
                 titleObleceni: "Apparel",
                 titleAbout: "About the Artist",
                 titleFaq: "Frequently Asked Questions",
+                filterVolne: "Available",
+                filterProdane: "In a New Home (Sold)",
+                filterVse: "All Artworks",
                 aboutHeading: "Welcome to the World of Colors & Intuition",
                 aboutP1: "Creation is a way of expressing emotions, inner peace, and energy, which I transfer onto canvas and textiles. Each piece is created intuitively, leaving a distinct personal imprint in your space.",
                 aboutP2: "In addition to large-format paintings, I also focus on hand-painted denim jackets and hoodies, creating truly original wearable art pieces.",
@@ -322,13 +350,24 @@
                 lblTech: "Technique:",
                 lblPrice: "Price",
                 btnModalInquire: "Inquire This Piece",
-                emptyObrazy: "No paintings found in this section.",
-                emptyObleceni: "No apparel items found in this section."
+                emptyObrazy: "No items found matching this filter.",
+                emptyObleceni: "No items found matching this filter."
             }
         };
 
         function toggleFaq(element) {
             element.classList.toggle('active');
+        }
+
+        function setFilter(section, filterType, buttonElement) {
+            currentFilters[section] = filterType;
+            
+            // Přepnutí aktivní třídy tlačítek v dané sekci
+            const container = buttonElement.parentElement;
+            container.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+
+            renderAllSections();
         }
 
         function formatImageUrl(rawUrl) {
@@ -392,18 +431,27 @@
             return status === 'prodané' || status === 'prodano' || status === 'sold';
         }
 
-        function renderGrid(containerId, items, emptyText) {
+        function renderGrid(containerId, items, emptyText, sectionKey) {
             const grid = document.getElementById(containerId);
             grid.innerHTML = '';
             
             const txt = i18n[currentLang];
+            const filter = currentFilters[sectionKey];
 
-            if (items.length === 0) {
+            // Filtrování položek podle zvoleného tlačítka
+            const filteredItems = items.filter(p => {
+                const sold = isItemSold(p.status);
+                if (filter === 'volne') return !sold;
+                if (filter === 'prodane') return sold;
+                return true; // 'vse'
+            });
+
+            if (filteredItems.length === 0) {
                 grid.innerHTML = `<p class="loading">${emptyText}</p>`;
                 return;
             }
 
-            items.forEach(p => {
+            filteredItems.forEach(p => {
                 const sold = isItemSold(p.status);
                 const name = currentLang === 'en' ? p.name_en : p.name_cz;
                 const tech = currentLang === 'en' ? p.technique_en : p.technique_cz;
@@ -444,8 +492,8 @@
             const obrazy = products.filter(p => p.category.includes('obraz') || p.category.includes('paint'));
             const obleceni = products.filter(p => p.category.includes('obleč') || p.category.includes('oblec') || p.category.includes('apparel') || p.category.includes('clothing'));
 
-            renderGrid('grid-obrazy', obrazy, txt.emptyObrazy);
-            renderGrid('grid-obleceni', obleceni, txt.emptyObleceni);
+            renderGrid('grid-obrazy', obrazy, txt.emptyObrazy, 'obrazy');
+            renderGrid('grid-obleceni', obleceni, txt.emptyObleceni, 'obleceni');
         }
 
         function openModal(productId) {
@@ -514,6 +562,14 @@
             document.getElementById('title-obleceni').textContent = txt.titleObleceni;
             document.getElementById('title-about').textContent = txt.titleAbout;
             document.getElementById('title-faq').textContent = txt.titleFaq;
+
+            document.getElementById('btn-obrazy-volne').textContent = txt.filterVolne;
+            document.getElementById('btn-obrazy-prodane').textContent = txt.filterProdane;
+            document.getElementById('btn-obrazy-vse').textContent = txt.filterVse;
+
+            document.getElementById('btn-obleceni-volne').textContent = txt.filterVolne;
+            document.getElementById('btn-obleceni-prodane').textContent = txt.filterProdane;
+            document.getElementById('btn-obleceni-vse').textContent = txt.filterVse;
             
             document.getElementById('about-heading').textContent = txt.aboutHeading;
             document.getElementById('about-p1').textContent = txt.aboutP1;
