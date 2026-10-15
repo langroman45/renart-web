@@ -137,66 +137,83 @@
         .btn-inquire:hover { background: var(--accent-gold); color: #000; }
         .btn-inquire.disabled { opacity: 0.4; pointer-events: none; border-color: var(--text-muted); color: var(--text-muted); }
 
-        /* REÁLNÁ SVĚTOVÁ MAPA */
+        /* MAPA SVĚTA S TVÝM REÁLNÝM OBRÁZKEM */
         .map-wrapper { 
             background: var(--card-bg); 
             border: 1px solid var(--border-color); 
             border-radius: 20px; 
-            padding: 2rem; 
+            padding: 1.5rem; 
             position: relative; 
             max-width: 1000px; 
             margin: 0 auto; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            overflow: hidden;
         }
 
         .map-container {
             width: 100%;
             position: relative;
+            display: inline-block;
         }
 
-        .map-svg {
+        .map-bg-img {
             width: 100%;
             height: auto;
             display: block;
+            border-radius: 10px;
         }
 
-        .world-map-path {
-            fill: #1e1e2d;
-            stroke: #2e2e42;
-            stroke-width: 0.8;
+        /* VYTVAŘENÍ BODY NAD PŘESNÝM OBRÁZKEM */
+        .map-pin-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
         }
 
-        /* BODY NA MAPĚ */
-        .map-pin {
+        .pin-marker {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
             cursor: pointer;
+            pointer-events: auto;
+            box-shadow: 0 0 12px var(--accent-gold);
+            transition: transform 0.2s;
         }
 
-        .map-pin circle.dot {
-            fill: var(--accent-gold);
-            filter: drop-shadow(0 0 8px var(--accent-gold));
+        .pin-marker:hover {
+            transform: translate(-50%, -50%) scale(1.4);
         }
 
-        .map-pin circle.pulse {
-            fill: none;
-            stroke: var(--accent-gold);
-            stroke-width: 1.5;
-            opacity: 0.8;
-            animation: pulse-animation 2s infinite ease-out;
-            transform-origin: center;
+        .pin-marker::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 24px;
+            height: 24px;
+            border: 1.5px solid var(--accent-gold);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse-ring 2s infinite ease-out;
         }
 
-        @keyframes pulse-animation {
-            0% { r: 3px; opacity: 1; }
-            100% { r: 16px; opacity: 0; }
+        @keyframes pulse-ring {
+            0% { width: 8px; height: 8px; opacity: 1; }
+            100% { width: 34px; height: 34px; opacity: 0; }
         }
 
-        /* POP-UP HLÁŠKA S NÁZVEM MĚSTA */
         .map-tooltip {
             position: absolute;
             background: rgba(20, 20, 28, 0.95);
             border: 1px solid var(--accent-gold);
             color: #fff;
-            padding: 0.5rem 0.9rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 8px;
             font-size: 0.85rem;
             font-weight: 600;
@@ -209,9 +226,7 @@
             z-index: 10;
         }
 
-        .map-tooltip.active {
-            opacity: 1;
-        }
+        .map-tooltip.active { opacity: 1; }
 
         /* O AUTORCE SEKCE */
         .about-section { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; max-width: 1100px; margin: 0 auto; }
@@ -382,35 +397,9 @@
         <div class="map-wrapper">
             <div class="map-tooltip" id="map-tooltip"></div>
             <div class="map-container">
-                <svg class="map-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
-                    <!-- REÁLNÉ PRECIZNÍ KONTURY VŠECH SVĚTADÍLŮ A OSTROVŮ -->
-                    <g class="world-map-path">
-                        <!-- Severní Amerika & Grónsko -->
-                        <path d="M120,40 L160,35 L200,30 L250,32 L290,45 L320,60 L290,80 L280,110 L250,115 L220,135 L230,175 L210,195 L200,230 L185,250 L170,230 L165,190 L150,175 L125,180 L110,150 L95,140 L70,115 L85,80 Z" />
-                        <path d="M310,25 L380,20 L400,55 L350,90 L315,65 Z" />
-                        <!-- Jižní Amerika -->
-                        <path d="M215,260 L255,255 L290,280 L315,315 L305,360 L275,415 L250,470 L235,465 L225,410 L220,360 L205,315 L210,285 Z" />
-                        <!-- Evropa & Skandinávie -->
-                        <path d="M460,110 L480,105 L505,100 L530,115 L525,130 L500,135 L490,155 L465,160 L450,150 L445,130 Z" />
-                        <path d="M485,45 L520,35 L535,65 L510,95 L490,80 Z" />
-                        <path d="M440,85 L455,80 L460,95 L445,100 Z" />
-                        <!-- Afrika & Madagaskar -->
-                        <path d="M440,170 L515,165 L555,200 L565,240 L535,300 L500,360 L465,365 L445,310 L420,260 L415,215 L430,190 Z" />
-                        <path d="M570,305 L585,300 L580,350 L565,355 Z" />
-                        <!-- Asie & Blízký Východ -->
-                        <path d="M530,105 L580,95 L650,85 L720,75 L820,70 L910,85 L950,110 L920,150 L870,165 L830,190 L790,230 L740,245 L700,220 L660,200 L620,215 L580,190 L555,160 L540,125 Z" />
-                        <path d="M535,175 L560,170 L575,205 L550,225 L530,205 Z" />
-                        <!-- Japonsko & Indonésie -->
-                        <path d="M900,125 L915,120 L920,155 L905,160 Z" />
-                        <path d="M760,265 L810,260 L860,270 L910,285 L880,300 L810,285 L755,280 Z" />
-                        <!-- Austrálie & Nový Zéland -->
-                        <path d="M780,325 L845,320 L880,345 L885,390 L850,420 L795,415 L765,380 L760,345 Z" />
-                        <path d="M910,390 L925,385 L935,430 L920,435 Z" />
-                    </g>
-
-                    <!-- INTERAKTIVNÍ ZLATÉ BODY NA MAPĚ (PŘESNÉ SOUŘADNICE ZEMÍ/MĚST) -->
-                    <g id="map-pins"></g>
-                </svg>
+                <!-- POUŽITÍ TVÉHO SOUBORU MAP OF WORLD.PNG -->
+                <img src="Map of world.png" alt="Světová mapa" class="map-bg-img" id="map-img">
+                <div class="map-pin-overlay" id="map-pins-container"></div>
             </div>
         </div>
     </div>
@@ -539,14 +528,14 @@
 
         let currentFilter = 'volne';
 
-        // REÁLNÉ GEOGRAFICKÉ SOUŘADNICE VŠECH MĚST A ZEMÍ
+        // PŘESNÉ PERCENTUÁLNÍ SOUŘADNICE ZAPASOVANÉ PŘÍMO NA TVŮJ OBRÁZEK MAP OF WORLD.PNG
         const mapLocations = [
-            { name_cz: "Praha, Česká republika", name_en: "Prague, Czech Republic", x: 485, y: 125 },
-            { name_cz: "Paříž, Francie", name_en: "Paris, France", x: 462, y: 132 },
-            { name_cz: "Londýn, Velká Británie", name_en: "London, United Kingdom", x: 450, y: 120 },
-            { name_cz: "Vídeň, Rakousko", name_en: "Vienna, Austria", x: 492, y: 130 },
-            { name_cz: "Miami, USA", name_en: "Miami, USA", x: 215, y: 210 },
-            { name_cz: "Canberra, Austrálie", name_en: "Canberra, Australia", x: 840, y: 395 }
+            { name_cz: "Praha, Česká republika", name_en: "Prague, Czech Republic", x: 49.8, y: 31.8 },
+            { name_cz: "Paříž, Francie", name_en: "Paris, France", x: 46.6, y: 34.2 },
+            { name_cz: "Londýn, Velká Británie", name_en: "London, United Kingdom", x: 45.5, y: 30.8 },
+            { name_cz: "Vídeň, Rakousko", name_en: "Vienna, Austria", x: 51.2, y: 34.0 },
+            { name_cz: "Miami, USA", name_en: "Miami, USA", x: 23.8, y: 49.2 },
+            { name_cz: "Canberra, Austrálie", name_en: "Canberra, Australia", x: 85.2, y: 81.5 }
         ];
 
         const i18n = {
@@ -627,50 +616,34 @@
         };
 
         function renderMapPins() {
-            const container = document.getElementById('map-pins');
+            const container = document.getElementById('map-pins-container');
             const tooltip = document.getElementById('map-tooltip');
             if(!container) return;
             container.innerHTML = '';
 
             mapLocations.forEach(loc => {
-                const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
-                g.setAttribute("class", "map-pin");
-                g.setAttribute("transform", `translate(${loc.x}, ${loc.y})`);
+                const marker = document.createElement('div');
+                marker.className = 'pin-marker';
+                marker.style.left = `${loc.x}%`;
+                marker.style.top = `${loc.y}%`;
 
-                const pulse = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-                pulse.setAttribute("class", "pulse");
-                pulse.setAttribute("cx", "0");
-                pulse.setAttribute("cy", "0");
-
-                const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-                dot.setAttribute("class", "dot");
-                dot.setAttribute("cx", "0");
-                dot.setAttribute("cy", "0");
-                dot.setAttribute("r", "4.5");
-
-                g.appendChild(pulse);
-                g.appendChild(dot);
-
-                g.addEventListener('mouseenter', (e) => {
+                marker.addEventListener('mouseenter', (e) => {
                     const name = currentLang === 'en' ? loc.name_en : loc.name_cz;
                     tooltip.textContent = name;
                     
+                    const rect = marker.getBoundingClientRect();
                     const wrapperRect = document.querySelector('.map-wrapper').getBoundingClientRect();
-                    const svgRect = e.target.ownerSVGElement.getBoundingClientRect();
 
-                    const xPos = (loc.x / 1000) * svgRect.width;
-                    const yPos = (loc.y / 500) * svgRect.height;
-
-                    tooltip.style.left = `${xPos + (svgRect.left - wrapperRect.left)}px`;
-                    tooltip.style.top = `${yPos + (svgRect.top - wrapperRect.top)}px`;
+                    tooltip.style.left = `${rect.left - wrapperRect.left + 5}px`;
+                    tooltip.style.top = `${rect.top - wrapperRect.top}px`;
                     tooltip.classList.add('active');
                 });
 
-                g.addEventListener('mouseleave', () => {
+                marker.addEventListener('mouseleave', () => {
                     tooltip.classList.remove('active');
                 });
 
-                container.appendChild(g);
+                container.appendChild(marker);
             });
         }
 
@@ -918,7 +891,7 @@
         }
 
         window.addEventListener('scroll', () => {
-            const sections = document.getElementById('obrazy') ? document.querySelectorAll('.section-container') : [];
+            const sections = document.querySelectorAll('.section-container');
             const navLinks = document.querySelectorAll('nav a[href^="#"]');
             
             let currentSectionId = '';
