@@ -69,8 +69,30 @@
         .btn-inquire:hover { background: var(--accent-gold); color: #000; }
         .btn-inquire.disabled { opacity: 0.4; pointer-events: none; border-color: var(--text-muted); color: var(--text-muted); }
 
-        /* MAPA SVĚTA */
-        .map-wrapper { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; position: relative; max-width: 1000px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.4); overflow: hidden; text-align: center; }
+        /* MAPA SVĚTA S ZOOMEM */
+        .map-wrapper { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; position: relative; max-width: 1000px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.4); text-align: center; }
+        
+        .map-viewport {
+            width: 100%;
+            height: auto;
+            max-height: 600px;
+            overflow: auto; /* Povolí posun prstem/myší, když je mapa zvětšená */
+            border-radius: 12px;
+            position: relative;
+            cursor: grab;
+            -webkit-overflow-scrolling: touch;
+        }
+        .map-viewport:active { cursor: grabbing; }
+
+        .map-inner-container {
+            position: relative;
+            width: 100%;
+            max-width: 950px;
+            margin: 0 auto;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+        }
+
         .map-tooltip {
             position: absolute;
             background: rgba(20, 20, 28, 0.95);
@@ -86,36 +108,67 @@
             transform: translate(-50%, -130%);
             white-space: nowrap;
             box-shadow: 0 5px 20px rgba(0,0,0,0.6);
-            z-index: 10;
+            z-index: 20;
         }
         .map-tooltip.active { opacity: 1; }
 
+        /* OVLÁDACÍ TLAČÍTKA ZOOMU */
+        .map-controls {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            z-index: 15;
+        }
+        .map-ctrl-btn {
+            width: 38px;
+            height: 38px;
+            background: rgba(20, 20, 28, 0.9);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            transition: background 0.2s, color 0.2s;
+        }
+        .map-ctrl-btn:hover {
+            background: var(--accent-gold);
+            color: #000;
+        }
+
         .percent-pin {
             position: absolute;
-            width: 12px;
-            height: 12px;
+            width: 16px;
+            height: 16px;
             transform: translate(-50%, -50%);
             cursor: pointer;
             z-index: 5;
         }
         .percent-pin .dot {
-            width: 8px;
-            height: 8px;
+            width: 9px;
+            height: 9px;
             background: var(--accent-gold);
             border-radius: 50%;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 8px var(--accent-gold);
+            box-shadow: 0 0 10px var(--accent-gold);
         }
         .percent-pin .pulse {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
             border: 1.5px solid var(--accent-gold);
             border-radius: 50%;
             opacity: 0.8;
@@ -242,7 +295,7 @@
         </div>
     </div>
 
-    <!-- SEKCE: MAPA SVĚTA -->
+    <!-- SEKCE: MAPA SVĚTA S ZOOMEM -->
     <div class="section-container" id="mapa">
         <h2 class="section-title" id="title-mapa">Kde již dělají moje obrazy radost</h2>
         <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem;" id="sub-mapa">Mé originální malby našly své domovy v soukromých sbírkách po celém světě.</p>
@@ -250,30 +303,40 @@
         <div class="map-wrapper">
             <div class="map-tooltip" id="map-tooltip"></div>
             
-            <div style="position: relative; width: 100%; max-width: 950px; margin: 0 auto; display: inline-block;">
-                <img src="Map of world.png" alt="Světová mapa" style="width: 100%; height: auto; display: block; border-radius: 12px;">
-                
-                <!-- EVROPSKÉ ZEMĚ & PRAHA -->
-                <div class="percent-pin" style="left: 50.5%; top: 41.0%;" onmouseenter="showPercentTooltip(event, 'Praha, Česká republika', 'Prague, Czech Republic')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                <div class="percent-pin" style="left: 49.2%; top: 38.8%;" onmouseenter="showPercentTooltip(event, 'Německo', 'Germany')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                <div class="percent-pin" style="left: 46.8%; top: 41.8%;" onmouseenter="showPercentTooltip(event, 'Francie', 'France')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                <div class="percent-pin" style="left: 52.2%; top: 38.5%;" onmouseenter="showPercentTooltip(event, 'Polsko', 'Poland')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                <div class="percent-pin" style="left: 47.9%; top: 39.8%;" onmouseenter="showPercentTooltip(event, 'Nizozemsko', 'Netherlands')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                <div class="percent-pin" style="left: 53.0%; top: 43.0%;" onmouseenter="showPercentTooltip(event, 'Maďarsko', 'Hungary')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                <div class="percent-pin" style="left: 51.5%; top: 48.2%;" onmouseenter="showPercentTooltip(event, 'Malta', 'Malta')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                <div class="percent-pin" style="left: 43.8%; top: 37.2%;" onmouseenter="showPercentTooltip(event, 'Irsko', 'Ireland')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+            <!-- OVLÁDACÍ TLAČÍTKA ZOOMU -->
+            <div class="map-controls">
+                <button class="map-ctrl-btn" onclick="zoomMap(0.3)" title="Přiblížit">+</button>
+                <button class="map-ctrl-btn" onclick="zoomMap(-0.3)" title="Oddálit">-</button>
+                <button class="map-ctrl-btn" onclick="resetZoom()" title="Resetovat pohled" style="font-size: 0.8rem;">⌂</button>
+            </div>
 
-                <!-- USA & SEVERNÍ AMERIKA -->
-                <div class="percent-pin" style="left: 25.7%; top: 55.1%;" onmouseenter="showPercentTooltip(event, 'Florida, USA', 'Florida, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                <div class="percent-pin" style="left: 18.2%; top: 48.5%;" onmouseenter="showPercentTooltip(event, 'Arizona, USA', 'Arizona, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                <div class="percent-pin" style="left: 18.8%; top: 39.5%;" onmouseenter="showPercentTooltip(event, 'Wyoming, USA', 'Wyoming, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                <div class="percent-pin" style="left: 15.2%; top: 46.2%;" onmouseenter="showPercentTooltip(event, 'Kalifornie, USA', 'California, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                <div class="percent-pin" style="left: 29.2%; top: 41.5%;" onmouseenter="showPercentTooltip(event, 'New York, USA', 'New York, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                <div class="percent-pin" style="left: 30.5%; top: 39.8%;" onmouseenter="showPercentTooltip(event, 'Massachusetts, USA', 'Massachusetts, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                <div class="percent-pin" style="left: 23.5%; top: 29.5%;" onmouseenter="showPercentTooltip(event, 'Kanada', 'Canada')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+            <!-- SCROLOVATELNÉ OKNO MAPY -->
+            <div class="map-viewport" id="map-viewport">
+                <div class="map-inner-container" id="map-inner">
+                    <img src="Map of world.png" alt="Světová mapa" style="width: 100%; height: auto; display: block; border-radius: 12px; pointer-events: none;">
+                    
+                    <!-- EVROPSKÉ ZEMĚ & PRAHA -->
+                    <div class="percent-pin" style="left: 50.5%; top: 41.0%;" onmouseenter="showPercentTooltip(event, 'Praha, Česká republika', 'Prague, Czech Republic')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 49.2%; top: 38.8%;" onmouseenter="showPercentTooltip(event, 'Německo', 'Germany')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 46.8%; top: 41.8%;" onmouseenter="showPercentTooltip(event, 'Francie', 'France')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 52.2%; top: 38.5%;" onmouseenter="showPercentTooltip(event, 'Polsko', 'Poland')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 47.9%; top: 39.8%;" onmouseenter="showPercentTooltip(event, 'Nizozemsko', 'Netherlands')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 53.0%; top: 43.0%;" onmouseenter="showPercentTooltip(event, 'Maďarsko', 'Hungary')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 51.5%; top: 48.2%;" onmouseenter="showPercentTooltip(event, 'Malta', 'Malta')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 43.8%; top: 37.2%;" onmouseenter="showPercentTooltip(event, 'Irsko', 'Ireland')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
 
-                <!-- AUSTRÁLIE -->
-                <div class="percent-pin" style="left: 81.5%; top: 76.5%;" onmouseenter="showPercentTooltip(event, 'Austrálie', 'Australia')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                    <!-- USA & SEVERNÍ AMERIKA -->
+                    <div class="percent-pin" style="left: 25.7%; top: 55.1%;" onmouseenter="showPercentTooltip(event, 'Florida, USA', 'Florida, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 18.2%; top: 48.5%;" onmouseenter="showPercentTooltip(event, 'Arizona, USA', 'Arizona, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 18.8%; top: 39.5%;" onmouseenter="showPercentTooltip(event, 'Wyoming, USA', 'Wyoming, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 15.2%; top: 46.2%;" onmouseenter="showPercentTooltip(event, 'Kalifornie, USA', 'California, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 29.2%; top: 41.5%;" onmouseenter="showPercentTooltip(event, 'New York, USA', 'New York, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 30.5%; top: 39.8%;" onmouseenter="showPercentTooltip(event, 'Massachusetts, USA', 'Massachusetts, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 23.5%; top: 29.5%;" onmouseenter="showPercentTooltip(event, 'Kanada', 'Canada')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+
+                    <!-- AUSTRÁLIE -->
+                    <div class="percent-pin" style="left: 81.5%; top: 76.5%;" onmouseenter="showPercentTooltip(event, 'Austrálie', 'Australia')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                </div>
             </div>
         </div>
     </div>
@@ -397,6 +460,19 @@
         let activeProduct = null;
         const EUR_RATE = 25;
         let currentFilter = 'volne';
+        let currentZoom = 1;
+
+        function zoomMap(delta) {
+            currentZoom += delta;
+            if (currentZoom < 1) currentZoom = 1;
+            if (currentZoom > 3) currentZoom = 3;
+            document.getElementById('map-inner').style.transform = `scale(${currentZoom})`;
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            document.getElementById('map-inner').style.transform = `scale(1)`;
+        }
 
         const i18n = {
             cz: {
