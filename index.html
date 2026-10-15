@@ -70,7 +70,7 @@
         .btn-inquire.disabled { opacity: 0.4; pointer-events: none; border-color: var(--text-muted); color: var(--text-muted); }
 
         /* MAPA SVĚTA */
-        .map-wrapper { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; position: relative; max-width: 1000px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.4); overflow: hidden; text-align: center; }
+        .map-wrapper { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; position: relative; max-width: 1000px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.4); overflow: hidden; }
         .map-tooltip {
             position: absolute;
             background: rgba(20, 20, 28, 0.95);
@@ -206,54 +206,94 @@
         </div>
     </div>
 
-    <!-- SEKCE: MAPA SVĚTA (PŘESNĚ KALIBROVANÉ PODLE PRAHY A FLORIDY) -->
+    <!-- SEKCE: MAPA SVĚTA (PROCENTUÁLNÍ POZICOVÁNÍ) -->
     <div class="section-container" id="mapa">
         <h2 class="section-title" id="title-mapa">Kde již dělají moje obrazy radost</h2>
         <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem;" id="sub-mapa">Mé originální malby našly své domovy v soukromých sbírkách po celém světě.</p>
         
         <div class="map-wrapper">
             <div class="map-tooltip" id="map-tooltip"></div>
-            <div style="display: inline-block; width: 100%; max-width: 950px; position: relative;">
-                <svg viewBox="0 0 1006 598" style="width: 100%; height: auto; display: block; border-radius: 12px; background: #0b0b0f;" xmlns="http://www.w3.org/2000/svg">
-                    <image href="Map of world.png" width="1006" height="598" />
+            
+            <div style="position: relative; width: 100%; max-width: 950px; margin: 0 auto; display: inline-block;">
+                <img src="Map of world.png" alt="Světová mapa" style="width: 100%; height: auto; display: block; border-radius: 12px;">
+                
+                <style>
+                    .percent-pin {
+                        position: absolute;
+                        width: 12px;
+                        height: 12px;
+                        transform: translate(-50%, -50%);
+                        cursor: pointer;
+                        z-index: 5;
+                    }
+                    .percent-pin .dot {
+                        width: 8px;
+                        height: 8px;
+                        background: var(--accent-gold);
+                        border-radius: 50%;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        box-shadow: 0 0 8px var(--accent-gold);
+                    }
+                    .percent-pin .pulse {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        width: 24px;
+                        height: 24px;
+                        border: 1.5px solid var(--accent-gold);
+                        border-radius: 50%;
+                        opacity: 0.8;
+                        animation: percent-pulse 2s infinite ease-out;
+                    }
+                    @keyframes percent-pulse {
+                        0% { width: 8px; height: 8px; opacity: 1; }
+                        100% { width: 32px; height: 32px; opacity: 0; }
+                    }
+                </style>
 
-                    <style>
-                        .map-dot { fill: var(--accent-gold); filter: drop-shadow(0 0 6px var(--accent-gold)); cursor: pointer; }
-                        .map-pulse { fill: none; stroke: var(--accent-gold); stroke-width: 1.5; opacity: 0.8; animation: pulse-anim 2s infinite ease-out; transform-origin: center; pointer-events: none; }
-                        @keyframes pulse-anim {
-                            0% { r: 4px; opacity: 1; }
-                            100% { r: 16px; opacity: 0; }
-                        }
-                    </style>
+                <!-- Praha -->
+                <div class="percent-pin" style="left: 51.5%; top: 44.5%;" onmouseenter="showPercentTooltip(event, 'Praha, Česká republika', 'Prague, Czech Republic')" onmouseleave="hideTooltip()">
+                    <div class="pulse"></div><div class="dot"></div>
+                </div>
 
-                    <g>
-                        <!-- USA & Státy (kalibrováno podle Floridy 278, 398) -->
-                        <g transform="translate(195, 340)" onmouseenter="showSvgTooltip(evt, 'Arizona, USA', 'Arizona, USA')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
-                        <g transform="translate(278, 398)" onmouseenter="showSvgTooltip(evt, 'Florida, USA', 'Florida, USA')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
-                        <g transform="translate(200, 275)" onmouseenter="showSvgTooltip(evt, 'Wyoming, USA', 'Wyoming, USA')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
-                        <g transform="translate(138, 325)" onmouseenter="showSvgTooltip(evt, 'Kalifornie, USA', 'California, USA')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
-                        <g transform="translate(308, 275)" onmouseenter="showSvgTooltip(evt, 'New York, USA', 'New York, USA')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
-                        <g transform="translate(322, 265)" onmouseenter="showSvgTooltip(evt, 'Massachusetts, USA', 'Massachusetts, USA')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
-                        
-                        <!-- Amerika / Kanada -->
-                        <g transform="translate(245, 185)" onmouseenter="showSvgTooltip(evt, 'Kanada', 'Canada')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
-                        <g transform="translate(245, 320)" onmouseenter="showSvgTooltip(evt, 'Amerika', 'America')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                <!-- Florida -->
+                <div class="percent-pin" style="left: 28%; top: 66%;" onmouseenter="showPercentTooltip(event, 'Florida, USA', 'Florida, USA')" onmouseleave="hideTooltip()">
+                    <div class="pulse"></div><div class="dot"></div>
+                </div>
 
-                        <!-- Evropa (kalibrováno podle Prahy 503, 267) -->
-                        <g transform="translate(495, 245)" onmouseenter="showSvgTooltip(evt, 'Evropa', 'Europe')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
-                        <g transform="translate(488, 235)" onmouseenter="showSvgTooltip(evt, 'Německo', 'Germany')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
-                        <g transform="translate(465, 255)" onmouseenter="showSvgTooltip(evt, 'Francie', 'France')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
-                        <g transform="translate(522, 230)" onmouseenter="showSvgTooltip(evt, 'Polsko', 'Poland')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
-                        <g transform="translate(470, 222)" onmouseenter="showSvgTooltip(evt, 'Nizozemsko', 'Netherlands')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
-                        <g transform="translate(532, 260)" onmouseenter="showSvgTooltip(evt, 'Maďarsko', 'Hungary')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
-                        <g transform="translate(512, 335)" onmouseenter="showSvgTooltip(evt, 'Malta', 'Malta')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
-                        <g transform="translate(435, 220)" onmouseenter="showSvgTooltip(evt, 'Irsko', 'Ireland')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
-                        <g transform="translate(503, 267)" onmouseenter="showSvgTooltip(evt, 'Praha, Česká republika', 'Prague, Czech Republic')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                <!-- Londýn -->
+                <div class="percent-pin" style="left: 45.5%; top: 41%;" onmouseenter="showPercentTooltip(event, 'Londýn, Velká Británie', 'London, United Kingdom')" onmouseleave="hideTooltip()">
+                    <div class="pulse"></div><div class="dot"></div>
+                </div>
 
-                        <!-- Austrálie -->
-                        <g transform="translate(825, 475)" onmouseenter="showSvgTooltip(evt, 'Austrálie', 'Australia')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
-                    </g>
-                </svg>
+                <!-- Paříž -->
+                <div class="percent-pin" style="left: 47%; top: 46%;" onmouseenter="showPercentTooltip(event, 'Paříž, Francie', 'Paris, France')" onmouseleave="hideTooltip()">
+                    <div class="pulse"></div><div class="dot"></div>
+                </div>
+
+                <!-- Vídeň -->
+                <div class="percent-pin" style="left: 53%; top: 47%;" onmouseenter="showPercentTooltip(event, 'Vídeň, Rakousko', 'Vienna, Austria')" onmouseleave="hideTooltip()">
+                    <div class="pulse"></div><div class="dot"></div>
+                </div>
+
+                <!-- Kalifornie -->
+                <div class="percent-pin" style="left: 14%; top: 57%;" onmouseenter="showPercentTooltip(event, 'Kalifornie, USA', 'California, USA')" onmouseleave="hideTooltip()">
+                    <div class="pulse"></div><div class="dot"></div>
+                </div>
+
+                <!-- New York -->
+                <div class="percent-pin" style="left: 31%; top: 47%;" onmouseenter="showPercentTooltip(event, 'New York, USA', 'New York, USA')" onmouseleave="hideTooltip()">
+                    <div class="pulse"></div><div class="dot"></div>
+                </div>
+
+                <!-- Austrálie (Canberra) -->
+                <div class="percent-pin" style="left: 83%; top: 81%;" onmouseenter="showPercentTooltip(event, 'Canberra, Austrálie', 'Canberra, Australia')" onmouseleave="hideTooltip()">
+                    <div class="pulse"></div><div class="dot"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -455,13 +495,13 @@
             }
         };
 
-        function showSvgTooltip(evt, textCz, textEn) {
+        function showPercentTooltip(evt, textCz, textEn) {
             const tooltip = document.getElementById('map-tooltip');
             const name = currentLang === 'en' ? textEn : textCz;
             tooltip.textContent = name;
             
             const wrapperRect = document.querySelector('.map-wrapper').getBoundingClientRect();
-            const targetRect = evt.target.getBoundingClientRect();
+            const targetRect = evt.currentTarget.getBoundingClientRect();
 
             tooltip.style.left = `${targetRect.left - wrapperRect.left + (targetRect.width / 2)}px`;
             tooltip.style.top = `${targetRect.top - wrapperRect.top - 10}px`;
