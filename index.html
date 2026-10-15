@@ -70,10 +70,7 @@
         .btn-inquire.disabled { opacity: 0.4; pointer-events: none; border-color: var(--text-muted); color: var(--text-muted); }
 
         /* MAPA SVĚTA */
-        .map-wrapper { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; position: relative; max-width: 1000px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.4); overflow: hidden; }
-        .map-container { width: 100%; position: relative; display: inline-block; }
-        .map-bg-img { width: 100%; height: auto; display: block; border-radius: 10px; }
-
+        .map-wrapper { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; position: relative; max-width: 1000px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.4); overflow: hidden; text-align: center; }
         .map-tooltip {
             position: absolute;
             background: rgba(20, 20, 28, 0.95);
@@ -209,26 +206,53 @@
         </div>
     </div>
 
-    <!-- SEKCE: MAPA SVĚTA (DYNAMICKY GENEROVANÉ BODY PRO VŠECHNY LOKACE) -->
+    <!-- SEKCE: MAPA SVĚTA (PŘESNĚ KALIBROVANÉ PODLE PRAHY A FLORIDY) -->
     <div class="section-container" id="mapa">
         <h2 class="section-title" id="title-mapa">Kde již dělají moje obrazy radost</h2>
         <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem;" id="sub-mapa">Mé originální malby našly své domovy v soukromých sbírkách po celém světě.</p>
         
         <div class="map-wrapper">
             <div class="map-tooltip" id="map-tooltip"></div>
-            <div class="map-container" style="position: relative; width: 100%; max-width: 1006px; margin: 0 auto;">
-                <img src="Map of world.png" alt="Světová mapa" class="map-bg-img" style="width: 100%; height: auto; display: block;">
-                
-                <svg id="map-svg-layer" viewBox="0 0 1006 598" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
+            <div style="display: inline-block; width: 100%; max-width: 950px; position: relative;">
+                <svg viewBox="0 0 1006 598" style="width: 100%; height: auto; display: block; border-radius: 12px; background: #0b0b0f;" xmlns="http://www.w3.org/2000/svg">
+                    <image href="Map of world.png" width="1006" height="598" />
+
                     <style>
-                        .exact-pin { cursor: pointer; pointer-events: auto; }
-                        .exact-pin circle.dot { fill: var(--accent-gold); filter: drop-shadow(0 0 8px var(--accent-gold)); }
-                        .exact-pin circle.pulse { fill: none; stroke: var(--accent-gold); stroke-width: 1.5; opacity: 0.8; animation: pulse-anim 2s infinite ease-out; transform-origin: center; }
+                        .map-dot { fill: var(--accent-gold); filter: drop-shadow(0 0 6px var(--accent-gold)); cursor: pointer; }
+                        .map-pulse { fill: none; stroke: var(--accent-gold); stroke-width: 1.5; opacity: 0.8; animation: pulse-anim 2s infinite ease-out; transform-origin: center; pointer-events: none; }
                         @keyframes pulse-anim {
                             0% { r: 4px; opacity: 1; }
-                            100% { r: 18px; opacity: 0; }
+                            100% { r: 16px; opacity: 0; }
                         }
                     </style>
+
+                    <g>
+                        <!-- USA & Státy (kalibrováno podle Floridy 278, 398) -->
+                        <g transform="translate(195, 340)" onmouseenter="showSvgTooltip(evt, 'Arizona, USA', 'Arizona, USA')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                        <g transform="translate(278, 398)" onmouseenter="showSvgTooltip(evt, 'Florida, USA', 'Florida, USA')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                        <g transform="translate(200, 275)" onmouseenter="showSvgTooltip(evt, 'Wyoming, USA', 'Wyoming, USA')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                        <g transform="translate(138, 325)" onmouseenter="showSvgTooltip(evt, 'Kalifornie, USA', 'California, USA')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                        <g transform="translate(308, 275)" onmouseenter="showSvgTooltip(evt, 'New York, USA', 'New York, USA')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                        <g transform="translate(322, 265)" onmouseenter="showSvgTooltip(evt, 'Massachusetts, USA', 'Massachusetts, USA')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                        
+                        <!-- Amerika / Kanada -->
+                        <g transform="translate(245, 185)" onmouseenter="showSvgTooltip(evt, 'Kanada', 'Canada')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                        <g transform="translate(245, 320)" onmouseenter="showSvgTooltip(evt, 'Amerika', 'America')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+
+                        <!-- Evropa (kalibrováno podle Prahy 503, 267) -->
+                        <g transform="translate(495, 245)" onmouseenter="showSvgTooltip(evt, 'Evropa', 'Europe')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                        <g transform="translate(488, 235)" onmouseenter="showSvgTooltip(evt, 'Německo', 'Germany')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                        <g transform="translate(465, 255)" onmouseenter="showSvgTooltip(evt, 'Francie', 'France')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                        <g transform="translate(522, 230)" onmouseenter="showSvgTooltip(evt, 'Polsko', 'Poland')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                        <g transform="translate(470, 222)" onmouseenter="showSvgTooltip(evt, 'Nizozemsko', 'Netherlands')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                        <g transform="translate(532, 260)" onmouseenter="showSvgTooltip(evt, 'Maďarsko', 'Hungary')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                        <g transform="translate(512, 335)" onmouseenter="showSvgTooltip(evt, 'Malta', 'Malta')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                        <g transform="translate(435, 220)" onmouseenter="showSvgTooltip(evt, 'Irsko', 'Ireland')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                        <g transform="translate(503, 267)" onmouseenter="showSvgTooltip(evt, 'Praha, Česká republika', 'Prague, Czech Republic')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+
+                        <!-- Austrálie -->
+                        <g transform="translate(825, 475)" onmouseenter="showSvgTooltip(evt, 'Austrálie', 'Australia')" onmouseleave="hideTooltip()"><circle class="map-pulse" cx="0" cy="0"/><circle class="map-dot" cx="0" cy="0" r="4"/></g>
+                    </g>
                 </svg>
             </div>
         </div>
@@ -354,64 +378,6 @@
         const EUR_RATE = 25;
         let currentFilter = 'volne';
 
-        // KOMPLETNÍ SEZNAM VŠECH LOKACÍ PŘEDEM UMÍSTĚNÝCH NA MAPU (1006x598 px)
-        const mapLocations = [
-            // USA státy
-            { name_cz: "Arizona, USA", name_en: "Arizona, USA", x: 195, y: 350 },
-            { name_cz: "Florida, USA", name_en: "Florida, USA", x: 275, y: 398 },
-            { name_cz: "Wyoming, USA", name_en: "Wyoming, USA", x: 190, y: 290 },
-            { name_cz: "Kalifornie, USA", name_en: "California, USA", x: 135, y: 340 },
-            { name_cz: "New York, USA", name_en: "New York, USA", x: 295, y: 295 },
-            { name_cz: "Massachusetts, USA", name_en: "Massachusetts, USA", x: 315, y: 285 },
-            
-            // Severní Amerika / Kanada / Amerika obecně
-            { name_cz: "Kanada", name_en: "Canada", x: 220, y: 200 },
-            { name_cz: "Spojené státy / Amerika", name_en: "United States / America", x: 220, y: 340 },
-
-            // Evropa & státy
-            { name_cz: "Evropa", name_en: "Europe", x: 480, y: 270 },
-            { name_cz: "Německo", name_en: "Germany", x: 488, y: 260 },
-            { name_cz: "Francie", name_en: "France", x: 468, y: 275 },
-            { name_cz: "Polsko", name_en: "Poland", x: 525, y: 250 },
-            { name_cz: "Nizozemsko", name_en: "Netherlands", x: 475, y: 245 },
-            { name_cz: "Maďarsko", name_en: "Hungary", x: 535, y: 280 },
-            { name_cz: "Malta", name_en: "Malta", x: 515, y: 360 },
-            { name_cz: "Irsko", name_en: "Ireland", x: 430, y: 240 },
-            { name_cz: "Praha, Česká republika", name_en: "Prague, Czech Republic", x: 508, y: 265 },
-
-            // Ostatní svět
-            { name_cz: "Austrálie", name_en: "Australia", x: 835, y: 485 }
-        ];
-
-        function renderMapLocations() {
-            const svgLayer = document.getElementById('map-svg-layer');
-            if (!svgLayer) return;
-
-            // Vygeneruje SVG body dynamicky ze seznamu výše
-            let svgContent = `
-                <style>
-                    .exact-pin { cursor: pointer; pointer-events: auto; }
-                    .exact-pin circle.dot { fill: var(--accent-gold); filter: drop-shadow(0 0 8px var(--accent-gold)); }
-                    .exact-pin circle.pulse { fill: none; stroke: var(--accent-gold); stroke-width: 1.5; opacity: 0.8; animation: pulse-anim 2s infinite ease-out; transform-origin: center; }
-                    @keyframes pulse-anim {
-                        0% { r: 4px; opacity: 1; }
-                        100% { r: 18px; opacity: 0; }
-                    }
-                </style>
-            `;
-
-            mapLocations.forEach(loc => {
-                svgContent += `
-                    <g class="exact-pin" transform="translate(${loc.x}, ${loc.y})" onmouseenter="showTooltip(evt, '${loc.name_cz}', '${loc.name_en}')" onmouseleave="hideTooltip()">
-                        <circle class="pulse" cx="0" cy="0" />
-                        <circle class="dot" cx="0" cy="0" r="4.5" />
-                    </g>
-                `;
-            });
-
-            svgLayer.innerHTML = svgContent;
-        }
-
         const i18n = {
             cz: {
                 navObrazy: "Obrazy",
@@ -489,7 +455,7 @@
             }
         };
 
-        function showTooltip(evt, textCz, textEn) {
+        function showSvgTooltip(evt, textCz, textEn) {
             const tooltip = document.getElementById('map-tooltip');
             const name = currentLang === 'en' ? textEn : textCz;
             tooltip.textContent = name;
@@ -498,7 +464,7 @@
             const targetRect = evt.target.getBoundingClientRect();
 
             tooltip.style.left = `${targetRect.left - wrapperRect.left + (targetRect.width / 2)}px`;
-            tooltip.style.top = `${targetRect.top - wrapperRect.top}px`;
+            tooltip.style.top = `${targetRect.top - wrapperRect.top - 10}px`;
             tooltip.classList.add('active');
         }
 
@@ -773,7 +739,6 @@
         });
 
         // INICIALIZACE
-        renderMapLocations();
         fetchProducts();
     </script>
 </body>
