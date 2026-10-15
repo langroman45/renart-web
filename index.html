@@ -242,7 +242,7 @@
         </div>
     </div>
 
-    <!-- SEKCE: MAPA SVĚTA (S NAKLIKÁVACÍM REŽIMEM) -->
+    <!-- SEKCE: MAPA SVĚTA (PŘESNĚ KALIBROVANÉ SOUŘADNICE PODLE OBRÁZKU) -->
     <div class="section-container" id="mapa">
         <h2 class="section-title" id="title-mapa">Kde již dělají moje obrazy radost</h2>
         <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem;" id="sub-mapa">Mé originální malby našly své domovy v soukromých sbírkách po celém světě.</p>
@@ -250,15 +250,30 @@
         <div class="map-wrapper">
             <div class="map-tooltip" id="map-tooltip"></div>
             
-            <div id="interactive-map-box" style="position: relative; width: 100%; max-width: 950px; margin: 0 auto; display: inline-block; cursor: crosshair;">
-                <img id="map-img-element" src="Map of world.png" alt="Světová mapa" style="width: 100%; height: auto; display: block; border-radius: 12px; pointer-events: none;">
+            <div style="position: relative; width: 100%; max-width: 950px; margin: 0 auto; display: inline-block;">
+                <img src="Map of world.png" alt="Světová mapa" style="width: 100%; height: auto; display: block; border-radius: 12px;">
                 
-                <div id="pins-container"></div>
-            </div>
+                <!-- EVROPSKÉ ZEMĚ & PRAHA -->
+                <div class="percent-pin" style="left: 50.5%; top: 41.0%;" onmouseenter="showPercentTooltip(event, 'Praha, Česká republika', 'Prague, Czech Republic')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                <div class="percent-pin" style="left: 49.2%; top: 38.8%;" onmouseenter="showPercentTooltip(event, 'Německo', 'Germany')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                <div class="percent-pin" style="left: 46.8%; top: 41.8%;" onmouseenter="showPercentTooltip(event, 'Francie', 'France')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                <div class="percent-pin" style="left: 52.2%; top: 38.5%;" onmouseenter="showPercentTooltip(event, 'Polsko', 'Poland')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                <div class="percent-pin" style="left: 47.3%; top: 37.8%;" onmouseenter="showPercentTooltip(event, 'Nizozemsko', 'Netherlands')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                <div class="percent-pin" style="left: 53.0%; top: 43.0%;" onmouseenter="showPercentTooltip(event, 'Maďarsko', 'Hungary')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                <div class="percent-pin" style="left: 51.2%; top: 52.8%;" onmouseenter="showPercentTooltip(event, 'Malta', 'Malta')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                <div class="percent-pin" style="left: 43.8%; top: 37.2%;" onmouseenter="showPercentTooltip(event, 'Irsko', 'Ireland')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
 
-            <!-- LIŠTA KTERÁ ZOBRAZÍ POSLEDNÍ KLIKNUTÉ SOUŘADNICE -->
-            <div id="click-logger" style="margin-top: 1rem; font-size: 0.9rem; color: var(--accent-gold); background: #181822; padding: 0.8rem; border-radius: 8px; font-family: monospace;">
-                Klikni na mapě na jakékoliv místo (Praha, Florida...) a zkopíruj mi text, který se tady objeví.
+                <!-- USA & SEVERNÍ AMERIKA -->
+                <div class="percent-pin" style="left: 25.7%; top: 55.1%;" onmouseenter="showPercentTooltip(event, 'Florida, USA', 'Florida, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                <div class="percent-pin" style="left: 18.2%; top: 48.5%;" onmouseenter="showPercentTooltip(event, 'Arizona, USA', 'Arizona, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                <div class="percent-pin" style="left: 18.8%; top: 39.5%;" onmouseenter="showPercentTooltip(event, 'Wyoming, USA', 'Wyoming, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                <div class="percent-pin" style="left: 13.5%; top: 46.2%;" onmouseenter="showPercentTooltip(event, 'Kalifornie, USA', 'California, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                <div class="percent-pin" style="left: 29.2%; top: 41.5%;" onmouseenter="showPercentTooltip(event, 'New York, USA', 'New York, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                <div class="percent-pin" style="left: 30.5%; top: 39.8%;" onmouseenter="showPercentTooltip(event, 'Massachusetts, USA', 'Massachusetts, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                <div class="percent-pin" style="left: 23.5%; top: 29.5%;" onmouseenter="showPercentTooltip(event, 'Kanada', 'Canada')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+
+                <!-- AUSTRÁLIE -->
+                <div class="percent-pin" style="left: 81.5%; top: 76.5%;" onmouseenter="showPercentTooltip(event, 'Austrálie', 'Australia')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
             </div>
         </div>
     </div>
@@ -383,25 +398,6 @@
         const EUR_RATE = 25;
         let currentFilter = 'volne';
 
-        // DETEKCE KLIKNUTÍ DO MAPY A VYGENEROHOVÁNÍ SOUŘADNIC
-        document.getElementById('interactive-map-box').addEventListener('click', function(e) {
-            const rect = this.getBoundingClientRect();
-            const xPercent = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
-            const yPercent = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
-
-            // Vytvoří tečku na kliknutém místě
-            const pin = document.createElement('div');
-            pin.className = 'percent-pin';
-            pin.style.left = `${xPercent}%`;
-            pin.style.top = `${yPercent}%`;
-            pin.innerHTML = '<div class="pulse"></div><div class="dot"></div>';
-            document.getElementById('pins-container').appendChild(pin);
-
-            // Vypíše text k zkopírování
-            const logger = document.getElementById('click-logger');
-            logger.innerHTML += `<br><code>left: ${xPercent}%; top: ${yPercent}%;</code>`;
-        });
-
         const i18n = {
             cz: {
                 navObrazy: "Obrazy", navMapa: "Kde tvořím radost", navAbout: "O autorce", navFaq: "FAQ", navContact: "Kontakt",
@@ -434,6 +430,19 @@
                 readMore: "Read More", readLess: "Read Less"
             }
         };
+
+        function showPercentTooltip(evt, textCz, textEn) {
+            const tooltip = document.getElementById('map-tooltip');
+            const name = currentLang === 'en' ? textEn : textCz;
+            tooltip.textContent = name;
+            
+            const wrapperRect = document.querySelector('.map-wrapper').getBoundingClientRect();
+            const targetRect = evt.currentTarget.getBoundingClientRect();
+
+            tooltip.style.left = `${targetRect.left - wrapperRect.left + (targetRect.width / 2)}px`;
+            tooltip.style.top = `${targetRect.top - wrapperRect.top - 10}px`;
+            tooltip.classList.add('active');
+        }
 
         function hideTooltip() {
             const tooltip = document.getElementById('map-tooltip');
