@@ -160,11 +160,10 @@
             display: block;
         }
 
-        .map-continent {
-            fill: #1d1d2b;
-            stroke: #2c2c3e;
-            stroke-width: 1;
-            rx: 6px;
+        .map-land {
+            fill: #1a1a26;
+            stroke: #2a2a3e;
+            stroke-width: 1.2;
         }
 
         /* BODY NA MAPĚ */
@@ -384,19 +383,19 @@
             <div class="map-tooltip" id="map-tooltip"></div>
             <div class="map-container">
                 <svg class="map-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
-                    <!-- KONTURY KONTINENTŮ JAKO DESIGNOWÉ KAFLE -->
+                    <!-- KONTURY SVĚTA (VEKTOROVÉ TVARY KONTINENTŮ) -->
                     <!-- Severní Amerika -->
-                    <rect class="map-continent" x="120" y="80" width="200" height="150" rx="15" />
+                    <path class="map-land" d="M100,80 Q220,60 320,120 T280,240 Q180,250 100,160 Z" />
                     <!-- Jižní Amerika -->
-                    <rect class="map-continent" x="240" y="260" width="90" height="180" rx="15" />
+                    <path class="map-land" d="M250,260 Q330,270 310,390 T240,460 Q210,380 230,300 Z" />
                     <!-- Evropa -->
-                    <rect class="map-continent" x="440" y="70" width="120" height="110" rx="12" />
+                    <path class="map-land" d="M430,70 Q530,60 560,130 T480,180 Q430,150 430,70 Z" />
                     <!-- Afrika -->
-                    <rect class="map-continent" x="430" y="200" width="130" height="190" rx="15" />
+                    <path class="map-land" d="M430,190 Q570,180 570,280 T510,410 Q420,350 430,190 Z" />
                     <!-- Asie -->
-                    <rect class="map-continent" x="580" y="60" width="310" height="210" rx="20" />
+                    <path class="map-land" d="M570,60 Q890,40 920,170 T780,280 Q620,250 570,130 Z" />
                     <!-- Austrálie -->
-                    <rect class="map-continent" x="760" y="310" width="120" height="100" rx="15" />
+                    <path class="map-land" d="M770,310 Q890,300 890,400 T770,420 Q740,360 770,310 Z" />
 
                     <!-- INTERAKTIVNÍ ZLATÉ BODY NA MAPĚ -->
                     <g id="map-pins"></g>
