@@ -355,52 +355,52 @@
                 <img src="Map of world.png" alt="Světová mapa" class="map-bg-img" style="width: 100%; height: auto; display: block;">
                 
                 <svg viewBox="0 0 1006 598" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
-                    <style>
-                        .exact-pin { cursor: pointer; pointer-events: auto; }
-                        .exact-pin circle.dot { fill: var(--accent-gold); filter: drop-shadow(0 0 8px var(--accent-gold)); }
-                        .exact-pin circle.pulse { fill: none; stroke: var(--accent-gold); stroke-width: 1.5; opacity: 0.8; animation: pulse-anim 2s infinite ease-out; transform-origin: center; }
-                        @keyframes pulse-anim {
-                            0% { r: 4px; opacity: 1; }
-                            100% { r: 18px; opacity: 0; }
-                        }
-                    </style>
+    <style>
+        .exact-pin { cursor: pointer; pointer-events: auto; }
+        .exact-pin circle.dot { fill: var(--accent-gold); filter: drop-shadow(0 0 8px var(--accent-gold)); }
+        .exact-pin circle.pulse { fill: none; stroke: var(--accent-gold); stroke-width: 1.5; opacity: 0.8; animation: pulse-anim 2s infinite ease-out; transform-origin: center; }
+        @keyframes pulse-anim {
+            0% { r: 4px; opacity: 1; }
+            100% { r: 18px; opacity: 0; }
+        }
+    </style>
 
-                    <!-- PRAHA (Česká republika) - x: 50.8, y: 44.5 -->
-                    <g class="exact-pin" transform="translate(511, 266)" onmouseenter="showTooltip(evt, 'Praha, Česká republika', 'Prague, Czech Republic')" onmouseleave="hideTooltip()">
-                        <circle class="pulse" cx="0" cy="0" />
-                        <circle class="dot" cx="0" cy="0" r="4.5" />
-                    </g>
+    <!-- LONDÝN (Velká Británie) - 45.8% z 1006px, 42.0% z 598px -->
+    <g class="exact-pin" transform="translate(461, 251)" onmouseenter="showTooltip(evt, 'Londýn, Velká Británie', 'London, United Kingdom')" onmouseleave="hideTooltip()">
+        <circle class="pulse" cx="0" cy="0" />
+        <circle class="dot" cx="0" cy="0" r="4.5" />
+    </g>
 
-                    <!-- PAŘÍŽ (Francie) - x: 47.0, y: 45.8 -->
-                    <g class="exact-pin" transform="translate(473, 274)" onmouseenter="showTooltip(evt, 'Paříž, Francie', 'Paris, France')" onmouseleave="hideTooltip()">
-                        <circle class="pulse" cx="0" cy="0" />
-                        <circle class="dot" cx="0" cy="0" r="4.5" />
-                    </g>
+    <!-- PAŘÍŽ (Francie) - 47.0% z 1006px, 45.8% z 598px -->
+    <g class="exact-pin" transform="translate(473, 274)" onmouseenter="showTooltip(evt, 'Paříž, Francie', 'Paris, France')" onmouseleave="hideTooltip()">
+        <circle class="pulse" cx="0" cy="0" />
+        <circle class="dot" cx="0" cy="0" r="4.5" />
+    </g>
 
-                    <!-- LONDÝN (Velká Británie) - x: 45.8, y: 42.0 -->
-                    <g class="exact-pin" transform="translate(461, 251)" onmouseenter="showTooltip(evt, 'Londýn, Velká Británie', 'London, United Kingdom')" onmouseleave="hideTooltip()">
-                        <circle class="pulse" cx="0" cy="0" />
-                        <circle class="dot" cx="0" cy="0" r="4.5" />
-                    </g>
+    <!-- PRAHA (Česká republika) - 50.8% z 1006px, 44.5% z 598px -->
+    <g class="exact-pin" transform="translate(511, 266)" onmouseenter="showTooltip(evt, 'Praha, Česká republika', 'Prague, Czech Republic')" onmouseleave="hideTooltip()">
+        <circle class="pulse" cx="0" cy="0" />
+        <circle class="dot" cx="0" cy="0" r="4.5" />
+    </g>
 
-                    <!-- VÍDEŇ (Rakousko) - x: 51.8, y: 46.2 -->
-                    <g class="exact-pin" transform="translate(521, 276)" onmouseenter="showTooltip(evt, 'Vídeň, Rakousko', 'Vienna, Austria')" onmouseleave="hideTooltip()">
-                        <circle class="pulse" cx="0" cy="0" />
-                        <circle class="dot" cx="0" cy="0" r="4.5" />
-                    </g>
+    <!-- VÍDEŇ (Rakousko) - 51.8% z 1006px, 46.2% z 598px -->
+    <g class="exact-pin" transform="translate(521, 276)" onmouseenter="showTooltip(evt, 'Vídeň, Rakousko', 'Vienna, Austria')" onmouseleave="hideTooltip()">
+        <circle class="pulse" cx="0" cy="0" />
+        <circle class="dot" cx="0" cy="0" r="4.5" />
+    </g>
 
-                    <!-- MIAMI (USA) - x: 27.2, y: 59.8 -->
-                    <g class="exact-pin" transform="translate(274, 358)" onmouseenter="showTooltip(evt, 'Miami, USA', 'Miami, USA')" onmouseleave="hideTooltip()">
-                        <circle class="pulse" cx="0" cy="0" />
-                        <circle class="dot" cx="0" cy="0" r="4.5" />
-                    </g>
+    <!-- MIAMI (USA) - 27.2% z 1006px, 59.8% z 598px -->
+    <g class="exact-pin" transform="translate(274, 358)" onmouseenter="showTooltip(evt, 'Miami, USA', 'Miami, USA')" onmouseleave="hideTooltip()">
+        <circle class="pulse" cx="0" cy="0" />
+        <circle class="dot" cx="0" cy="0" r="4.5" />
+    </g>
 
-                    <!-- CANBERRA (Austrálie) - x: 82.5, y: 79.5 -->
-                    <g class="exact-pin" transform="translate(830, 475)" onmouseenter="showTooltip(evt, 'Canberra, Austrálie', 'Canberra, Australia')" onmouseleave="hideTooltip()">
-                        <circle class="pulse" cx="0" cy="0" />
-                        <circle class="dot" cx="0" cy="0" r="4.5" />
-                    </g>
-                </svg>
+    <!-- CANBERRA (Austrálie) - 82.5% z 1006px, 79.5% z 598px -->
+    <g class="exact-pin" transform="translate(830, 475)" onmouseenter="showTooltip(evt, 'Canberra, Austrálie', 'Canberra, Australia')" onmouseleave="hideTooltip()">
+        <circle class="pulse" cx="0" cy="0" />
+        <circle class="dot" cx="0" cy="0" r="4.5" />
+    </g>
+</svg>
             </div>
         </div>
     </div>
