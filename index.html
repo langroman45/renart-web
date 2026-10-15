@@ -137,7 +137,7 @@
         .btn-inquire:hover { background: var(--accent-gold); color: #000; }
         .btn-inquire.disabled { opacity: 0.4; pointer-events: none; border-color: var(--text-muted); color: var(--text-muted); }
 
-        /* MAPA SVĚTA S TVÝM REÁLNÝM OBRÁZKEM */
+        /* MAPA SVĚTA */
         .map-wrapper { 
             background: var(--card-bg); 
             border: 1px solid var(--border-color); 
@@ -161,51 +161,6 @@
             height: auto;
             display: block;
             border-radius: 10px;
-        }
-
-        /* VYTVAŘENÍ BODY NAD PŘESNÝM OBRÁZKEM */
-        .map-pin-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .pin-marker {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: var(--accent-gold);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            cursor: pointer;
-            pointer-events: auto;
-            box-shadow: 0 0 12px var(--accent-gold);
-            transition: transform 0.2s;
-        }
-
-        .pin-marker:hover {
-            transform: translate(-50%, -50%) scale(1.4);
-        }
-
-        .pin-marker::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 24px;
-            height: 24px;
-            border: 1.5px solid var(--accent-gold);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            animation: pulse-ring 2s infinite ease-out;
-        }
-
-        @keyframes pulse-ring {
-            0% { width: 8px; height: 8px; opacity: 1; }
-            100% { width: 34px; height: 34px; opacity: 0; }
         }
 
         .map-tooltip {
@@ -389,17 +344,63 @@
         </div>
     </div>
 
-    <!-- SEKCE: MAPA SVĚTA -->
+    <!-- SEKCE: MAPA SVĚTA (PŘESNÉ SVG PIXELOVÉ POZICOVÁNÍ 1006x598) -->
     <div class="section-container" id="mapa">
         <h2 class="section-title" id="title-mapa">Kde již dělají moje obrazy radost</h2>
         <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem;" id="sub-mapa">Mé originální malby našly své domovy v soukromých sbírkách po celém světě.</p>
         
         <div class="map-wrapper">
             <div class="map-tooltip" id="map-tooltip"></div>
-            <div class="map-container">
-                <!-- POUŽITÍ TVÉHO SOUBORU MAP OF WORLD.PNG -->
-                <img src="Map of world.png" alt="Světová mapa" class="map-bg-img" id="map-img">
-                <div class="map-pin-overlay" id="map-pins-container"></div>
+            <div class="map-container" style="position: relative; width: 100%; max-width: 1006px; margin: 0 auto;">
+                <img src="Map of world.png" alt="Světová mapa" class="map-bg-img" style="width: 100%; height: auto; display: block;">
+                
+                <svg viewBox="0 0 1006 598" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
+                    <style>
+                        .exact-pin { cursor: pointer; pointer-events: auto; }
+                        .exact-pin circle.dot { fill: var(--accent-gold); filter: drop-shadow(0 0 8px var(--accent-gold)); }
+                        .exact-pin circle.pulse { fill: none; stroke: var(--accent-gold); stroke-width: 1.5; opacity: 0.8; animation: pulse-anim 2s infinite ease-out; transform-origin: center; }
+                        @keyframes pulse-anim {
+                            0% { r: 4px; opacity: 1; }
+                            100% { r: 18px; opacity: 0; }
+                        }
+                    </style>
+
+                    <!-- LONDÝN -->
+                    <g class="exact-pin" transform="translate(445, 220)" onmouseenter="showTooltip(evt, 'Londýn, Velká Británie', 'London, United Kingdom')" onmouseleave="hideTooltip()">
+                        <circle class="pulse" cx="0" cy="0" />
+                        <circle class="dot" cx="0" cy="0" r="4.5" />
+                    </g>
+
+                    <!-- PAŘÍŽ -->
+                    <g class="exact-pin" transform="translate(462, 253)" onmouseenter="showTooltip(evt, 'Paříž, Francie', 'Paris, France')" onmouseleave="hideTooltip()">
+                        <circle class="pulse" cx="0" cy="0" />
+                        <circle class="dot" cx="0" cy="0" r="4.5" />
+                    </g>
+
+                    <!-- PRAHA -->
+                    <g class="exact-pin" transform="translate(503, 245)" onmouseenter="showTooltip(evt, 'Praha, Česká republika', 'Prague, Czech Republic')" onmouseleave="hideTooltip()">
+                        <circle class="pulse" cx="0" cy="0" />
+                        <circle class="dot" cx="0" cy="0" r="4.5" />
+                    </g>
+
+                    <!-- VÍDEŇ -->
+                    <g class="exact-pin" transform="translate(520, 263)" onmouseenter="showTooltip(evt, 'Vídeň, Rakousko', 'Vienna, Austria')" onmouseleave="hideTooltip()">
+                        <circle class="pulse" cx="0" cy="0" />
+                        <circle class="dot" cx="0" cy="0" r="4.5" />
+                    </g>
+
+                    <!-- MIAMI -->
+                    <g class="exact-pin" transform="translate(272, 340)" onmouseenter="showTooltip(evt, 'Miami, USA', 'Miami, USA')" onmouseleave="hideTooltip()">
+                        <circle class="pulse" cx="0" cy="0" />
+                        <circle class="dot" cx="0" cy="0" r="4.5" />
+                    </g>
+
+                    <!-- CANBERRA -->
+                    <g class="exact-pin" transform="translate(830, 478)" onmouseenter="showTooltip(evt, 'Canberra, Austrálie', 'Canberra, Australia')" onmouseleave="hideTooltip()">
+                        <circle class="pulse" cx="0" cy="0" />
+                        <circle class="dot" cx="0" cy="0" r="4.5" />
+                    </g>
+                </svg>
             </div>
         </div>
     </div>
@@ -525,18 +526,7 @@
         let currentLang = 'cz';
         let activeProduct = null;
         const EUR_RATE = 25;
-
         let currentFilter = 'volne';
-
-        // PŘESNÉ PERCENTUÁLNÍ SOUŘADNICE ZAPASOVANÉ PŘÍMO NA TVŮJ OBRÁZEK MAP OF WORLD.PNG
-        const mapLocations = [
-            { name_cz: "Praha, Česká republika", name_en: "Prague, Czech Republic", x: 50.0, y: 41.0 },
-            { name_cz: "Paříž, Francie", name_en: "Paris, France", x: 45.9, y: 42.3 },
-            { name_cz: "Londýn, Velká Británie", name_en: "London, United Kingdom", x: 44.2, y: 36.8 },
-            { name_cz: "Vídeň, Rakousko", name_en: "Vienna, Austria", x: 51.7, y: 44.0 },
-            { name_cz: "Miami, USA", name_en: "Miami, USA", x: 27.0, y: 56.9 },
-            { name_cz: "Canberra, Austrálie", name_en: "Canberra, Australia", x: 82.5, y: 79.9 }
-        ];
 
         const i18n = {
             cz: {
@@ -615,36 +605,22 @@
             }
         };
 
-        function renderMapPins() {
-            const container = document.getElementById('map-pins-container');
+        function showTooltip(evt, textCz, textEn) {
             const tooltip = document.getElementById('map-tooltip');
-            if(!container) return;
-            container.innerHTML = '';
+            const name = currentLang === 'en' ? textEn : textCz;
+            tooltip.textContent = name;
+            
+            const wrapperRect = document.querySelector('.map-wrapper').getBoundingClientRect();
+            const targetRect = evt.target.getBoundingClientRect();
 
-            mapLocations.forEach(loc => {
-                const marker = document.createElement('div');
-                marker.className = 'pin-marker';
-                marker.style.left = `${loc.x}%`;
-                marker.style.top = `${loc.y}%`;
+            tooltip.style.left = `${targetRect.left - wrapperRect.left + (targetRect.width / 2)}px`;
+            tooltip.style.top = `${targetRect.top - wrapperRect.top}px`;
+            tooltip.classList.add('active');
+        }
 
-                marker.addEventListener('mouseenter', (e) => {
-                    const name = currentLang === 'en' ? loc.name_en : loc.name_cz;
-                    tooltip.textContent = name;
-                    
-                    const rect = marker.getBoundingClientRect();
-                    const wrapperRect = document.querySelector('.map-wrapper').getBoundingClientRect();
-
-                    tooltip.style.left = `${rect.left - wrapperRect.left + 5}px`;
-                    tooltip.style.top = `${rect.top - wrapperRect.top}px`;
-                    tooltip.classList.add('active');
-                });
-
-                marker.addEventListener('mouseleave', () => {
-                    tooltip.classList.remove('active');
-                });
-
-                container.appendChild(marker);
-            });
+        function hideTooltip() {
+            const tooltip = document.getElementById('map-tooltip');
+            tooltip.classList.remove('active');
         }
 
         function toggleAboutText() {
@@ -883,7 +859,6 @@
             }
 
             renderObrazy();
-            renderMapPins();
             
             if (document.getElementById('product-modal').classList.contains('active') && activeProduct) {
                 openModal(activeProduct.id);
@@ -914,7 +889,6 @@
         });
 
         // INICIALIZACE
-        renderMapPins();
         fetchProducts();
     </script>
 </body>
