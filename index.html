@@ -24,7 +24,6 @@
             scroll-behavior: smooth; 
         }
 
-        /* ZAMEZENÍ PŘETÉKÁNÍ DO STRAN NA MOBILU (iOS i Android) */
         html, body { 
             width: 100%;
             max-width: 100%;
@@ -100,7 +99,7 @@
 
         .hero { padding: 4rem 5% 3rem; text-align: center; }
         .hero h1 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 1rem; font-weight: 400; line-height: 1.2; }
-        .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 650px; margin: 0 auto; }
+        .hero p { color: var(--text-muted); font-size: 1.15rem; max-width: 650px; margin: 0 auto; }
 
         .section-container { max-width: 1300px; margin: 0 auto; padding: 3rem 5%; border-top: 1px solid var(--border-color); scroll-margin-top: 80px; }
         .section-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 1.5rem; font-weight: 400; text-align: center; }
@@ -139,12 +138,24 @@
         .btn-inquire.disabled { opacity: 0.4; pointer-events: none; border-color: var(--text-muted); color: var(--text-muted); }
 
         /* O AUTORCE SEKCE */
-        .about-section { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: center; max-width: 1100px; margin: 0 auto; }
-        .about-img-wrap { width: 100%; height: 450px; background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border-color); overflow: hidden; position: relative; }
+        .about-section { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; max-width: 1100px; margin: 0 auto; }
+        .about-img-wrap { width: 100%; height: 500px; background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border-color); overflow: hidden; position: sticky; top: 100px; }
         .about-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; display: block; }
 
-        .about-text h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 1.2rem; font-weight: 400; }
-        .about-text p { color: var(--text-muted); margin-bottom: 1rem; font-size: 1rem; line-height: 1.6; }
+        .about-text h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 1.2rem; font-weight: 400; color: var(--text-main); }
+        .about-text h4 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin: 1.5rem 0 0.8rem; color: var(--accent-gold); font-weight: 500; }
+        .about-text p { color: var(--text-muted); margin-bottom: 1rem; font-size: 1.02rem; line-height: 1.7; }
+        
+        .about-text ul { list-style: none; margin-bottom: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem; }
+        .about-text li { color: var(--text-muted); font-size: 0.98rem; position: relative; padding-left: 1.2rem; }
+        .about-text li::before { content: "•"; color: var(--accent-gold); position: absolute; left: 0; font-weight: bold; }
+
+        /* ROZBALOVACÍ OBSAH (MORE CONTENT) */
+        .more-content { display: none; margin-top: 0; }
+        .more-content.visible { display: block; }
+
+        .btn-toggle-about { background: transparent; color: var(--accent-gold); border: 1px solid var(--accent-gold); padding: 0.6rem 1.4rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.3s; margin-top: 1rem; display: inline-block; }
+        .btn-toggle-about:hover { background: var(--accent-gold); color: #000; }
 
         /* FAQ SEKCE */
         .faq-container { max-width: 850px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.8rem; }
@@ -243,7 +254,7 @@
                 gap: 2rem;
             }
 
-            .about-img-wrap { height: 320px; }
+            .about-img-wrap { height: 320px; position: static; }
 
             .modal-container {
                 grid-template-columns: 1fr;
@@ -304,12 +315,51 @@
         <h2 class="section-title" id="title-about">O autorce</h2>
         <div class="about-section">
             <div class="about-img-wrap">
-                <img src="Autorka.jpg" alt="Renáta – Autorka RenArt">
+                <img src="Autorka.jpg" alt="Renáta Langová – RenArt">
             </div>
             <div class="about-text">
-                <h3 id="about-heading">Vítejte ve světě barev a intuice</h3>
-                <p id="about-p1">Tvorba je pro mě způsobem vyjádření emocí, vnitřního klidu a energie, kterou přenáším na plátna. Každé dílo vzniká intuitivně, bez předem daných pravidel, a zanechává tak v prostoru osobitý otisk.</p>
-                <p id="about-p2">Velkoformátové malby odrážejí mé vnitřní prožitky a převádějí je do harmonických i divokých barevných kompozic.</p>
+                <h3>Renata Langová | RenArt</h3>
+                <p><strong>Tvořím obrazy, které nejsou jen o tom, co vidíte. Jsou o tom, co cítíte.</strong></p>
+                <p>Jmenuji se Renata Langová a pod uměleckým jménem RenArt tvořím abstraktně-intuitivní obrazy plné energie, barev, emocí a plastických struktur.</p>
+                <p>Umění mě provází od dětství. Vystudovala jsem uměleckou školu SUŠTŘ v Praze, kterou jsem dokončila v roce 2011. K profesionální tvorbě jsem se naplno vrátila v roce 2021 a od té doby se má tvorba dostává do soukromých sbírek v České republice i zahraničí.</p>
+                <p>Při malbě se nechávám vést intuicí, emocemi a okamžitou inspirací. Experimentuji s barvami, vrstvami a strukturami. Každý obraz vzniká jako jedinečný originál, který v sobě nese vlastní energii a příběh.</p>
+                
+                <!-- ROZBALOVACÍ ČÁST (ZOBRAZIT VÍCE) -->
+                <div class="more-content" id="more-about-content">
+                    <p>Věřím, že umění nemusí mít jediný správný výklad. Každý v něm může najít něco jiného – sílu, svobodu, naději nebo kousek sebe sama.</p>
+                    <p>Svou tvorbou chci připomínat, že největší hodnotou je autenticita. Odvaha být sám sebou, nebýt kopií nikoho jiného a otevřít svůj vlastní potenciál.</p>
+                    <p style="font-style: italic; color: var(--text-main); margin: 1.2rem 0;">„Nikdo na světě už nebude přesně jako vy.“<br><strong>Renata</strong></p>
+                    <p style="font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 1.5rem;">Umělkyně a autorka abstraktní malby</p>
+
+                    <h4>Vzdělání</h4>
+                    <ul>
+                        <li>SUŠTŘ, Praha – absolvování v roce 2011</li>
+                    </ul>
+
+                    <h4>Umělecká činnost</h4>
+                    <ul>
+                        <li>Profesionální tvorbě se věnuji od roku 2021.</li>
+                        <li>Specializuji se na abstraktně-intuitivní malbu, práci s barvami, strukturami a dynamickými kompozicemi.</li>
+                        <li>Tvořím originální obrazy a autorské zakázky.</li>
+                    </ul>
+
+                    <h4>Výstavy a prezentace</h4>
+                    <ul>
+                        <li>2023 – Pavillon du Vin, Praha</li>
+                        <li>2024 – Pasáž českého designu, Praha</li>
+                        <li>2026 – Fashion Show, Beroun</li>
+                        <li>2026 – Hlubiny duše, Městská galerie Beroun</li>
+                    </ul>
+
+                    <h4>Mezinárodní působnost</h4>
+                    <ul>
+                        <li>Mé obrazy jsou součástí soukromých sbírek v České republice i zahraničí.</li>
+                        <li>Své originální obrazy nabízím sběratelům a milovníkům umění po celém světě.</li>
+                    </ul>
+                </div>
+
+                <!-- TLAČÍTKO PRO ROZBALENÍ / ZABALENÍ -->
+                <button class="btn-toggle-about" id="toggle-about-btn" onclick="toggleAboutText()">Zobrazit více</button>
             </div>
         </div>
     </div>
@@ -401,9 +451,6 @@
                 filterVolne: "K prodeji",
                 filterProdane: "V novém domově (Prodáno)",
                 filterVse: "Všechna díla",
-                aboutHeading: "Vítejte ve světě barev a intuice",
-                aboutP1: "Tvorba je pro mě způsobem vyjádření emocí, vnitřního klidu a energie, kterou přenáším na plátna. Každé dílo vzniká intuitivně, bez předem daných pravidel, a zanechává tak v prostoru osobitý otisk.",
-                aboutP2: "Velkoformátové malby odrážejí mé vnitřní prožitky a převádějí je do harmonických i divokých barevných kompozic.",
                 faqQ1: "Jak probíhá zakoupení nebo rezervace díla?",
                 faqA1: "U vybraného díla stačí kliknout na tlačítko „Mám zájem“ a napsat mi e-mail. Následně se domluvíme na platebních podmínkách, možnostech předání nebo způsobu doručení.",
                 faqQ2: "Je možné vytvořit obraz na zakázku?",
@@ -420,7 +467,9 @@
                 lblTech: "Technika:",
                 lblPrice: "Cena",
                 btnModalInquire: "Poptat toto dílo",
-                emptyObrazy: "V této sekci se momentálně nenacházejí žádná díla odpovídající filtru."
+                emptyObrazy: "V této sekci se momentálně nenacházejí žádná díla odpovídající filtru.",
+                readMore: "Zobrazit více",
+                readLess: "Zobrazit méně"
             },
             en: {
                 navObrazy: "Paintings",
@@ -436,9 +485,6 @@
                 filterVolne: "Available",
                 filterProdane: "In a New Home (Sold)",
                 filterVse: "All Artworks",
-                aboutHeading: "Welcome to the World of Colors & Intuition",
-                aboutP1: "Creation is a way of expressing emotions, inner peace, and energy, which I transfer onto canvas. Each piece is created intuitively, leaving a distinct personal imprint in your space.",
-                aboutP2: "Large-format paintings reflect my inner experiences and translate them into harmonious or wild color compositions.",
                 faqQ1: "How do I purchase or reserve an artwork?",
                 faqA1: "Simply click the 'Inquire' button on your chosen item to send me an email. We will then discuss payment options, pickup details, or shipping methods.",
                 faqQ2: "Can I order a custom painting?",
@@ -455,9 +501,24 @@
                 lblTech: "Technique:",
                 lblPrice: "Price",
                 btnModalInquire: "Inquire This Piece",
-                emptyObrazy: "No items found matching this filter."
+                emptyObrazy: "No items found matching this filter.",
+                readMore: "Read More",
+                readLess: "Read Less"
             }
         };
+
+        function toggleAboutText() {
+            const moreContent = document.getElementById('more-about-content');
+            const btn = document.getElementById('toggle-about-btn');
+            const txt = i18n[currentLang];
+
+            moreContent.classList.toggle('visible');
+            if (moreContent.classList.contains('visible')) {
+                btn.textContent = txt.readLess;
+            } else {
+                btn.textContent = txt.readMore;
+            }
+        }
 
         function toggleFaq(element) {
             element.classList.toggle('active');
@@ -660,10 +721,6 @@
             document.getElementById('btn-obrazy-prodane').textContent = txt.filterProdane;
             document.getElementById('btn-obrazy-vse').textContent = txt.filterVse;
             
-            document.getElementById('about-heading').textContent = txt.aboutHeading;
-            document.getElementById('about-p1').textContent = txt.aboutP1;
-            document.getElementById('about-p2').textContent = txt.aboutP2;
-            
             document.getElementById('faq-q1').textContent = txt.faqQ1;
             document.getElementById('faq-a1').textContent = txt.faqA1;
             document.getElementById('faq-q2').textContent = txt.faqQ2;
@@ -673,6 +730,14 @@
 
             document.getElementById('contact-heading').textContent = txt.contactHeading;
             document.getElementById('contact-sub').textContent = txt.contactSub;
+
+            const moreContent = document.getElementById('more-about-content');
+            const toggleBtn = document.getElementById('toggle-about-btn');
+            if (moreContent.classList.contains('visible')) {
+                toggleBtn.textContent = txt.readLess;
+            } else {
+                toggleBtn.textContent = txt.readMore;
+            }
 
             renderObrazy();
             
