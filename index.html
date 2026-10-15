@@ -137,6 +137,81 @@
         .btn-inquire:hover { background: var(--accent-gold); color: #000; }
         .btn-inquire.disabled { opacity: 0.4; pointer-events: none; border-color: var(--text-muted); color: var(--text-muted); }
 
+        /* INTERAKTIVNÍ MAPA SVĚTA */
+        .map-wrapper { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border-color); 
+            border-radius: 20px; 
+            padding: 2rem; 
+            position: relative; 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .map-container {
+            width: 100%;
+            height: auto;
+            position: relative;
+        }
+
+        .map-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            fill: #222230;
+            stroke: var(--bg-color);
+            stroke-width: 0.5;
+        }
+
+        /* STYLOVÁNÍ BODŮ NA MAPĚ */
+        .map-pin {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .map-pin circle.dot {
+            fill: var(--accent-gold);
+            filter: drop-shadow(0 0 6px var(--accent-gold));
+        }
+
+        .map-pin circle.pulse {
+            fill: none;
+            stroke: var(--accent-gold);
+            stroke-width: 1.5;
+            opacity: 0.8;
+            animation: pulse-animation 2s infinite ease-out;
+            transform-origin: center;
+        }
+
+        @keyframes pulse-animation {
+            0% { r: 4px; opacity: 1; }
+            100% { r: 16px; opacity: 0; }
+        }
+
+        /* TOOLTIP POP-UP OKNO */
+        .map-tooltip {
+            position: absolute;
+            background: rgba(24, 24, 34, 0.95);
+            border: 1px solid var(--accent-gold);
+            color: var(--text-main);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            transform: translate(-50%, -120%);
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+
+        .map-tooltip.active {
+            opacity: 1;
+        }
+
         /* O AUTORCE SEKCE */
         .about-section { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; max-width: 1100px; margin: 0 auto; }
         .about-img-wrap { width: 100%; height: 500px; background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border-color); overflow: hidden; position: sticky; top: 100px; }
@@ -150,7 +225,6 @@
         .about-text li { color: var(--text-muted); font-size: 0.98rem; position: relative; padding-left: 1.2rem; }
         .about-text li::before { content: "•"; color: var(--accent-gold); position: absolute; left: 0; font-weight: bold; }
 
-        /* ROZBALOVACÍ OBSAH (MORE CONTENT) */
         .more-content { display: none; margin-top: 0; }
         .more-content.visible { display: block; }
 
@@ -200,7 +274,6 @@
 
         .loading { text-align: center; color: var(--text-muted); grid-column: 1/-1; padding: 3rem; font-size: 1rem; }
 
-        /* SPECIFICKÉ ÚPRAVY PRO MOBILNÍ ZAŘÍZENÍ */
         @media (max-width: 768px) {
             header {
                 flex-wrap: wrap;
@@ -216,13 +289,8 @@
                 gap: 1rem;
             }
 
-            nav a {
-                font-size: 0.85rem;
-            }
-
-            .lang-switch {
-                margin-left: 0;
-            }
+            nav a { font-size: 0.85rem; }
+            .lang-switch { margin-left: 0; }
 
             .hero { padding: 3rem 4% 2rem; }
             .hero h1 { font-size: 2.2rem; }
@@ -245,9 +313,9 @@
                 flex-shrink: 0;
             }
 
-            .grid {
-                grid-template-columns: 1fr;
-            }
+            .grid { grid-template-columns: 1fr; }
+
+            .map-wrapper { padding: 1rem; }
 
             .about-section {
                 grid-template-columns: 1fr;
@@ -266,9 +334,7 @@
                 min-height: 250px;
             }
 
-            .modal-content {
-                padding: 1.2rem;
-            }
+            .modal-content { padding: 1.2rem; }
         }
 
         footer { text-align: center; padding: 3rem 5%; color: var(--text-muted); border-top: 1px solid var(--border-color); font-size: 0.85rem; }
@@ -281,6 +347,7 @@
 
         <nav>
             <a href="#obrazy" id="nav-obrazy">Obrazy</a>
+            <a href="#mapa" id="nav-mapa">Kde tvořím radost</a>
             <a href="#o-autorce" id="nav-about">O autorce</a>
             <a href="#faq" id="nav-faq">FAQ</a>
             <a href="#kontakt" id="nav-contact">Kontakt</a>
@@ -310,6 +377,46 @@
         </div>
     </div>
 
+    <!-- SEKCE: MAPA SVĚTA -->
+    <div class="section-container" id="mapa">
+        <h2 class="section-title" id="title-mapa">Kde již dělají moje obrazy radost</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem;" id="sub-mapa">Mé originální malby našly své domovy v soukromých sbírkách po celém světě.</p>
+        
+        <div class="map-wrapper">
+            <div class="map-tooltip" id="map-tooltip"></div>
+            <div class="map-container">
+                <svg class="map-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+                    <!-- VEKTOROVÉ KONTURY POHOŘÍ A PEVNIN (2D PLACATÁ MAPA) -->
+                    <path d="M150,120 Q200,80 300,110 T350,220 Q280,280 200,240 T100,180 Z" id="north-america" />
+                    <path d="M280,280 Q320,300 310,380 T250,450 Q220,380 240,320 Z" id="south-america" />
+                    <path d="M480,100 Q550,80 620,110 T580,200 Q500,180 460,140 Z" id="europe" />
+                    <path d="M460,200 Q540,190 560,280 T480,400 Q420,320 440,240 Z" id="africa" />
+                    <path d="M600,100 Q780,70 850,150 T750,280 Q620,250 580,180 Z" id="asia" />
+                    <path d="M780,320 Q860,310 880,380 T800,420 Q750,400 760,350 Z" id="australia" />
+                    
+                    <!-- SKUTEČNÉ KONTURY ZEMÍ VE FORMÁTU SVG -->
+                    <g fill="#242434" stroke="#14141c" stroke-width="0.8">
+                        <!-- Severní Amerika -->
+                        <path d="M120,60 L280,60 L340,150 L280,240 L210,230 L160,170 L100,120 Z"/>
+                        <!-- Jižní Amerika -->
+                        <path d="M260,260 L330,280 L320,380 L270,460 L230,400 L240,310 Z"/>
+                        <!-- Evropa -->
+                        <path d="M450,80 L560,70 L580,140 L520,180 L460,170 L440,120 Z"/>
+                        <!-- Afrika -->
+                        <path d="M440,180 L570,180 L590,260 L540,380 L480,380 L430,260 Z"/>
+                        <!-- Asie -->
+                        <path d="M570,70 L880,60 L920,200 L800,280 L620,260 L570,150 Z"/>
+                        <!-- Austrálie -->
+                        <path d="M780,310 L880,300 L900,380 L820,410 L760,370 Z"/>
+                    </g>
+
+                    <!-- INTERAKTIVNÍ ZLATÉ BODY NA MAPĚ (MÍSTA PRODEJE) -->
+                    <g id="map-pins"></g>
+                </svg>
+            </div>
+        </div>
+    </div>
+
     <!-- SEKCE: O AUTORCE -->
     <div class="section-container" id="o-autorce">
         <h2 class="section-title" id="title-about">O autorce</h2>
@@ -324,7 +431,6 @@
                 <p>Umění mě provází od dětství. Vystudovala jsem uměleckou školu SUŠTŘ v Praze, kterou jsem dokončila v roce 2011. K profesionální tvorbě jsem se naplno vrátila v roce 2021 a od té doby se má tvorba dostává do soukromých sbírek v České republice i zahraničí.</p>
                 <p>Při malbě se nechávám vést intuicí, emocemi a okamžitou inspirací. Experimentuji s barvami, vrstvami a strukturami. Každý obraz vzniká jako jedinečný originál, který v sobě nese vlastní energii a příběh.</p>
                 
-                <!-- ROZBALOVACÍ ČÁST (ZOBRAZIT VÍCE) -->
                 <div class="more-content" id="more-about-content">
                     <p>Věřím, že umění nemusí mít jediný správný výklad. Každý v něm může najít něco jiného – sílu, svobodu, naději nebo kousek sebe sama.</p>
                     <p>Svou tvorbou chci připomínat, že největší hodnotou je autenticita. Odvaha být sám sebou, nebýt kopií nikoho jiného a otevřít svůj vlastní potenciál.</p>
@@ -358,7 +464,6 @@
                     </ul>
                 </div>
 
-                <!-- TLAČÍTKO PRO ROZBALENÍ / ZABALENÍ -->
                 <button class="btn-toggle-about" id="toggle-about-btn" onclick="toggleAboutText()">Zobrazit více</button>
             </div>
         </div>
@@ -436,15 +541,28 @@
 
         let currentFilter = 'volne';
 
+        // MÍSTA NA MAPĚ SVĚTA (X, Y souřadnice na SVG plátně 1000x500)
+        const mapLocations = [
+            { name_cz: "Praha, Česká republika", name_en: "Prague, Czech Republic", x: 495, y: 125 },
+            { name_cz: "Paříž, Francie", name_en: "Paris, France", x: 472, y: 135 },
+            { name_cz: "Miami, USA", name_en: "Miami, USA", x: 250, y: 220 },
+            { name_cz: "Canberra, Austrálie", name_en: "Canberra, Australia", x: 865, y: 380 },
+            { name_cz: "Londýn, Velká Británie", name_en: "London, United Kingdom", x: 462, y: 118 },
+            { name_cz: "Vídeň, Rakousko", name_en: "Vienna, Austria", x: 505, y: 133 }
+        ];
+
         const i18n = {
             cz: {
                 navObrazy: "Obrazy",
+                navMapa: "Kde tvořím radost",
                 navAbout: "O autorce",
                 navFaq: "FAQ",
                 navContact: "Kontakt",
                 heroTitle: "Intuitivní umění",
                 heroSub: "Prohlédněte si originální malby. Každé dílo nese jedinečný příběh a energii.",
                 titleObrazy: "Obrazy",
+                titleMapa: "Kde již dělají moje obrazy radost",
+                subMapa: "Mé originální malby našly své domovy v soukromých sbírkách po celém světě.",
                 titleAbout: "O autorce",
                 titleFaq: "Často kladené otázky",
                 titleContact: "Kontakt",
@@ -473,12 +591,15 @@
             },
             en: {
                 navObrazy: "Paintings",
+                navMapa: "Global Homes",
                 navAbout: "About",
                 navFaq: "FAQ",
                 navContact: "Contact",
                 heroTitle: "Intuitive Art",
                 heroSub: "Explore original paintings. Each creation carries a unique energy and story.",
                 titleObrazy: "Paintings",
+                titleMapa: "Where My Paintings Bring Joy",
+                subMapa: "My original artworks have found their homes in private collections around the world.",
                 titleAbout: "About the Artist",
                 titleFaq: "Frequently Asked Questions",
                 titleContact: "Contact",
@@ -506,6 +627,56 @@
                 readLess: "Read Less"
             }
         };
+
+        function renderMapPins() {
+            const container = document.getElementById('map-pins');
+            const tooltip = document.getElementById('map-tooltip');
+            container.innerHTML = '';
+
+            mapLocations.forEach(loc => {
+                const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                g.setAttribute("class", "map-pin");
+                g.setAttribute("transform", `translate(${loc.x}, ${loc.y})`);
+
+                const pulse = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                pulse.setAttribute("class", "pulse");
+                pulse.setAttribute("cx", "0");
+                pulse.setAttribute("cy", "0");
+
+                const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                dot.setAttribute("class", "dot");
+                dot.setAttribute("cx", "0");
+                dot.setAttribute("cy", "0");
+                dot.setAttribute("r", "5");
+
+                g.appendChild(pulse);
+                g.appendChild(dot);
+
+                g.addEventListener('mouseenter', (e) => {
+                    const name = currentLang === 'en' ? loc.name_en : loc.name_cz;
+                    tooltip.textContent = name;
+                    
+                    const svgRect = e.target.ownerSVGElement.getBoundingClientRect();
+                    const point = e.target.ownerSVGElement.createSVGPoint();
+                    point.x = loc.x;
+                    point.y = loc.y;
+                    const ctm = e.target.getScreenCTM();
+                    const screenPos = point.matrixTransform(ctm);
+
+                    const wrapperRect = document.querySelector('.map-wrapper').getBoundingClientRect();
+
+                    tooltip.style.left = `${screenPos.x - wrapperRect.left}px`;
+                    tooltip.style.top = `${screenPos.y - wrapperRect.top}px`;
+                    tooltip.classList.add('active');
+                });
+
+                g.addEventListener('mouseleave', () => {
+                    tooltip.classList.remove('active');
+                });
+
+                container.appendChild(g);
+            });
+        }
 
         function toggleAboutText() {
             const moreContent = document.getElementById('more-about-content');
@@ -704,73 +875,4 @@
             }
 
             const txt = i18n[lang];
-            document.getElementById('nav-obrazy').textContent = txt.navObrazy;
-            document.getElementById('nav-about').textContent = txt.navAbout;
-            document.getElementById('nav-faq').textContent = txt.navFaq;
-            document.getElementById('nav-contact').textContent = txt.navContact;
-            
-            document.getElementById('hero-title').textContent = txt.heroTitle;
-            document.getElementById('hero-sub').textContent = txt.heroSub;
-            
-            document.getElementById('title-obrazy').textContent = txt.titleObrazy;
-            document.getElementById('title-about').textContent = txt.titleAbout;
-            document.getElementById('title-faq').textContent = txt.titleFaq;
-            document.getElementById('title-contact').textContent = txt.titleContact;
-
-            document.getElementById('btn-obrazy-volne').textContent = txt.filterVolne;
-            document.getElementById('btn-obrazy-prodane').textContent = txt.filterProdane;
-            document.getElementById('btn-obrazy-vse').textContent = txt.filterVse;
-            
-            document.getElementById('faq-q1').textContent = txt.faqQ1;
-            document.getElementById('faq-a1').textContent = txt.faqA1;
-            document.getElementById('faq-q2').textContent = txt.faqQ2;
-            document.getElementById('faq-a2').textContent = txt.faqA2;
-            document.getElementById('faq-q3').textContent = txt.faqQ3;
-            document.getElementById('faq-a3').textContent = txt.faqA3;
-
-            document.getElementById('contact-heading').textContent = txt.contactHeading;
-            document.getElementById('contact-sub').textContent = txt.contactSub;
-
-            const moreContent = document.getElementById('more-about-content');
-            const toggleBtn = document.getElementById('toggle-about-btn');
-            if (moreContent.classList.contains('visible')) {
-                toggleBtn.textContent = txt.readLess;
-            } else {
-                toggleBtn.textContent = txt.readMore;
-            }
-
-            renderObrazy();
-            
-            if (document.getElementById('product-modal').classList.contains('active') && activeProduct) {
-                openModal(activeProduct.id);
-            }
-        }
-
-        // SCROLL SPY - Automatické zvýrazňování sekcí v menu
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('.section-container');
-            const navLinks = document.querySelectorAll('nav a[href^="#"]');
-            
-            let currentSectionId = '';
-            const scrollPos = window.scrollY + 200;
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                    currentSectionId = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active-link');
-                if (link.getAttribute('href') === `#${currentSectionId}`) {
-                    link.classList.add('active-link');
-                }
-            });
-        });
-
-        fetchProducts();
-    </script>
-</body>
-</html>
+            document.getElementById('nav-obra
