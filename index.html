@@ -70,7 +70,7 @@
         .btn-inquire.disabled { opacity: 0.4; pointer-events: none; border-color: var(--text-muted); color: var(--text-muted); }
 
         /* MAPA SVĚTA */
-        .map-wrapper { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; position: relative; max-width: 1000px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.4); overflow: hidden; }
+        .map-wrapper { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; position: relative; max-width: 1000px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.4); overflow: hidden; text-align: center; }
         .map-tooltip {
             position: absolute;
             background: rgba(20, 20, 28, 0.95);
@@ -89,6 +89,42 @@
             z-index: 10;
         }
         .map-tooltip.active { opacity: 1; }
+
+        .percent-pin {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            z-index: 5;
+        }
+        .percent-pin .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 8px var(--accent-gold);
+        }
+        .percent-pin .pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 24px;
+            height: 24px;
+            border: 1.5px solid var(--accent-gold);
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: percent-pulse 2s infinite ease-out;
+        }
+        @keyframes percent-pulse {
+            0% { width: 8px; height: 8px; opacity: 1; }
+            100% { width: 32px; height: 32px; opacity: 0; }
+        }
 
         /* O AUTORCE SEKCE */
         .about-section { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; max-width: 1100px; margin: 0 auto; }
@@ -206,7 +242,7 @@
         </div>
     </div>
 
-    <!-- SEKCE: MAPA SVĚTA (PROCENTUÁLNÍ POZICOVÁNÍ) -->
+    <!-- SEKCE: MAPA SVĚTA (S NAKLIKÁVACÍM REŽIMEM) -->
     <div class="section-container" id="mapa">
         <h2 class="section-title" id="title-mapa">Kde již dělají moje obrazy radost</h2>
         <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem;" id="sub-mapa">Mé originální malby našly své domovy v soukromých sbírkách po celém světě.</p>
@@ -214,86 +250,15 @@
         <div class="map-wrapper">
             <div class="map-tooltip" id="map-tooltip"></div>
             
-            <div style="position: relative; width: 100%; max-width: 950px; margin: 0 auto; display: inline-block;">
-                <img src="Map of world.png" alt="Světová mapa" style="width: 100%; height: auto; display: block; border-radius: 12px;">
+            <div id="interactive-map-box" style="position: relative; width: 100%; max-width: 950px; margin: 0 auto; display: inline-block; cursor: crosshair;">
+                <img id="map-img-element" src="Map of world.png" alt="Světová mapa" style="width: 100%; height: auto; display: block; border-radius: 12px; pointer-events: none;">
                 
-                <style>
-                    .percent-pin {
-                        position: absolute;
-                        width: 12px;
-                        height: 12px;
-                        transform: translate(-50%, -50%);
-                        cursor: pointer;
-                        z-index: 5;
-                    }
-                    .percent-pin .dot {
-                        width: 8px;
-                        height: 8px;
-                        background: var(--accent-gold);
-                        border-radius: 50%;
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        box-shadow: 0 0 8px var(--accent-gold);
-                    }
-                    .percent-pin .pulse {
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        width: 24px;
-                        height: 24px;
-                        border: 1.5px solid var(--accent-gold);
-                        border-radius: 50%;
-                        opacity: 0.8;
-                        animation: percent-pulse 2s infinite ease-out;
-                    }
-                    @keyframes percent-pulse {
-                        0% { width: 8px; height: 8px; opacity: 1; }
-                        100% { width: 32px; height: 32px; opacity: 0; }
-                    }
-                </style>
+                <div id="pins-container"></div>
+            </div>
 
-                <!-- Praha -->
-                <div class="percent-pin" style="left: 51.5%; top: 44.5%;" onmouseenter="showPercentTooltip(event, 'Praha, Česká republika', 'Prague, Czech Republic')" onmouseleave="hideTooltip()">
-                    <div class="pulse"></div><div class="dot"></div>
-                </div>
-
-                <!-- Florida -->
-                <div class="percent-pin" style="left: 28%; top: 66%;" onmouseenter="showPercentTooltip(event, 'Florida, USA', 'Florida, USA')" onmouseleave="hideTooltip()">
-                    <div class="pulse"></div><div class="dot"></div>
-                </div>
-
-                <!-- Londýn -->
-                <div class="percent-pin" style="left: 45.5%; top: 41%;" onmouseenter="showPercentTooltip(event, 'Londýn, Velká Británie', 'London, United Kingdom')" onmouseleave="hideTooltip()">
-                    <div class="pulse"></div><div class="dot"></div>
-                </div>
-
-                <!-- Paříž -->
-                <div class="percent-pin" style="left: 47%; top: 46%;" onmouseenter="showPercentTooltip(event, 'Paříž, Francie', 'Paris, France')" onmouseleave="hideTooltip()">
-                    <div class="pulse"></div><div class="dot"></div>
-                </div>
-
-                <!-- Vídeň -->
-                <div class="percent-pin" style="left: 53%; top: 47%;" onmouseenter="showPercentTooltip(event, 'Vídeň, Rakousko', 'Vienna, Austria')" onmouseleave="hideTooltip()">
-                    <div class="pulse"></div><div class="dot"></div>
-                </div>
-
-                <!-- Kalifornie -->
-                <div class="percent-pin" style="left: 14%; top: 57%;" onmouseenter="showPercentTooltip(event, 'Kalifornie, USA', 'California, USA')" onmouseleave="hideTooltip()">
-                    <div class="pulse"></div><div class="dot"></div>
-                </div>
-
-                <!-- New York -->
-                <div class="percent-pin" style="left: 31%; top: 47%;" onmouseenter="showPercentTooltip(event, 'New York, USA', 'New York, USA')" onmouseleave="hideTooltip()">
-                    <div class="pulse"></div><div class="dot"></div>
-                </div>
-
-                <!-- Austrálie (Canberra) -->
-                <div class="percent-pin" style="left: 83%; top: 81%;" onmouseenter="showPercentTooltip(event, 'Canberra, Austrálie', 'Canberra, Australia')" onmouseleave="hideTooltip()">
-                    <div class="pulse"></div><div class="dot"></div>
-                </div>
+            <!-- LIŠTA KTERÁ ZOBRAZÍ POSLEDNÍ KLIKNUTÉ SOUŘADNICE -->
+            <div id="click-logger" style="margin-top: 1rem; font-size: 0.9rem; color: var(--accent-gold); background: #181822; padding: 0.8rem; border-radius: 8px; font-family: monospace;">
+                Klikni na mapě na jakékoliv místo (Praha, Florida...) a zkopíruj mi text, který se tady objeví.
             </div>
         </div>
     </div>
@@ -418,95 +383,57 @@
         const EUR_RATE = 25;
         let currentFilter = 'volne';
 
+        // DETEKCE KLIKNUTÍ DO MAPY A VYGENEROHOVÁNÍ SOUŘADNIC
+        document.getElementById('interactive-map-box').addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const xPercent = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+            const yPercent = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+
+            // Vytvoří tečku na kliknutém místě
+            const pin = document.createElement('div');
+            pin.className = 'percent-pin';
+            pin.style.left = `${xPercent}%`;
+            pin.style.top = `${yPercent}%`;
+            pin.innerHTML = '<div class="pulse"></div><div class="dot"></div>';
+            document.getElementById('pins-container').appendChild(pin);
+
+            // Vypíše text k zkopírování
+            const logger = document.getElementById('click-logger');
+            logger.innerHTML += `<br><code>left: ${xPercent}%; top: ${yPercent}%;</code>`;
+        });
+
         const i18n = {
             cz: {
-                navObrazy: "Obrazy",
-                navMapa: "Kde tvořím radost",
-                navAbout: "O autorce",
-                navFaq: "FAQ",
-                navContact: "Kontakt",
-                heroTitle: "Intuitivní umění",
-                heroSub: "Prohlédněte si originální malby. Každé dílo nese jedinečný příběh a energii.",
-                titleObrazy: "Obrazy",
-                titleMapa: "Kde již dělají moje obrazy radost",
-                subMapa: "Mé originální malby našly své domovy v soukromých sbírkách po celém světě.",
-                titleAbout: "O autorce",
-                titleFaq: "Často kladené otázky",
-                titleContact: "Kontakt",
-                filterVolne: "K prodeji",
-                filterProdane: "V novém domově (Prodáno)",
-                filterVse: "Všechna díla",
-                faqQ1: "Jak probíhá zakoupení nebo rezervace díla?",
-                faqA1: "U vybraného díla stačí kliknout na tlačítko „Mám zájem“ a napsat mi e-mail. Následně se domluvíme na platebních podmínkách, možnostech předání nebo způsobu doručení.",
-                faqQ2: "Je možné vytvořit obraz na zakázku?",
-                faqA2: "Ano! Velmi ráda tvořím osobitá díla přímo na míru vašim přáním nebo barevným preferencím vašeho interiéru. Neváhejte me kontaktovat s vaší představou.",
-                faqQ3: "Jakým způsobem probíhá doručení obrazů?",
-                faqA3: "Obrazy pečlivě balím tak, aby k vám dorazily v naprostém pořádku. Zasílám po celé ČR i do zahraničí přes ověřené kurýrní služby. Po dohodě je možné i osobní předání.",
-                contactHeading: "Máte zájem o dílo?",
-                contactSub: "Napište mi a ráda s vámi proberu detaily, osobní předání nebo možnosti dopravy.",
-                badgeAvailable: "Ihned k odběru",
-                badgeSold: "V novém domově",
-                btnInquire: "Mám zájem",
-                btnSoldOut: "Prodáno",
-                lblSize: "Rozměry:",
-                lblTech: "Technika:",
-                lblPrice: "Cena",
-                btnModalInquire: "Poptat toto dílo",
+                navObrazy: "Obrazy", navMapa: "Kde tvořím radost", navAbout: "O autorce", navFaq: "FAQ", navContact: "Kontakt",
+                heroTitle: "Intuitivní umění", heroSub: "Prohlédněte si originální malby. Každé dílo nese jedinečný příběh a energii.",
+                titleObrazy: "Obrazy", titleMapa: "Kde již dělají moje obrazy radost", subMapa: "Mé originální malby našly své domovy v soukromých sbírkách po celém světě.",
+                titleAbout: "O autorce", titleFaq: "Často kladené otázky", titleContact: "Kontakt",
+                filterVolne: "K prodeji", filterProdane: "V novém domově (Prodáno)", filterVse: "Všechna díla",
+                faqQ1: "Jak probíhá zakoupení nebo rezervace díla?", faqA1: "U vybraného díla stačí kliknout na tlačítko „Mám zájem“ a napsat mi e-mail.",
+                faqQ2: "Je možné vytvořit obraz na zakázku?", faqA2: "Ano! Velmi ráda tvořím osobitá díla přímo na míru vašim přáním.",
+                faqQ3: "Jakým způsobem probíhá doručení obrazů?", faqA3: "Obrazy pečlivě balím tak, aby k vám dorazily v naprostém pořádku.",
+                contactHeading: "Máte zájem o dílo?", contactSub: "Napište mi a ráda s vámi proberu detaily.",
+                badgeAvailable: "Ihned k odběru", badgeSold: "V novém domově", btnInquire: "Mám zájem", btnSoldOut: "Prodáno",
+                lblSize: "Rozměry:", lblTech: "Technika:", lblPrice: "Cena", btnModalInquire: "Poptat toto dílo",
                 emptyObrazy: "V této sekci se momentálně nenacházejí žádná díla odpovídající filtru.",
-                readMore: "Zobrazit více",
-                readLess: "Zobrazit méně"
+                readMore: "Zobrazit více", readLess: "Zobrazit méně"
             },
             en: {
-                navObrazy: "Paintings",
-                navMapa: "Global Homes",
-                navAbout: "About",
-                navFaq: "FAQ",
-                navContact: "Contact",
-                heroTitle: "Intuitive Art",
-                heroSub: "Explore original paintings. Each creation carries a unique energy and story.",
-                titleObrazy: "Paintings",
-                titleMapa: "Where My Paintings Bring Joy",
-                subMapa: "My original artworks have found their homes in private collections around the world.",
-                titleAbout: "About the Artist",
-                titleFaq: "Frequently Asked Questions",
-                titleContact: "Contact",
-                filterVolne: "Available",
-                filterProdane: "In a New Home (Sold)",
-                filterVse: "All Artworks",
-                faqQ1: "How do I purchase or reserve an artwork?",
-                faqA1: "Simply click the 'Inquire' button on your chosen item to send me an email. We will then discuss payment options, pickup details, or shipping methods.",
-                faqQ2: "Can I order a custom painting?",
-                faqA2: "Yes! I love creating custom pieces tailored to your personal wishes or interior color palettes. Feel free to contact me with your vision.",
-                faqQ3: "How are artworks shipped?",
-                faqA3: "All items are carefully packaged to ensure safe arrival. Shipping is available nationwide and internationally via reliable couriers. Personal delivery can also be arranged.",
-                contactHeading: "Interested in an Artwork?",
-                contactSub: "Feel free to reach out and I will gladly discuss details, pickup options, or shipping with you.",
-                badgeAvailable: "Available",
-                badgeSold: "In a New Home",
-                btnInquire: "Inquire",
-                btnSoldOut: "Sold",
-                lblSize: "Dimensions:",
-                lblTech: "Technique:",
-                lblPrice: "Price",
-                btnModalInquire: "Inquire This Piece",
+                navObrazy: "Paintings", navMapa: "Global Homes", navAbout: "About", navFaq: "FAQ", navContact: "Contact",
+                heroTitle: "Intuitive Art", heroSub: "Explore original paintings.",
+                titleObrazy: "Paintings", titleMapa: "Where My Paintings Bring Joy", subMapa: "My original artworks have found their homes worldwide.",
+                titleAbout: "About the Artist", titleFaq: "Frequently Asked Questions", titleContact: "Contact",
+                filterVolne: "Available", filterProdane: "In a New Home (Sold)", filterVse: "All Artworks",
+                faqQ1: "How do I purchase or reserve an artwork?", faqA1: "Simply click the 'Inquire' button.",
+                faqQ2: "Can I order a custom painting?", faqA2: "Yes! I love creating custom pieces.",
+                faqQ3: "How are artworks shipped?", faqA3: "All items are carefully packaged.",
+                contactHeading: "Interested in an Artwork?", contactSub: "Feel free to reach out.",
+                badgeAvailable: "Available", badgeSold: "In a New Home", btnInquire: "Inquire", btnSoldOut: "Sold",
+                lblSize: "Dimensions:", lblTech: "Technique:", lblPrice: "Price", btnModalInquire: "Inquire This Piece",
                 emptyObrazy: "No items found matching this filter.",
-                readMore: "Read More",
-                readLess: "Read Less"
+                readMore: "Read More", readLess: "Read Less"
             }
         };
-
-        function showPercentTooltip(evt, textCz, textEn) {
-            const tooltip = document.getElementById('map-tooltip');
-            const name = currentLang === 'en' ? textEn : textCz;
-            tooltip.textContent = name;
-            
-            const wrapperRect = document.querySelector('.map-wrapper').getBoundingClientRect();
-            const targetRect = evt.currentTarget.getBoundingClientRect();
-
-            tooltip.style.left = `${targetRect.left - wrapperRect.left + (targetRect.width / 2)}px`;
-            tooltip.style.top = `${targetRect.top - wrapperRect.top - 10}px`;
-            tooltip.classList.add('active');
-        }
 
         function hideTooltip() {
             const tooltip = document.getElementById('map-tooltip');
@@ -519,11 +446,7 @@
             const txt = i18n[currentLang];
 
             moreContent.classList.toggle('visible');
-            if (moreContent.classList.contains('visible')) {
-                btn.textContent = txt.readLess;
-            } else {
-                btn.textContent = txt.readMore;
-            }
+            btn.textContent = moreContent.classList.contains('visible') ? txt.readLess : txt.readMore;
         }
 
         function toggleFaq(element) {
@@ -729,56 +652,10 @@
             document.getElementById('btn-obrazy-volne').textContent = txt.filterVolne;
             document.getElementById('btn-obrazy-prodane').textContent = txt.filterProdane;
             document.getElementById('btn-obrazy-vse').textContent = txt.filterVse;
-            
-            document.getElementById('faq-q1').textContent = txt.faqQ1;
-            document.getElementById('faq-a1').textContent = txt.faqA1;
-            document.getElementById('faq-q2').textContent = txt.faqQ2;
-            document.getElementById('faq-a2').textContent = txt.faqA2;
-            document.getElementById('faq-q3').textContent = txt.faqQ3;
-            document.getElementById('faq-a3').textContent = txt.faqA3;
-
-            document.getElementById('contact-heading').textContent = txt.contactHeading;
-            document.getElementById('contact-sub').textContent = txt.contactSub;
-
-            const moreContent = document.getElementById('more-about-content');
-            const toggleBtn = document.getElementById('toggle-about-btn');
-            if (moreContent.classList.contains('visible')) {
-                toggleBtn.textContent = txt.readLess;
-            } else {
-                toggleBtn.textContent = txt.readMore;
-            }
 
             renderObrazy();
-            
-            if (document.getElementById('product-modal').classList.contains('active') && activeProduct) {
-                openModal(activeProduct.id);
-            }
         }
 
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('.section-container');
-            const navLinks = document.querySelectorAll('nav a[href^="#"]');
-            
-            let currentSectionId = '';
-            const scrollPos = window.scrollY + 200;
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                    currentSectionId = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active-link');
-                if (link.getAttribute('href') === `#${currentSectionId}`) {
-                    link.classList.add('active-link');
-                }
-            });
-        });
-
-        // INICIALIZACE
         fetchProducts();
     </script>
 </body>
