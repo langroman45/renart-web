@@ -38,7 +38,7 @@
         .lang-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 12px; font-weight: 600; }
         .lang-btn.active { background: var(--accent-gold); color: #000; }
 
-        /* ROZTÁHNUTÁ BAREVNÁ HERO SEKCE BEZ BOXU (ZESÍLENÝ PŘECHOD O 20%) */
+        /* ROZTÁHNUTÁ HERO SEKCE SE ZÁŘIVĚJŠÍMI A ŽIVĚJŠÍMI BARVAMI */
         .hero { 
             position: relative;
             min-height: 70vh; 
@@ -48,9 +48,12 @@
             flex-direction: column; 
             align-items: center; 
             justify-content: center;
-            background-image: linear-gradient(180deg, rgba(11, 11, 15, 0.8) 0%, rgba(11, 11, 15, 0.65) 50%, #0b0b0f 100%), url('FotkaUvod.jpg');
+            /* Jemnější přechod, aby propustil víc světla a barev z fotky */
+            background-image: linear-gradient(180deg, rgba(11, 11, 15, 0.25) 0%, rgba(11, 11, 15, 0.4) 50%, #0b0b0f 100%), url('FotkaUvod.jpg');
             background-size: cover;
             background-position: center;
+            /* Zde zvýšena sytost barev (saturation) o 25%, aby fotka zářila */
+            filter: saturate(1.25);
             border-bottom: none;
         }
 
