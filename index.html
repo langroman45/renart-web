@@ -38,7 +38,7 @@
         .lang-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 12px; font-weight: 600; }
         .lang-btn.active { background: var(--accent-gold); color: #000; }
 
-        /* ÚVODNÍ SEKCE S FOTKOU JAKO POZADÍM */
+        /* ÚVODNÍ SEKCE S BAREVNOU FOTKOU A KONTRASTNÍM TEXTOVÝM BOXEM */
         .hero { 
             position: relative;
             padding: 6rem 5%; 
@@ -47,13 +47,39 @@
             flex-direction: column; 
             align-items: center; 
             justify-content: center;
-            background-image: linear-gradient(rgba(11, 11, 15, 0.82), rgba(11, 11, 15, 0.9)), url('FotkaUvod.jpg');
+            background-image: url('FotkaUvod.jpg');
             background-size: cover;
             background-position: center;
             border-bottom: 1px solid var(--border-color);
         }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; margin-bottom: 1rem; font-weight: 400; line-height: 1.2; text-shadow: 0 4px 20px rgba(0,0,0,0.8); }
-        .hero p { color: var(--text-muted); font-size: 1.15rem; max-width: 650px; margin: 0 auto; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        
+        .hero-text-box {
+            background: rgba(11, 11, 15, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 2.5rem 3.5rem;
+            border-radius: 24px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            max-width: 750px;
+        }
+
+        .hero h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 3.2rem; 
+            margin-bottom: 0.8rem; 
+            font-weight: 600; 
+            line-height: 1.2; 
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8); 
+        }
+        .hero p { 
+            color: #f3f3f6; 
+            font-size: 1.2rem; 
+            margin: 0 auto; 
+            font-weight: 400;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8); 
+        }
 
         .section-container { max-width: 1300px; margin: 0 auto; padding: 3rem 5%; border-top: 1px solid var(--border-color); scroll-margin-top: 80px; }
         .section-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 1.5rem; font-weight: 400; text-align: center; }
@@ -91,7 +117,7 @@
         .btn-inquire:hover { background: var(--accent-gold); color: #000; }
         .btn-inquire.disabled { opacity: 0.4; pointer-events: none; border-color: var(--text-muted); color: var(--text-muted); }
 
-        /* MAPA SVĚTA S NATIVNÍM DOTYKOVÝm ZOOMEM */
+        /* MAPA SVĚTA S NATIVNÍM DOTYKOVÝM ZOOMEM */
         .map-wrapper { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; position: relative; max-width: 1000px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.4); text-align: center; }
         
         .map-viewport {
@@ -228,7 +254,8 @@
             nav { width: 100%; justify-content: space-between; overflow-x: auto; padding-bottom: 0.3rem; gap: 1rem; }
             nav a { font-size: 0.85rem; }
             .lang-switch { margin-left: 0; }
-            .hero { padding: 4rem 4%; }
+            .hero { padding: 3.5rem 4%; }
+            .hero-text-box { padding: 1.8rem 1.5rem; border-radius: 18px; }
             .hero h1 { font-size: 2.2rem; }
             .hero p { font-size: 0.95rem; }
             .section-container { padding: 2.5rem 4%; }
@@ -267,10 +294,12 @@
         </nav>
     </header>
 
-    <!-- ÚVODNÍ SEKCE S FOTKOU ATELIÉRU JAKO POZADÍM -->
+    <!-- ÚVODNÍ SEKCE S BAREVNOU FOTKOU A KONTRASTNÍM TEXTOVÝM BOXEM -->
     <section class="hero">
-        <h1 id="hero-title">Intuitivní umění</h1>
-        <p id="hero-sub">Prohlédněte si originální malby. Každé dílo nese jedinečný příběh a energii.</p>
+        <div class="hero-text-box">
+            <h1 id="hero-title">Intuitivní umění</h1>
+            <p id="hero-sub">Prohlédněte si originální malby. Každé dílo nese jedinečný příběh a energii.</p>
+        </div>
     </section>
 
     <!-- SEKCE: OBRAZY -->
