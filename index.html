@@ -38,7 +38,7 @@
         .lang-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 12px; font-weight: 600; }
         .lang-btn.active { background: var(--accent-gold); color: #000; }
 
-        /* ROZTÁHNUTÁ BAREVNÁ HERO SEKCE BEZ BOXU */
+        /* ROZTÁHNUTÁ BAREVNÁ HERO SEKCE BEZ BOXU (ZESÍLENÝ PŘECHOD O 20%) */
         .hero { 
             position: relative;
             min-height: 70vh; 
@@ -48,7 +48,7 @@
             flex-direction: column; 
             align-items: center; 
             justify-content: center;
-            background-image: linear-gradient(180deg, rgba(11, 11, 15, 0.65) 0%, rgba(11, 11, 15, 0.5) 50%, #0b0b0f 100%), url('FotkaUvod.jpg');
+            background-image: linear-gradient(180deg, rgba(11, 11, 15, 0.8) 0%, rgba(11, 11, 15, 0.65) 50%, #0b0b0f 100%), url('FotkaUvod.jpg');
             background-size: cover;
             background-position: center;
             border-bottom: none;
@@ -240,15 +240,14 @@
 
         .loading { text-align: center; color: var(--text-muted); grid-column: 1/-1; padding: 3rem; font-size: 1rem; }
 
-        /* UPRAVENÉ MOBILNÍ STYLY PRO ČISTÝ VZHLED BEZ POSUVNÍKU */
+        /* MOBILNÍ STYLY */
         @media (max-width: 768px) {
             header { flex-wrap: wrap; gap: 0.8rem; padding: 0.8rem 4%; }
             nav { width: 100%; justify-content: space-between; overflow-x: auto; padding-bottom: 0.3rem; gap: 1rem; }
-            nav::-webkit-scrollbar { display: none; } /* Skryje posuvník v menu pod mobilem */
+            nav::-webkit-scrollbar { display: none; }
             nav a { font-size: 0.85rem; }
             .lang-switch { margin-left: 0; }
             
-            /* Zmenšení hero sekce a textů na mobilu, aby to vypadalo skvěle */
             .hero { min-height: 45vh; padding: 3.5rem 4%; }
             .hero h1 { font-size: 2rem; margin-bottom: 0.6rem; }
             .hero p { font-size: 0.95rem; max-width: 100%; padding: 0 0.5rem; }
@@ -256,7 +255,7 @@
             .section-container { padding: 2.5rem 4%; }
             .section-title { font-size: 1.8rem; }
             .filter-buttons { justify-content: flex-start; overflow-x: auto; white-space: nowrap; padding-bottom: 0.5rem; width: 100%; }
-            .filter-buttons::-webkit-scrollbar { display: none; } /* Skryje posuvník u filtrů */
+            .filter-buttons::-webkit-scrollbar { display: none; }
             .filter-btn { font-size: 0.8rem; padding: 0.4rem 0.9rem; flex-shrink: 0; }
             .grid { grid-template-columns: 1fr; }
             .map-wrapper { padding: 1rem; }
