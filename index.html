@@ -38,47 +38,38 @@
         .lang-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 12px; font-weight: 600; }
         .lang-btn.active { background: var(--accent-gold); color: #000; }
 
-        /* ÚVODNÍ SEKCE S BAREVNOU FOTKOU A KONTRASTNÍM TEXTOVÝM BOXEM */
+        /* ROZTÁHNUTÁ BAREVNÁ HERO SEKCE BEZ BOXU */
         .hero { 
             position: relative;
-            padding: 6rem 5%; 
+            min-height: 70vh; 
+            padding: 8rem 5%; 
             text-align: center; 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
             justify-content: center;
-            background-image: url('FotkaUvod.jpg');
+            background-image: linear-gradient(180deg, rgba(11, 11, 15, 0.4) 0%, rgba(11, 11, 15, 0.6) 50%, rgba(11, 11, 15, 0.95) 100%), url('FotkaUvod.jpg');
             background-size: cover;
             background-position: center;
             border-bottom: 1px solid var(--border-color);
         }
-        
-        .hero-text-box {
-            background: rgba(11, 11, 15, 0.65);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            padding: 2.5rem 3.5rem;
-            border-radius: 24px;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            max-width: 750px;
-        }
 
         .hero h1 { 
             font-family: 'Playfair Display', serif; 
-            font-size: 3.2rem; 
-            margin-bottom: 0.8rem; 
+            font-size: 3.8rem; 
+            margin-bottom: 1rem; 
             font-weight: 600; 
             line-height: 1.2; 
             color: #ffffff;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8); 
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 2px 5px rgba(0, 0, 0, 0.9); 
         }
         .hero p { 
-            color: #f3f3f6; 
-            font-size: 1.2rem; 
+            color: #ffffff; 
+            font-size: 1.3rem; 
+            max-width: 700px;
             margin: 0 auto; 
-            font-weight: 400;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.8); 
+            font-weight: 500;
+            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.9), 0 1px 4px rgba(0, 0, 0, 0.9); 
         }
 
         .section-container { max-width: 1300px; margin: 0 auto; padding: 3rem 5%; border-top: 1px solid var(--border-color); scroll-margin-top: 80px; }
@@ -254,10 +245,9 @@
             nav { width: 100%; justify-content: space-between; overflow-x: auto; padding-bottom: 0.3rem; gap: 1rem; }
             nav a { font-size: 0.85rem; }
             .lang-switch { margin-left: 0; }
-            .hero { padding: 3.5rem 4%; }
-            .hero-text-box { padding: 1.8rem 1.5rem; border-radius: 18px; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 0.95rem; }
+            .hero { min-height: 50vh; padding: 5rem 4%; }
+            .hero h1 { font-size: 2.3rem; }
+            .hero p { font-size: 1rem; }
             .section-container { padding: 2.5rem 4%; }
             .section-title { font-size: 1.8rem; }
             .filter-buttons { justify-content: flex-start; overflow-x: auto; white-space: nowrap; padding-bottom: 0.5rem; width: 100%; }
@@ -294,12 +284,10 @@
         </nav>
     </header>
 
-    <!-- ÚVODNÍ SEKCE S BAREVNOU FOTKOU A KONTRASTNÍM TEXTOVÝM BOXEM -->
+    <!-- ÚVODNÍ SEKCE S BAREVNOU FOTKOU -->
     <section class="hero">
-        <div class="hero-text-box">
-            <h1 id="hero-title">Intuitivní umění</h1>
-            <p id="hero-sub">Prohlédněte si originální malby. Každé dílo nese jedinečný příběh a energii.</p>
-        </div>
+        <h1 id="hero-title">Intuitivní umění</h1>
+        <p id="hero-sub">Prohlédněte si originální malby. Každé dílo nese jedinečný příběh a energii.</p>
     </section>
 
     <!-- SEKCE: OBRAZY -->
