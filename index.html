@@ -223,7 +223,7 @@
             100% { width: 32px; height: 32px; opacity: 0; }
         }
 
-        /* SEKCE: RECENZE SBĚRATELŮ (BEZ HVĚZDIČEK) */
+        /* RECENZE SBĚRATELŮ */
         .reviews-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -302,53 +302,84 @@
         .contact-box p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 1rem; }
         .contact-email { font-size: 1.25rem; color: var(--accent-gold); text-decoration: none; font-weight: 600; border-bottom: 2px solid var(--accent-gold); padding-bottom: 2px; word-break: break-all; }
 
-        /* MODAL / POP-UP OKNO */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 8, 0.85); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 1rem; }
+        /* MODAL / POP-UP OKNO S MAXIMÁLNÍ VELIKOSTÍ FOTKY */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 8, 0.88); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 1.5rem; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
-        .modal-container { background: var(--modal-bg); border: 1px solid var(--border-color); border-radius: 20px; width: 100%; max-width: 950px; display: grid; grid-template-columns: 1.2fr 1fr; overflow: hidden; position: relative; max-height: 90vh; }
+        .modal-container { background: var(--modal-bg); border: 1px solid var(--border-color); border-radius: 20px; width: 100%; max-width: 1050px; display: grid; grid-template-columns: 1.3fr 1fr; overflow: hidden; position: relative; max-height: 90vh; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
         .modal-overlay.active .modal-container { transform: scale(1); }
 
-        .modal-img-wrap { background: #111; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 380px; position: relative; padding: 1rem; }
-        .modal-main-img { width: 100%; height: 350px; object-fit: contain; border-radius: 8px; }
+        /* Levá část s fotkou roztažená na maximum */
+        .modal-img-wrap { 
+            background: #0a0a0e; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            padding: 1.5rem; 
+            min-height: 480px;
+            overflow: hidden;
+        }
         
+        .modal-main-img { 
+            width: 100%; 
+            height: 100%; 
+            max-height: 520px;
+            object-fit: contain; 
+            border-radius: 8px; 
+            transition: transform 0.3s ease;
+        }
+        
+        /* Elegantně plovoucí náhledy přímo přes spodní část fotky */
         .modal-thumbnails {
+            position: absolute;
+            bottom: 1.2rem;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            gap: 0.5rem;
-            margin-top: 0.8rem;
+            gap: 0.6rem;
+            background: rgba(15, 15, 22, 0.75);
+            backdrop-filter: blur(8px);
+            padding: 0.5rem 0.8rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            max-width: 90%;
             overflow-x: auto;
-            max-width: 100%;
-            padding-bottom: 0.3rem;
+            z-index: 5;
         }
         .modal-thumb {
-            width: 50px;
-            height: 50px;
-            border-radius: 6px;
+            width: 65px;
+            height: 65px;
+            border-radius: 8px;
             object-fit: cover;
             cursor: pointer;
             border: 2px solid transparent;
-            opacity: 0.6;
-            transition: all 0.2s;
+            opacity: 0.65;
+            transition: all 0.25s ease;
             flex-shrink: 0;
+            background: #111;
         }
         .modal-thumb.active, .modal-thumb:hover {
             opacity: 1;
             border-color: var(--accent-gold);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
         }
 
-        .modal-content { padding: 2rem; display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto; }
-        .modal-close { position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); color: #fff; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: background 0.3s; z-index: 10; }
+        .modal-content { padding: 2.2rem; display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto; }
+        .modal-close { position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.6); border: 1px solid var(--border-color); color: #fff; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; transition: background 0.3s; z-index: 10; }
         .modal-close:hover { background: var(--accent-gold); color: #000; }
 
-        .modal-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin: 1rem 0; font-weight: 600; }
-        .modal-spec-list { border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 0.8rem 0; margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
-        .modal-spec-item { display: flex; font-size: 0.88rem; color: var(--text-muted); }
-        .modal-spec-item strong { color: var(--text-main); width: 100px; flex-shrink: 0; }
-        .modal-desc-text { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.2rem; line-height: 1.5; }
+        .modal-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin: 1rem 0; font-weight: 600; }
+        .modal-spec-list { border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 1rem 0; margin-bottom: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+        .modal-spec-item { display: flex; font-size: 0.95rem; color: var(--text-muted); }
+        .modal-spec-item strong { color: var(--text-main); width: 110px; flex-shrink: 0; }
+        .modal-desc-text { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.6; }
 
-        .modal-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 1rem; }
-        .modal-price-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); display: block; }
-        .modal-price { font-size: 1.3rem; font-weight: 700; color: var(--text-main); }
-        .btn-modal-inquire { background: var(--accent-gold); color: #000; border: none; padding: 0.7rem 1.4rem; border-radius: 8px; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: opacity 0.3s; cursor: pointer; display: inline-block; text-align: center; }
+        .modal-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 1.2rem; }
+        .modal-price-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); display: block; }
+        .modal-price { font-size: 1.4rem; font-weight: 700; color: var(--text-main); }
+        .btn-modal-inquire { background: var(--accent-gold); color: #000; border: none; padding: 0.8rem 1.6rem; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: opacity 0.3s; cursor: pointer; display: inline-block; text-align: center; }
 
         .loading { text-align: center; color: var(--text-muted); grid-column: 1/-1; padding: 3rem; font-size: 1rem; }
 
@@ -368,10 +399,12 @@
             .map-wrapper { padding: 1rem; }
             .about-section { grid-template-columns: 1fr; gap: 2rem; }
             .about-img-wrap { height: 320px; position: static; }
-            .modal-container { grid-template-columns: 1fr; max-height: 85vh; }
-            .modal-img-wrap { min-height: 280px; }
-            .modal-main-img { height: 220px; }
-            .modal-content { padding: 1.2rem; }
+            .modal-container { grid-template-columns: 1fr; max-height: 88vh; }
+            .modal-img-wrap { min-height: 320px; padding: 1rem; }
+            .modal-main-img { height: 280px; }
+            .modal-thumbnails { bottom: 0.8rem; padding: 0.4rem; }
+            .modal-thumb { width: 50px; height: 50px; }
+            .modal-content { padding: 1.4rem; }
         }
 
         footer { text-align: center; padding: 3rem 5%; color: var(--text-muted); border-top: 1px solid var(--border-color); font-size: 0.85rem; }
@@ -417,7 +450,6 @@
             <button class="filter-btn active" onclick="setFilter('volne', this)" id="btn-obrazy-volne">K prodeji</button>
             <button class="filter-btn" onclick="setFilter('prodane', this)" id="btn-obrazy-prodane">V novém domově (Prodáno)</button>
             <button class="filter-btn" onclick="setFilter('vse', this)" id="btn-obrazy-vse">Všechna díla</button>
-            <!-- FILTROVÁNÍ PODLE CENY (JEN VOLNÉ OBRAZY) -->
             <button class="filter-btn" onclick="setFilter('price-asc', this)" id="btn-price-asc">Od nejlevnějšího</button>
             <button class="filter-btn" onclick="setFilter('price-desc', this)" id="btn-price-desc">Od nejdražšího</button>
         </div>
@@ -464,7 +496,7 @@
         </div>
     </div>
 
-    <!-- SEKCE: RECENZE SBĚRATELŮ (DYNAMICKY ZE SLOUPEČKU Z GOOGLE TABULKY) -->
+    <!-- SEKCE: RECENZE SBĚRATELŮ -->
     <div class="section-container" id="recenze">
         <h2 class="section-title" id="title-recenze">Co říkají sběratelé</h2>
         <div class="reviews-grid" id="reviews-container">
@@ -553,7 +585,7 @@
         </div>
     </div>
 
-    <!-- DETAIL MODAL S PODPOROU GALERIE FOTEK -->
+    <!-- DETAIL MODAL / POP-UP OKNO -->
     <div class="modal-overlay" id="product-modal" onclick="closeModal(event)">
         <div class="modal-container" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeModal()">×</button>
@@ -695,7 +727,6 @@
                 const response = await fetch(SCRIPT_URL);
                 const data = await response.json();
                 
-                // Pokud skript vrací objekt s tabulkami (obrazy + hodnocení)
                 const itemsList = Array.isArray(data) ? data : (data.obrazy || data.products || []);
                 const reviewsList = Array.isArray(data) ? [] : (data.hodnoceni || data.reviews || []);
 
@@ -726,7 +757,6 @@
                         text_en: r["Hodnocení (EN)"] || r["Hodnocení (CZ)"] || ""
                     }));
                 } else {
-                    // Náhradní výchozí recenze
                     reviews = [
                         { name: "Michaela K.", location: "Praha", text_cz: "Obraz dorazil naprosto v pořádku. Naživo má úžasnou strukturu a zlaté odlesky, které vrhají nádherné světlo do našeho obýváku.", text_en: "The painting arrived in perfect condition. In person, it has an amazing texture and gold reflections." },
                         { name: "David M.", location: "Německo", text_cz: "Renata mě fascinovala svou osobností i tvorbou. Zakázkový obraz přesně vystihl atmosféru, kterou jsem do interiéru potřeboval.", text_en: "Renata fascinated me with her personality and work. The custom painting captured the atmosphere I needed." },
@@ -791,17 +821,14 @@
             const txt = i18n[currentLang];
             let obrazy = products.filter(p => p.category.includes('obraz') || p.category.includes('paint'));
 
-            // FILTROVÁNÍ A ŘAZENÍ
             if (currentFilter === 'volne') {
                 obrazy = obrazy.filter(p => !isItemSold(p.status));
             } else if (currentFilter === 'prodane') {
                 obrazy = obrazy.filter(p => isItemSold(p.status));
             } else if (currentFilter === 'price-asc') {
-                // Skryje prodané z cenového řazení
                 obrazy = obrazy.filter(p => !isItemSold(p.status));
                 obrazy.sort((a, b) => parsePriceCZK(a.price) - parsePriceCZK(b.price));
             } else if (currentFilter === 'price-desc') {
-                // Skryje prodané z cenového řazení
                 obrazy = obrazy.filter(p => !isItemSold(p.status));
                 obrazy.sort((a, b) => parsePriceCZK(b.price) - parsePriceCZK(a.price));
             }
@@ -821,7 +848,6 @@
                     ? `<img src="${p.imageUrl}" alt="${name}" loading="lazy">` 
                     : `<span>[Obrázek: ${name}]</span>`;
 
-                // SKRYTÍ CENY PRO PRODANÉ OBRAZY
                 const priceDisplay = sold ? '' : `<span class="card-price">${formatPrice(p.price)}</span>`;
 
                 const card = document.createElement('div');
@@ -868,7 +894,6 @@
             document.getElementById('modal-tech').textContent = tech || "Neuvedeno";
             document.getElementById('modal-desc').textContent = desc || "";
             
-            // SKRYTÍ CENY V MODÁLNÍM OKNĚ PRO PRODANÉ OBRAZY
             const priceLabelEl = document.getElementById('lbl-price-title');
             const priceValEl = document.getElementById('modal-price');
             if (sold) {
@@ -896,6 +921,7 @@
                 mainImg.style.display = 'block';
 
                 if (imgs.length > 1) {
+                    thumbsContainer.style.display = 'flex';
                     imgs.forEach((imgUrl, idx) => {
                         const thumb = document.createElement('img');
                         thumb.src = imgUrl;
@@ -907,9 +933,12 @@
                         };
                         thumbsContainer.appendChild(thumb);
                     });
+                } else {
+                    thumbsContainer.style.display = 'none';
                 }
             } else {
                 mainImg.style.display = 'none';
+                thumbsContainer.style.display = 'none';
             }
 
             const inquireBtn = document.getElementById('modal-inquire-btn');
