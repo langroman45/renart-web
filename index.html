@@ -3,7 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>RenArt | Intuitivní umění</title>
+    <title>RenArt | Intuitivní umění – Renata Langová</title>
+    
+    <!-- SEO & OPEN GRAPH TAGY PRO SOCIÁLNÍ SÍTĚ -->
+    <meta name="description" content="Originální abstraktně-intuitivní malby plné energie, barev a emocí od Renaty Langové (RenArt).">
+    <meta name="keywords" content="RenArt, Renata Langová, intuitivní umění, abstraktní malba, obrazy na prodej, umění do interiéru">
+    <meta name="author" content="Renata Langová">
+
+    <!-- Open Graph / Facebook / WhatsApp / Instagram -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://renartstudio.cz/">
+    <meta property="og:title" content="RenArt | Intuitivní umění – Renata Langová">
+    <meta property="og:description" content="Prohlédněte si originální malby plné energie, barev a plastických struktur. Vstupte do světa intuitivního umění.">
+    <meta property="og:image" content="FotkaUvod.jpg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RenArt | Intuitivní umění">
+    <meta name="twitter:description" content="Originální abstraktně-intuitivní malby plné energie, barev a emocí od Renaty Langové.">
+    <meta name="twitter:image" content="FotkaUvod.jpg">
     
     <!-- IKONA V ZÁLOŽCE PROHLÍŽEČE (FAVICON) -->
     <link rel="icon" type="image/jpeg" href="./logo.jpg">
@@ -34,19 +52,21 @@
         nav a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s; white-space: nowrap; }
         nav a:hover, nav a.active-link { color: var(--accent-gold); }
 
-        /* ZVÝRAZNĚNÁ INSTAGRAM IKONA VE ZLATÉ BARVĚ */
+        /* STYLY PRO INSTAGRAM IKONKU V LIŠTĚ */
         .social-icon {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             color: var(--accent-gold);
             transition: transform 0.3s, opacity 0.3s;
             text-decoration: none;
+            flex-shrink: 0;
         }
         .social-icon svg {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             fill: currentColor;
+            display: block;
         }
         .social-icon:hover {
             opacity: 0.8;
@@ -57,7 +77,7 @@
         .lang-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 12px; font-weight: 600; }
         .lang-btn.active { background: var(--accent-gold); color: #000; }
 
-        /* HERO SEKCE S ŽIVĚJŠÍMI BARVAMI (SATURACE +20%) */
+        /* HERO SEKCE */
         .hero { 
             position: relative;
             min-height: 70vh; 
@@ -95,7 +115,7 @@
         .section-container { max-width: 1300px; margin: 0 auto; padding: 3rem 5%; border-top: 1px solid var(--border-color); scroll-margin-top: 80px; }
         .section-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 1.5rem; font-weight: 400; text-align: center; }
 
-        /* FILTRY */
+        /* FILTRY & ŘAZENÍ */
         .filter-buttons { display: flex; justify-content: center; gap: 0.6rem; margin-bottom: 2rem; flex-wrap: wrap; }
         .filter-btn { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; cursor: pointer; transition: all 0.3s; font-weight: 500; }
         .filter-btn:hover { border-color: var(--accent-gold); color: var(--text-main); }
@@ -128,7 +148,7 @@
         .btn-inquire:hover { background: var(--accent-gold); color: #000; }
         .btn-inquire.disabled { opacity: 0.4; pointer-events: none; border-color: var(--text-muted); color: var(--text-muted); }
 
-        /* MAPA SVĚTA S NATIVNÍM DOTYKOVÝM ZOOMEM */
+        /* MAPA SVĚTA */
         .map-wrapper { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; position: relative; max-width: 1000px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.4); text-align: center; }
         
         .map-viewport {
@@ -203,6 +223,58 @@
             100% { width: 32px; height: 32px; opacity: 0; }
         }
 
+        /* SEKCE: HODNOCENÍ / REFERENCE SBĚRATELŮ */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 2rem auto 0;
+        }
+        .review-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        .review-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(212, 175, 55, 0.25);
+        }
+        .review-stars {
+            color: var(--accent-gold);
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+        }
+        .review-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+            flex-grow: 1;
+        }
+        .review-author {
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-color);
+            padding-top: 0.8rem;
+        }
+        .review-location {
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            font-weight: 500;
+        }
+
         /* O AUTORCE SEKCE */
         .about-section { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; max-width: 1100px; margin: 0 auto; }
         .about-img-wrap { width: 100%; height: 500px; background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border-color); overflow: hidden; position: sticky; top: 100px; }
@@ -235,14 +307,40 @@
         .contact-box p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 1rem; }
         .contact-email { font-size: 1.25rem; color: var(--accent-gold); text-decoration: none; font-weight: 600; border-bottom: 2px solid var(--accent-gold); padding-bottom: 2px; word-break: break-all; }
 
-        /* MODAL / POP-UP OKNO */
+        /* MODAL / POP-UP OKNO S GALERIÍ VÍCE FOTEK */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 8, 0.85); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 1rem; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
-        .modal-container { background: var(--modal-bg); border: 1px solid var(--border-color); border-radius: 20px; width: 100%; max-width: 900px; display: grid; grid-template-columns: 1.2fr 1fr; overflow: hidden; position: relative; max-height: 90vh; }
+        .modal-container { background: var(--modal-bg); border: 1px solid var(--border-color); border-radius: 20px; width: 100%; max-width: 950px; display: grid; grid-template-columns: 1.2fr 1fr; overflow: hidden; position: relative; max-height: 90vh; }
         .modal-overlay.active .modal-container { transform: scale(1); }
 
-        .modal-img-wrap { background: #111; display: flex; align-items: center; justify-content: center; min-height: 350px; position: relative; }
-        .modal-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        .modal-img-wrap { background: #111; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 380px; position: relative; padding: 1rem; }
+        .modal-main-img { width: 100%; height: 350px; object-fit: contain; border-radius: 8px; }
+        
+        /* Náhledy fotografií (Mockupy / Detaily) */
+        .modal-thumbnails {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            overflow-x: auto;
+            max-width: 100%;
+            padding-bottom: 0.3rem;
+        }
+        .modal-thumb {
+            width: 50px;
+            height: 50px;
+            border-radius: 6px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            opacity: 0.6;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .modal-thumb.active, .modal-thumb:hover {
+            opacity: 1;
+            border-color: var(--accent-gold);
+        }
+
         .modal-content { padding: 2rem; display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto; }
         .modal-close { position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); color: #fff; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: background 0.3s; z-index: 10; }
         .modal-close:hover { background: var(--accent-gold); color: #000; }
@@ -277,7 +375,8 @@
             .about-section { grid-template-columns: 1fr; gap: 2rem; }
             .about-img-wrap { height: 320px; position: static; }
             .modal-container { grid-template-columns: 1fr; max-height: 85vh; }
-            .modal-img-wrap { height: 250px; min-height: 250px; }
+            .modal-img-wrap { min-height: 280px; }
+            .modal-main-img { height: 220px; }
             .modal-content { padding: 1.2rem; }
         }
 
@@ -294,11 +393,12 @@
         <nav>
             <a href="#obrazy" id="nav-obrazy">Obrazy</a>
             <a href="#mapa" id="nav-mapa">Kde tvořím radost</a>
+            <a href="#recenze" id="nav-recenze">Recenze</a>
             <a href="#o-autorce" id="nav-about">O autorce</a>
             <a href="#faq" id="nav-faq">FAQ</a>
             <a href="#kontakt" id="nav-contact">Kontakt</a>
             
-            <!-- ZVÝRAZNĚNÁ INSTAGRAM IKONA VE ZLATÉ BARVĚ -->
+            <!-- INSTAGRAM IKONA -->
             <a href="https://www.instagram.com/__renart__/" target="_blank" rel="noopener noreferrer" class="social-icon" title="Instagram">
                 <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
             </a>
@@ -310,7 +410,7 @@
         </nav>
     </header>
 
-    <!-- ÚVODNÍ SEKCE S ŽIVĚJŠÍ FOTKOU -->
+    <!-- ÚVODNÍ SEKCE -->
     <section class="hero">
         <h1 id="hero-title">Intuitivní umění</h1>
         <p id="hero-sub">Prohlédněte si originální malby. Každé dílo nese jedinečný příběh a energii.</p>
@@ -323,13 +423,16 @@
             <button class="filter-btn active" onclick="setFilter('volne', this)" id="btn-obrazy-volne">K prodeji</button>
             <button class="filter-btn" onclick="setFilter('prodane', this)" id="btn-obrazy-prodane">V novém domově (Prodáno)</button>
             <button class="filter-btn" onclick="setFilter('vse', this)" id="btn-obrazy-vse">Všechna díla</button>
+            <!-- SORTS/CENOVÉ FILTRY -->
+            <button class="filter-btn" onclick="setFilter('price-asc', this)" id="btn-price-asc">Od nejlevnějšího</button>
+            <button class="filter-btn" onclick="setFilter('price-desc', this)" id="btn-price-desc">Od nejdražšího</button>
         </div>
         <div class="grid" id="grid-obrazy">
             <div class="loading">Načítám obrazy...</div>
         </div>
     </div>
 
-    <!-- SEKCE: MAPA SVĚTA S NATIVNÍM DOTYKOVÝM ZOOMEM -->
+    <!-- SEKCE: MAPA SVĚTA -->
     <div class="section-container" id="mapa">
         <h2 class="section-title" id="title-mapa">Kde již dělají moje obrazy radost</h2>
         <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem;" id="sub-mapa">Mé originální malby našly své domovy v soukromých sbírkách po celém světě.</p>
@@ -362,6 +465,43 @@
 
                     <!-- AUSTRÁLIE -->
                     <div class="percent-pin" style="left: 81.5%; top: 76.5%;" onmouseenter="showPercentTooltip(event, 'Austrálie', 'Australia')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOVÁ SEKCE: REFERENCE A RECENZE SBĚRATELŮ -->
+    <div class="section-container" id="recenze">
+        <h2 class="section-title" id="title-recenze">Co říkají sběratelé</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div>
+                    <div class="review-stars">★ ★ ★ ★ ★</div>
+                    <p class="review-text" id="rev-text-1">„Obraz dorazil naprosto v pořádku. Naživo má úžasnou strukturu a zlaté odlesky, které vrhají nádherné světlo do našeho obýváku. Všichni přátelé nám ho obdivují.“</p>
+                </div>
+                <div class="review-author">
+                    <span>Michaela K.</span>
+                    <span class="review-location">Praha</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <div>
+                    <div class="review-stars">★ ★ ★ ★ ★</div>
+                    <p class="review-text" id="rev-text-2">„Renata me fascinovala svou osobností i tvorbou. Zakázkový obraz přesně vystihl atmosféru, kterou jsem do interiéru potřeboval. Skvělá komunikace i doručení.“</p>
+                </div>
+                <div class="review-author">
+                    <span>David M.</span>
+                    <span class="review-location">Německo</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <div>
+                    <div class="review-stars">★ ★ ★ ★ ★</div>
+                    <p class="review-text" id="rev-text-3">„Tento obraz mi každý den připomíná radost a svobodu. Pečlivě zabaleno, doručení do USA proběhlo bez jediného problému. Děkuji!“</p>
+                </div>
+                <div class="review-author">
+                    <span>Sarah L.</span>
+                    <span class="review-location">Florida, USA</span>
                 </div>
             </div>
         </div>
@@ -448,11 +588,14 @@
         </div>
     </div>
 
-    <!-- DETAIL MODAL / POP-UP OKNO -->
+    <!-- DETAIL MODAL S PODPOROU GALERIE FOTEK (MOCKUPY / DETAIL / STROM) -->
     <div class="modal-overlay" id="product-modal" onclick="closeModal(event)">
         <div class="modal-container" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeModal()">×</button>
-            <div class="modal-img-wrap" id="modal-img-container"></div>
+            <div class="modal-img-wrap">
+                <img id="modal-main-img" class="modal-main-img" src="" alt="">
+                <div class="modal-thumbnails" id="modal-thumbnails"></div>
+            </div>
             <div class="modal-content">
                 <div>
                     <span class="badge" id="modal-badge"></span>
@@ -489,11 +632,13 @@
 
         const i18n = {
             cz: {
-                navObrazy: "Obrazy", navMapa: "Kde tvořím radost", navAbout: "O autorce", navFaq: "FAQ", navContact: "Kontakt",
+                navObrazy: "Obrazy", navMapa: "Kde tvořím radost", navRecenze: "Recenze", navAbout: "O autorce", navFaq: "FAQ", navContact: "Kontakt",
                 heroTitle: "Intuitivní umění", heroSub: "Prohlédněte si originální malby. Každé dílo nese jedinečný příběh a energii.",
                 titleObrazy: "Obrazy", titleMapa: "Kde již dělají moje obrazy radost", subMapa: "Mé originální malby našly své domovy v soukromých sbírkách po celém světě.",
+                titleRecenze: "Co říkají sběratelé",
                 titleAbout: "O autorce", titleFaq: "Často kladené otázky", titleContact: "Kontakt",
                 filterVolne: "K prodeji", filterProdane: "V novém domově (Prodáno)", filterVse: "Všechna díla",
+                btnPriceAsc: "Od nejlevnějšího", btnPriceDesc: "Od nejdražšího",
                 faqQ1: "Jak probíhá zakoupení nebo rezervace díla?", faqA1: "U vybraného díla stačí kliknout na tlačítko „Mám zájem“ a napsat mi e-mail.",
                 faqQ2: "Je možné vytvořit obraz na zakázku?", faqA2: "Ano! Velmi ráda tvořím osobitá díla přímo na míru vašim přáním.",
                 faqQ3: "Jakým způsobem probíhá doručení obrazů?", faqA3: "Obrazy pečlivě balím tak, aby k vám dorazily v naprostém pořádku.",
@@ -501,14 +646,19 @@
                 badgeAvailable: "Ihned k odběru", badgeSold: "V novém domově", btnInquire: "Mám zájem", btnSoldOut: "Prodáno",
                 lblSize: "Rozměry:", lblTech: "Technika:", lblPrice: "Cena", btnModalInquire: "Poptat toto dílo",
                 emptyObrazy: "V této sekci se momentálně nenacházejí žádná díla odpovídající filtru.",
-                readMore: "Zobrazit více", readLess: "Zobrazit méně"
+                readMore: "Zobrazit více", readLess: "Zobrazit méně",
+                rev1: "„Obraz dorazil naprosto v pořádku. Naživo má úžasnou strukturu a zlaté odlesky, které vrhají nádherné světlo do našeho obýváku. Všichni přátelé nám ho obdivují.“",
+                rev2: "„Renata me fascinovala svou osobností i tvorbou. Zakázkový obraz přesně vystihl atmosféru, kterou jsem do interiéru potřeboval. Skvělá komunikace i doručení.“",
+                rev3: "„Tento obraz mi každý den připomíná radost a svobodu. Pečlivě zabaleno, doručení do USA proběhlo bez jediného problému. Děkuji!“"
             },
             en: {
-                navObrazy: "Paintings", navMapa: "Global Homes", navAbout: "About", navFaq: "FAQ", navContact: "Contact",
+                navObrazy: "Paintings", navMapa: "Global Homes", navRecenze: "Reviews", navAbout: "About", navFaq: "FAQ", navContact: "Contact",
                 heroTitle: "Intuitive Art", heroSub: "Explore original paintings.",
                 titleObrazy: "Paintings", titleMapa: "Where My Paintings Bring Joy", subMapa: "My original artworks have found their homes worldwide.",
+                titleRecenze: "What Collectors Say",
                 titleAbout: "About the Artist", titleFaq: "Frequently Asked Questions", titleContact: "Contact",
                 filterVolne: "Available", filterProdane: "In a New Home (Sold)", filterVse: "All Artworks",
+                btnPriceAsc: "Lowest Price", btnPriceDesc: "Highest Price",
                 faqQ1: "How do I purchase or reserve an artwork?", faqA1: "Simply click the 'Inquire' button.",
                 faqQ2: "Can I order a custom painting?", faqA2: "Yes! I love creating custom pieces.",
                 faqQ3: "How are artworks shipped?", faqA3: "All items are carefully packaged.",
@@ -516,7 +666,10 @@
                 badgeAvailable: "Available", badgeSold: "In a New Home", btnInquire: "Inquire", btnSoldOut: "Sold",
                 lblSize: "Dimensions:", lblTech: "Technique:", lblPrice: "Price", btnModalInquire: "Inquire This Piece",
                 emptyObrazy: "No items found matching this filter.",
-                readMore: "Read More", readLess: "Read Less"
+                readMore: "Read More", readLess: "Read Less",
+                rev1: "„The painting arrived in perfect condition. In person, it has an amazing texture and gold reflections that bring beautiful light into our living room.“",
+                rev2: "„Renata fascinated me with her personality and work. The custom painting captured the atmosphere I needed for the interior. Excellent communication!“",
+                rev3: "„This painting reminds me of joy and freedom every single day. Carefully packaged, shipping to the US was completely seamless. Thank you!“"
             }
         };
 
@@ -571,25 +724,36 @@
             return url;
         }
 
+        // Funkce pro rozparsování více obrázků ze sloupce URL (oddělené čárkou, mezerou nebo novým řádkem)
+        function parseImageUrls(rawUrls) {
+            if (!rawUrls) return [];
+            const splitUrls = rawUrls.toString().split(/[\n,\s]+/);
+            return splitUrls.map(u => formatImageUrl(u)).filter(u => u !== null);
+        }
+
         async function fetchProducts() {
             try {
                 const response = await fetch(SCRIPT_URL);
                 const data = await response.json();
                 
-                products = data.map((item, index) => ({
-                    id: item["ID"] || index + 1,
-                    name_cz: item["Název děl/produktu"] || "Bez názvu",
-                    name_en: item["Název (EN)"] || item["Název děl/produktu"] || "Untitled",
-                    category: (item["Kategorie"] || "Obraz").toLowerCase().trim(),
-                    size: item["Rozměry/Velikost"] || "",
-                    technique_cz: item["Technika"] || "",
-                    technique_en: item["Technika (EN)"] || item["Technika"] || "",
-                    price: item["Cena (CZK)"] || item["Cena"] || "0 Kč",
-                    status: item["Stav"] || "Volné",
-                    desc_cz: item["Popis"] || "",
-                    desc_en: item["Popis (EN)"] || item["Popis"] || "",
-                    imageUrl: formatImageUrl(item["URL"])
-                }));
+                products = data.map((item, index) => {
+                    const images = parseImageUrls(item["URL"] || item["Obrázky"] || "");
+                    return {
+                        id: item["ID"] || index + 1,
+                        name_cz: item["Název děl/produktu"] || "Bez názvu",
+                        name_en: item["Název (EN)"] || item["Název děl/produktu"] || "Untitled",
+                        category: (item["Kategorie"] || "Obraz").toLowerCase().trim(),
+                        size: item["Rozměry/Velikost"] || "",
+                        technique_cz: item["Technika"] || "",
+                        technique_en: item["Technika (EN)"] || item["Technika"] || "",
+                        price: item["Cena (CZK)"] || item["Cena"] || "0 Kč",
+                        status: item["Stav"] || "Volné",
+                        desc_cz: item["Popis"] || "",
+                        desc_en: item["Popis (EN)"] || item["Popis"] || "",
+                        images: images,
+                        imageUrl: images.length > 0 ? images[0] : null
+                    };
+                });
 
                 renderObrazy();
             } catch (error) {
@@ -625,21 +789,25 @@
             grid.innerHTML = '';
             
             const txt = i18n[currentLang];
-            const obrazy = products.filter(p => p.category.includes('obraz') || p.category.includes('paint'));
+            let obrazy = products.filter(p => p.category.includes('obraz') || p.category.includes('paint'));
 
-            const filteredItems = obrazy.filter(p => {
-                const sold = isItemSold(p.status);
-                if (currentFilter === 'volne') return !sold;
-                if (currentFilter === 'prodane') return sold;
-                return true;
-            });
+            // FILTROVÁNÍ A ŘAZENÍ PODLE CENY
+            if (currentFilter === 'volne') {
+                obrazy = obrazy.filter(p => !isItemSold(p.status));
+            } else if (currentFilter === 'prodane') {
+                obrazy = obrazy.filter(p => isItemSold(p.status));
+            } else if (currentFilter === 'price-asc') {
+                obrazy.sort((a, b) => parsePriceCZK(a.price) - parsePriceCZK(b.price));
+            } else if (currentFilter === 'price-desc') {
+                obrazy.sort((a, b) => parsePriceCZK(b.price) - parsePriceCZK(a.price));
+            }
 
-            if (filteredItems.length === 0) {
+            if (obrazy.length === 0) {
                 grid.innerHTML = `<p class="loading">${txt.emptyObrazy}</p>`;
                 return;
             }
 
-            filteredItems.forEach(p => {
+            obrazy.forEach(p => {
                 const sold = isItemSold(p.status);
                 const name = currentLang === 'en' ? p.name_en : p.name_cz;
                 const tech = currentLang === 'en' ? p.technique_en : p.technique_cz;
@@ -676,6 +844,7 @@
             });
         }
 
+        // OTEVŘENÍ MODÁLNÍHO OKNA S PODPOROU GALERIE (MOCKUPY / DETAIL FOTKY)
         function openModal(productId) {
             activeProduct = products.find(p => p.id === productId);
             if (!activeProduct) return;
@@ -698,11 +867,35 @@
             document.getElementById('lbl-tech').textContent = txt.lblTech;
             document.getElementById('lbl-price-title').textContent = txt.lblPrice;
 
-            const modalImgContainer = document.getElementById('modal-img-container');
-            if (activeProduct.imageUrl) {
-                modalImgContainer.innerHTML = `<img src="${activeProduct.imageUrl}" alt="${name}">`;
+            // Správa více fotek v pop-upu (Mockupy v interiéru)
+            const mainImg = document.getElementById('modal-main-img');
+            const thumbsContainer = document.getElementById('modal-thumbnails');
+            thumbsContainer.innerHTML = '';
+
+            const imgs = activeProduct.images && activeProduct.images.length > 0 
+                ? activeProduct.images 
+                : [activeProduct.imageUrl];
+
+            if (imgs[0]) {
+                mainImg.src = imgs[0];
+                mainImg.alt = name;
+                mainImg.style.display = 'block';
+
+                if (imgs.length > 1) {
+                    imgs.forEach((imgUrl, idx) => {
+                        const thumb = document.createElement('img');
+                        thumb.src = imgUrl;
+                        thumb.className = `modal-thumb ${idx === 0 ? 'active' : ''}`;
+                        thumb.onclick = () => {
+                            mainImg.src = imgUrl;
+                            thumbsContainer.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
+                            thumb.classList.add('active');
+                        };
+                        thumbsContainer.appendChild(thumb);
+                    });
+                }
             } else {
-                modalImgContainer.innerHTML = `<span style="color:var(--text-muted)">[Obrázek: ${name}]</span>`;
+                mainImg.style.display = 'none';
             }
 
             const inquireBtn = document.getElementById('modal-inquire-btn');
@@ -733,6 +926,7 @@
             const txt = i18n[lang];
             document.getElementById('nav-obrazy').textContent = txt.navObrazy;
             document.getElementById('nav-mapa').textContent = txt.navMapa;
+            document.getElementById('nav-recenze').textContent = txt.navRecenze;
             document.getElementById('nav-about').textContent = txt.navAbout;
             document.getElementById('nav-faq').textContent = txt.navFaq;
             document.getElementById('nav-contact').textContent = txt.navContact;
@@ -743,6 +937,7 @@
             document.getElementById('title-obrazy').textContent = txt.titleObrazy;
             document.getElementById('title-mapa').textContent = txt.titleMapa;
             document.getElementById('sub-mapa').textContent = txt.subMapa;
+            document.getElementById('title-recenze').textContent = txt.titleRecenze;
             document.getElementById('title-about').textContent = txt.titleAbout;
             document.getElementById('title-faq').textContent = txt.titleFaq;
             document.getElementById('title-contact').textContent = txt.titleContact;
@@ -750,6 +945,12 @@
             document.getElementById('btn-obrazy-volne').textContent = txt.filterVolne;
             document.getElementById('btn-obrazy-prodane').textContent = txt.filterProdane;
             document.getElementById('btn-obrazy-vse').textContent = txt.filterVse;
+            document.getElementById('btn-price-asc').textContent = txt.btnPriceAsc;
+            document.getElementById('btn-price-desc').textContent = txt.btnPriceDesc;
+
+            document.getElementById('rev-text-1').textContent = txt.rev1;
+            document.getElementById('rev-text-2').textContent = txt.rev2;
+            document.getElementById('rev-text-3').textContent = txt.rev3;
 
             renderObrazy();
         }
