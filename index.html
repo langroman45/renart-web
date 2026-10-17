@@ -46,7 +46,7 @@
         
         .logo-container { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
         .logo-img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 1px solid var(--accent-gold); }
-        .logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600; letter-spacing: 2px; color: var(--text-main); text-decoration: none; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600; letter-spacing: 1px; color: var(--text-main); text-decoration: none; }
         
         nav { display: flex; align-items: center; gap: 1.8rem; }
         nav a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s; white-space: nowrap; }
@@ -223,7 +223,7 @@
             100% { width: 32px; height: 32px; opacity: 0; }
         }
 
-        /* SEKCE: HODNOCENÍ / REFERENCE SBĚRATELŮ */
+        /* SEKCE: RECENZE SBĚRATELŮ (BEZ HVĚZDIČEK) */
         .reviews-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -246,14 +246,9 @@
             transform: translateY(-3px);
             border-color: rgba(212, 175, 55, 0.25);
         }
-        .review-stars {
-            color: var(--accent-gold);
-            font-size: 1.1rem;
-            margin-bottom: 0.8rem;
-        }
         .review-text {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.98rem;
             font-style: italic;
             line-height: 1.6;
             margin-bottom: 1.2rem;
@@ -307,7 +302,7 @@
         .contact-box p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 1rem; }
         .contact-email { font-size: 1.25rem; color: var(--accent-gold); text-decoration: none; font-weight: 600; border-bottom: 2px solid var(--accent-gold); padding-bottom: 2px; word-break: break-all; }
 
-        /* MODAL / POP-UP OKNO S GALERIÍ VÍCE FOTEK */
+        /* MODAL / POP-UP OKNO */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 8, 0.85); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 1rem; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
         .modal-container { background: var(--modal-bg); border: 1px solid var(--border-color); border-radius: 20px; width: 100%; max-width: 950px; display: grid; grid-template-columns: 1.2fr 1fr; overflow: hidden; position: relative; max-height: 90vh; }
@@ -316,7 +311,6 @@
         .modal-img-wrap { background: #111; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 380px; position: relative; padding: 1rem; }
         .modal-main-img { width: 100%; height: 350px; object-fit: contain; border-radius: 8px; }
         
-        /* Náhledy fotografií (Mockupy / Detaily) */
         .modal-thumbnails {
             display: flex;
             gap: 0.5rem;
@@ -388,7 +382,7 @@
     <header>
         <a href="#" class="logo-container">
             <img src="./logo.jpg" alt="RenArt Logo" class="logo-img">
-            <span class="logo">RENART</span>
+            <span class="logo">RenArt</span>
         </a>
         <nav>
             <a href="#obrazy" id="nav-obrazy">Obrazy</a>
@@ -423,7 +417,7 @@
             <button class="filter-btn active" onclick="setFilter('volne', this)" id="btn-obrazy-volne">K prodeji</button>
             <button class="filter-btn" onclick="setFilter('prodane', this)" id="btn-obrazy-prodane">V novém domově (Prodáno)</button>
             <button class="filter-btn" onclick="setFilter('vse', this)" id="btn-obrazy-vse">Všechna díla</button>
-            <!-- SORTS/CENOVÉ FILTRY -->
+            <!-- FILTROVÁNÍ PODLE CENY (JEN VOLNÉ OBRAZY) -->
             <button class="filter-btn" onclick="setFilter('price-asc', this)" id="btn-price-asc">Od nejlevnějšího</button>
             <button class="filter-btn" onclick="setFilter('price-desc', this)" id="btn-price-desc">Od nejdražšího</button>
         </div>
@@ -470,40 +464,11 @@
         </div>
     </div>
 
-    <!-- NOVÁ SEKCE: REFERENCE A RECENZE SBĚRATELŮ -->
+    <!-- SEKCE: RECENZE SBĚRATELŮ (DYNAMICKY ZE SLOUPEČKU Z GOOGLE TABULKY) -->
     <div class="section-container" id="recenze">
         <h2 class="section-title" id="title-recenze">Co říkají sběratelé</h2>
-        <div class="reviews-grid">
-            <div class="review-card">
-                <div>
-                    <div class="review-stars">★ ★ ★ ★ ★</div>
-                    <p class="review-text" id="rev-text-1">„Obraz dorazil naprosto v pořádku. Naživo má úžasnou strukturu a zlaté odlesky, které vrhají nádherné světlo do našeho obýváku. Všichni přátelé nám ho obdivují.“</p>
-                </div>
-                <div class="review-author">
-                    <span>Michaela K.</span>
-                    <span class="review-location">Praha</span>
-                </div>
-            </div>
-            <div class="review-card">
-                <div>
-                    <div class="review-stars">★ ★ ★ ★ ★</div>
-                    <p class="review-text" id="rev-text-2">„Renata me fascinovala svou osobností i tvorbou. Zakázkový obraz přesně vystihl atmosféru, kterou jsem do interiéru potřeboval. Skvělá komunikace i doručení.“</p>
-                </div>
-                <div class="review-author">
-                    <span>David M.</span>
-                    <span class="review-location">Německo</span>
-                </div>
-            </div>
-            <div class="review-card">
-                <div>
-                    <div class="review-stars">★ ★ ★ ★ ★</div>
-                    <p class="review-text" id="rev-text-3">„Tento obraz mi každý den připomíná radost a svobodu. Pečlivě zabaleno, doručení do USA proběhlo bez jediného problému. Děkuji!“</p>
-                </div>
-                <div class="review-author">
-                    <span>Sarah L.</span>
-                    <span class="review-location">Florida, USA</span>
-                </div>
-            </div>
+        <div class="reviews-grid" id="reviews-container">
+            <div class="loading">Načítám recenze...</div>
         </div>
     </div>
 
@@ -588,7 +553,7 @@
         </div>
     </div>
 
-    <!-- DETAIL MODAL S PODPOROU GALERIE FOTEK (MOCKUPY / DETAIL / STROM) -->
+    <!-- DETAIL MODAL S PODPOROU GALERIE FOTEK -->
     <div class="modal-overlay" id="product-modal" onclick="closeModal(event)">
         <div class="modal-container" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeModal()">×</button>
@@ -608,7 +573,7 @@
                 </div>
                 <div class="modal-footer">
                     <div>
-                        <span class="modal-price-label" id="lbl-price-title">Cena</span>
+                        <span class="modal-price-label" id="lbl-price-title"></span>
                         <span class="modal-price" id="modal-price"></span>
                     </div>
                     <a href="#" id="modal-inquire-btn" class="btn-modal-inquire">Mám zájem</a>
@@ -625,6 +590,7 @@
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9SJVwkNjYxNMq_DCvWzI2cctC88m2eE6ByiiPQHyo_UfPJkNQVVEbbqo_17jrru6dzg/exec';
         
         let products = [];
+        let reviews = [];
         let currentLang = 'cz';
         let activeProduct = null;
         const EUR_RATE = 25;
@@ -646,10 +612,7 @@
                 badgeAvailable: "Ihned k odběru", badgeSold: "V novém domově", btnInquire: "Mám zájem", btnSoldOut: "Prodáno",
                 lblSize: "Rozměry:", lblTech: "Technika:", lblPrice: "Cena", btnModalInquire: "Poptat toto dílo",
                 emptyObrazy: "V této sekci se momentálně nenacházejí žádná díla odpovídající filtru.",
-                readMore: "Zobrazit více", readLess: "Zobrazit méně",
-                rev1: "„Obraz dorazil naprosto v pořádku. Naživo má úžasnou strukturu a zlaté odlesky, které vrhají nádherné světlo do našeho obýváku. Všichni přátelé nám ho obdivují.“",
-                rev2: "„Renata me fascinovala svou osobností i tvorbou. Zakázkový obraz přesně vystihl atmosféru, kterou jsem do interiéru potřeboval. Skvělá komunikace i doručení.“",
-                rev3: "„Tento obraz mi každý den připomíná radost a svobodu. Pečlivě zabaleno, doručení do USA proběhlo bez jediného problému. Děkuji!“"
+                readMore: "Zobrazit více", readLess: "Zobrazit méně"
             },
             en: {
                 navObrazy: "Paintings", navMapa: "Global Homes", navRecenze: "Reviews", navAbout: "About", navFaq: "FAQ", navContact: "Contact",
@@ -666,10 +629,7 @@
                 badgeAvailable: "Available", badgeSold: "In a New Home", btnInquire: "Inquire", btnSoldOut: "Sold",
                 lblSize: "Dimensions:", lblTech: "Technique:", lblPrice: "Price", btnModalInquire: "Inquire This Piece",
                 emptyObrazy: "No items found matching this filter.",
-                readMore: "Read More", readLess: "Read Less",
-                rev1: "„The painting arrived in perfect condition. In person, it has an amazing texture and gold reflections that bring beautiful light into our living room.“",
-                rev2: "„Renata fascinated me with her personality and work. The custom painting captured the atmosphere I needed for the interior. Excellent communication!“",
-                rev3: "„This painting reminds me of joy and freedom every single day. Carefully packaged, shipping to the US was completely seamless. Thank you!“"
+                readMore: "Read More", readLess: "Read Less"
             }
         };
 
@@ -724,7 +684,6 @@
             return url;
         }
 
-        // Funkce pro rozparsování více obrázků ze sloupce URL (oddělené čárkou, mezerou nebo novým řádkem)
         function parseImageUrls(rawUrls) {
             if (!rawUrls) return [];
             const splitUrls = rawUrls.toString().split(/[\n,\s]+/);
@@ -736,7 +695,11 @@
                 const response = await fetch(SCRIPT_URL);
                 const data = await response.json();
                 
-                products = data.map((item, index) => {
+                // Pokud skript vrací objekt s tabulkami (obrazy + hodnocení)
+                const itemsList = Array.isArray(data) ? data : (data.obrazy || data.products || []);
+                const reviewsList = Array.isArray(data) ? [] : (data.hodnoceni || data.reviews || []);
+
+                products = itemsList.map((item, index) => {
                     const images = parseImageUrls(item["URL"] || item["Obrázky"] || "");
                     return {
                         id: item["ID"] || index + 1,
@@ -755,7 +718,24 @@
                     };
                 });
 
+                if (reviewsList.length > 0) {
+                    reviews = reviewsList.map(r => ({
+                        name: r["Jméno"] || "",
+                        location: r["Místo / Země"] || "",
+                        text_cz: r["Hodnocení (CZ)"] || "",
+                        text_en: r["Hodnocení (EN)"] || r["Hodnocení (CZ)"] || ""
+                    }));
+                } else {
+                    // Náhradní výchozí recenze
+                    reviews = [
+                        { name: "Michaela K.", location: "Praha", text_cz: "Obraz dorazil naprosto v pořádku. Naživo má úžasnou strukturu a zlaté odlesky, které vrhají nádherné světlo do našeho obýváku.", text_en: "The painting arrived in perfect condition. In person, it has an amazing texture and gold reflections." },
+                        { name: "David M.", location: "Německo", text_cz: "Renata mě fascinovala svou osobností i tvorbou. Zakázkový obraz přesně vystihl atmosféru, kterou jsem do interiéru potřeboval.", text_en: "Renata fascinated me with her personality and work. The custom painting captured the atmosphere I needed." },
+                        { name: "Sarah L.", location: "Florida, USA", text_cz: "Tento obraz mi každý den připomíná radost a svobodu. Pečlivě zabaleno, doručení do USA proběhlo bez jediného problému.", text_en: "This painting reminds me of joy and freedom every single day. Shipping to the US was completely seamless." }
+                    ];
+                }
+
                 renderObrazy();
+                renderReviews();
             } catch (error) {
                 console.error("Chyba při načítání dat:", error);
                 document.getElementById('grid-obrazy').innerHTML = '<p class="loading">Nepodařilo se načíst data.</p>';
@@ -784,6 +764,26 @@
             return status === 'prodané' || status === 'prodano' || status === 'sold';
         }
 
+        function renderReviews() {
+            const container = document.getElementById('reviews-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            reviews.forEach(r => {
+                const text = currentLang === 'en' ? r.text_en : r.text_cz;
+                const card = document.createElement('div');
+                card.className = 'review-card';
+                card.innerHTML = `
+                    <p class="review-text">„${text}“</p>
+                    <div class="review-author">
+                        <span>${r.name}</span>
+                        <span class="review-location">${r.location}</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
         function renderObrazy() {
             const grid = document.getElementById('grid-obrazy');
             grid.innerHTML = '';
@@ -791,14 +791,18 @@
             const txt = i18n[currentLang];
             let obrazy = products.filter(p => p.category.includes('obraz') || p.category.includes('paint'));
 
-            // FILTROVÁNÍ A ŘAZENÍ PODLE CENY
+            // FILTROVÁNÍ A ŘAZENÍ
             if (currentFilter === 'volne') {
                 obrazy = obrazy.filter(p => !isItemSold(p.status));
             } else if (currentFilter === 'prodane') {
                 obrazy = obrazy.filter(p => isItemSold(p.status));
             } else if (currentFilter === 'price-asc') {
+                // Skryje prodané z cenového řazení
+                obrazy = obrazy.filter(p => !isItemSold(p.status));
                 obrazy.sort((a, b) => parsePriceCZK(a.price) - parsePriceCZK(b.price));
             } else if (currentFilter === 'price-desc') {
+                // Skryje prodané z cenového řazení
+                obrazy = obrazy.filter(p => !isItemSold(p.status));
                 obrazy.sort((a, b) => parsePriceCZK(b.price) - parsePriceCZK(a.price));
             }
 
@@ -817,6 +821,9 @@
                     ? `<img src="${p.imageUrl}" alt="${name}" loading="lazy">` 
                     : `<span>[Obrázek: ${name}]</span>`;
 
+                // SKRYTÍ CENY PRO PRODANÉ OBRAZY
+                const priceDisplay = sold ? '' : `<span class="card-price">${formatPrice(p.price)}</span>`;
+
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.onclick = () => openModal(p.id);
@@ -833,7 +840,7 @@
                         ${tech ? `<div class="card-details">${tech}</div>` : ''}
                         ${desc ? `<p class="card-desc">${desc}</p>` : ''}
                         <div class="card-footer">
-                            <span class="card-price">${formatPrice(p.price)}</span>
+                            ${priceDisplay}
                             <span class="btn-inquire ${sold ? 'disabled' : ''}">
                                 ${!sold ? txt.btnInquire : txt.btnSoldOut}
                             </span>
@@ -844,7 +851,6 @@
             });
         }
 
-        // OTEVŘENÍ MODÁLNÍHO OKNA S PODPOROU GALERIE (MOCKUPY / DETAIL FOTKY)
         function openModal(productId) {
             activeProduct = products.find(p => p.id === productId);
             if (!activeProduct) return;
@@ -861,13 +867,21 @@
             document.getElementById('modal-size').textContent = activeProduct.size || "Neuvedeno";
             document.getElementById('modal-tech').textContent = tech || "Neuvedeno";
             document.getElementById('modal-desc').textContent = desc || "";
-            document.getElementById('modal-price').textContent = formatPrice(activeProduct.price);
             
+            // SKRYTÍ CENY V MODÁLNÍM OKNĚ PRO PRODANÉ OBRAZY
+            const priceLabelEl = document.getElementById('lbl-price-title');
+            const priceValEl = document.getElementById('modal-price');
+            if (sold) {
+                priceLabelEl.textContent = "";
+                priceValEl.textContent = "";
+            } else {
+                priceLabelEl.textContent = txt.lblPrice;
+                priceValEl.textContent = formatPrice(activeProduct.price);
+            }
+
             document.getElementById('lbl-size').textContent = txt.lblSize;
             document.getElementById('lbl-tech').textContent = txt.lblTech;
-            document.getElementById('lbl-price-title').textContent = txt.lblPrice;
 
-            // Správa více fotek v pop-upu (Mockupy v interiéru)
             const mainImg = document.getElementById('modal-main-img');
             const thumbsContainer = document.getElementById('modal-thumbnails');
             thumbsContainer.innerHTML = '';
@@ -948,11 +962,8 @@
             document.getElementById('btn-price-asc').textContent = txt.btnPriceAsc;
             document.getElementById('btn-price-desc').textContent = txt.btnPriceDesc;
 
-            document.getElementById('rev-text-1').textContent = txt.rev1;
-            document.getElementById('rev-text-2').textContent = txt.rev2;
-            document.getElementById('rev-text-3').textContent = txt.rev3;
-
             renderObrazy();
+            renderReviews();
         }
 
         fetchProducts();
