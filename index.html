@@ -95,7 +95,7 @@
             text-shadow: 0 3px 15px rgba(0, 0, 0, 0.9), 0 1px 4px rgba(0, 0, 0, 0.9); 
         }
 
-        /* SEKCE BEZ OD DĚLICÍ LINKY */
+        /* SEKCE BEZ DĚLICÍCH LINEK */
         .section-container { max-width: 1300px; margin: 0 auto; padding: 3rem 5%; scroll-margin-top: 80px; }
         .section-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 1.5rem; font-weight: 400; text-align: center; }
 
@@ -138,7 +138,7 @@
         .map-inner-container { position: relative; width: 100%; min-width: 600px; max-width: 950px; margin: 0 auto; }
         .map-tooltip { position: absolute; background: rgba(20, 20, 28, 0.95); border: 1px solid var(--accent-gold); color: #fff; padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; pointer-events: none; opacity: 0; transition: opacity 0.2s ease; transform: translate(-50%, -130%); white-space: nowrap; box-shadow: 0 5px 20px rgba(0,0,0,0.6); z-index: 20; }
         .map-tooltip.active { opacity: 1; }
-        .percent-pin { position: absolute; width: 16px; height: 16px; transform: translate(-50%, -50%); cursor: pointer; z-index: 5; }
+        .percent-pin { position: absolute; width: 24px; height: 24px; transform: translate(-50%, -50%); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; }
         .percent-pin .dot { width: 8px; height: 8px; background: var(--accent-gold); border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 8px var(--accent-gold); }
         .percent-pin .pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 24px; height: 24px; border: 1.5px solid var(--accent-gold); border-radius: 50%; opacity: 0.8; animation: percent-pulse 2s infinite ease-out; }
         @keyframes percent-pulse { 0% { width: 8px; height: 8px; opacity: 1; } 100% { width: 32px; height: 32px; opacity: 0; } }
@@ -403,24 +403,24 @@
                 <div class="map-inner-container" id="map-inner">
                     <img src="Map of world.png" alt="Světová mapa" style="width: 100%; height: auto; display: block; border-radius: 12px; pointer-events: none;">
                     
-                    <div class="percent-pin" style="left: 50.5%; top: 41.0%;" onmouseenter="showPercentTooltip(event, 'Praha, Česká republika', 'Prague, Czech Republic')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                    <div class="percent-pin" style="left: 49.2%; top: 38.8%;" onmouseenter="showPercentTooltip(event, 'Německo', 'Germany')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                    <div class="percent-pin" style="left: 46.8%; top: 41.8%;" onmouseenter="showPercentTooltip(event, 'Francie', 'France')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                    <div class="percent-pin" style="left: 52.2%; top: 38.5%;" onmouseenter="showPercentTooltip(event, 'Polsko', 'Poland')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                    <div class="percent-pin" style="left: 47.9%; top: 39.8%;" onmouseenter="showPercentTooltip(event, 'Nizozemsko', 'Netherlands')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                    <div class="percent-pin" style="left: 53.0%; top: 43.0%;" onmouseenter="showPercentTooltip(event, 'Maďarsko', 'Hungary')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                    <div class="percent-pin" style="left: 51.5%; top: 48.2%;" onmouseenter="showPercentTooltip(event, 'Malta', 'Malta')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                    <div class="percent-pin" style="left: 43.8%; top: 37.2%;" onmouseenter="showPercentTooltip(event, 'Irsko', 'Ireland')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 50.5%; top: 41.0%;" onclick="togglePercentTooltip(event, 'Praha, Česká republika', 'Prague, Czech Republic')"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 49.2%; top: 38.8%;" onclick="togglePercentTooltip(event, 'Německo', 'Germany')"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 46.8%; top: 41.8%;" onclick="togglePercentTooltip(event, 'Francie', 'France')"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 52.2%; top: 38.5%;" onclick="togglePercentTooltip(event, 'Polsko', 'Poland')"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 47.9%; top: 39.8%;" onclick="togglePercentTooltip(event, 'Nizozemsko', 'Netherlands')"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 53.0%; top: 43.0%;" onclick="togglePercentTooltip(event, 'Maďarsko', 'Hungary')"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 51.5%; top: 48.2%;" onclick="togglePercentTooltip(event, 'Malta', 'Malta')"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 43.8%; top: 37.2%;" onclick="togglePercentTooltip(event, 'Irsko', 'Ireland')"><div class="pulse"></div><div class="dot"></div></div>
 
-                    <div class="percent-pin" style="left: 25.7%; top: 55.1%;" onmouseenter="showPercentTooltip(event, 'Florida, USA', 'Florida, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                    <div class="percent-pin" style="left: 18.2%; top: 48.5%;" onmouseenter="showPercentTooltip(event, 'Arizona, USA', 'Arizona, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                    <div class="percent-pin" style="left: 18.8%; top: 39.5%;" onmouseenter="showPercentTooltip(event, 'Wyoming, USA', 'Wyoming, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                    <div class="percent-pin" style="left: 15.2%; top: 46.2%;" onmouseenter="showPercentTooltip(event, 'Kalifornie, USA', 'California, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                    <div class="percent-pin" style="left: 29.2%; top: 41.5%;" onmouseenter="showPercentTooltip(event, 'New York, USA', 'New York, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                    <div class="percent-pin" style="left: 30.5%; top: 39.8%;" onmouseenter="showPercentTooltip(event, 'Massachusetts, USA', 'Massachusetts, USA')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
-                    <div class="percent-pin" style="left: 23.5%; top: 29.5%;" onmouseenter="showPercentTooltip(event, 'Kanada', 'Canada')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 25.7%; top: 55.1%;" onclick="togglePercentTooltip(event, 'Florida, USA', 'Florida, USA')"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 18.2%; top: 48.5%;" onclick="togglePercentTooltip(event, 'Arizona, USA', 'Arizona, USA')"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 18.8%; top: 39.5%;" onclick="togglePercentTooltip(event, 'Wyoming, USA', 'Wyoming, USA')"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 15.2%; top: 46.2%;" onclick="togglePercentTooltip(event, 'Kalifornie, USA', 'California, USA')"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 29.2%; top: 41.5%;" onclick="togglePercentTooltip(event, 'New York, USA', 'New York, USA')"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 30.5%; top: 39.8%;" onclick="togglePercentTooltip(event, 'Massachusetts, USA', 'Massachusetts, USA')"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 23.5%; top: 29.5%;" onclick="togglePercentTooltip(event, 'Kanada', 'Canada')"><div class="pulse"></div><div class="dot"></div></div>
 
-                    <div class="percent-pin" style="left: 81.5%; top: 76.5%;" onmouseenter="showPercentTooltip(event, 'Austrálie', 'Australia')" onmouseleave="hideTooltip()"><div class="pulse"></div><div class="dot"></div></div>
+                    <div class="percent-pin" style="left: 81.5%; top: 76.5%;" onclick="togglePercentTooltip(event, 'Austrálie', 'Australia')"><div class="pulse"></div><div class="dot"></div></div>
                 </div>
             </div>
         </div>
@@ -550,6 +550,7 @@
 
         let touchStartX = 0;
         let touchEndX = 0;
+        let activePinTooltip = null;
 
         const i18n = {
             cz: {
@@ -588,9 +589,18 @@
             }
         };
 
-        function showPercentTooltip(evt, textCz, textEn) {
+        function togglePercentTooltip(evt, textCz, textEn) {
+            evt.stopPropagation();
             const tooltip = document.getElementById('map-tooltip');
             const name = currentLang === 'en' ? textEn : textCz;
+            
+            if (activePinTooltip === evt.currentTarget) {
+                hideTooltip();
+                activePinTooltip = null;
+                return;
+            }
+
+            activePinTooltip = evt.currentTarget;
             tooltip.textContent = name;
             
             const wrapperRect = document.querySelector('.map-wrapper').getBoundingClientRect();
@@ -605,6 +615,11 @@
             const tooltip = document.getElementById('map-tooltip');
             tooltip.classList.remove('active');
         }
+
+        document.addEventListener('click', () => {
+            hideTooltip();
+            activePinTooltip = null;
+        });
 
         function toggleAboutText() {
             const moreContent = document.getElementById('more-about-content');
