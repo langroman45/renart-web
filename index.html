@@ -125,7 +125,9 @@
         .card-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.2rem; flex-grow: 1; line-height: 1.5; }
 
         .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: auto; }
+        .card-price-wrap { display: flex; flex-direction: column; }
         .card-price { font-size: 1.15rem; font-weight: 700; color: var(--text-main); }
+        .price-note { font-size: 0.75rem; color: var(--text-muted); margin-top: -2px; }
         
         .btn-inquire { background: transparent; color: var(--accent-gold); border: 1px solid var(--accent-gold); padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: all 0.3s; }
         .btn-inquire:hover { background: var(--accent-gold); color: #000; }
@@ -313,7 +315,6 @@
             box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
         }
 
-        /* TLAČÍTKO PRO OTEVŘENÍ FORMULÁŘE */
         .modal-action-bar {
             margin-top: 1rem;
             display: flex;
@@ -332,7 +333,7 @@
         }
         .btn-open-form:hover { opacity: 0.9; }
 
-        /* OBJEDNACÍ FORMULÁŘ (MODAL / OVERLAY) */
+        /* FORMULÁŘ */
         .form-overlay {
             position: fixed;
             top: 0;
@@ -723,6 +724,7 @@
                 formHeading: "Nezávazná poptávka díla",
                 lblArtwork: "Vybrané dílo", lblEmail: "Váš e-mail *", lblPhone: "Telefonní číslo *", lblMessage: "Vaše zpráva / poznámka",
                 formSubmit: "Odeslat poptávku", formSuccess: "Děkuji! Vaše poptávka byla úspěšně odeslána. Brzy se vám ozvu.",
+                priceNote: "",
                 emptyObrazy: "V této sekci se momentálně nenacházejí žádná díla odpovídající filtru.",
                 readMore: "Zobrazit více", readLess: "Zobrazit méně"
             },
@@ -743,6 +745,7 @@
                 formHeading: "Artwork Inquiry",
                 lblArtwork: "Selected Artwork", lblEmail: "Your Email *", lblPhone: "Phone Number *", lblMessage: "Your Message / Note",
                 formSubmit: "Send Inquiry", formSuccess: "Thank you! Your inquiry has been successfully sent. I will get back to you soon.",
+                priceNote: "* Shipping costs not included",
                 emptyObrazy: "No items found matching this filter.",
                 readMore: "Read More", readLess: "Read Less"
             }
@@ -945,7 +948,12 @@
                     ? `<img src="${p.imageUrl}" alt="${name}" loading="lazy">` 
                     : `<span>[Obrázek: ${name}]</span>`;
 
-                const priceDisplay = sold ? '' : `<span class="card-price">${formatPrice(p.price)}</span>`;
+                const priceDisplay = sold ? '' : `
+                    <div class="card-price-wrap">
+                        <span class="card-price">${formatPrice(p.price)}</span>
+                        <span class="price-note">${txt.priceNote}</span>
+                    </div>
+                `;
 
                 const card = document.createElement('div');
                 card.className = 'card';
@@ -1053,10 +1061,8 @@
             updateModalImage();
         }
 
-        /* OTEVŘENÍ A ZAVŘENÍ FORMULÁŘE PRO POPTÁVKU */
         function openInquireForm() {
             if (!activeProduct) return;
-            const txt = i18n[currentLang];
             const name = currentLang === 'en' ? activeProduct.name_en : activeProduct.name_cz;
 
             document.getElementById('form-product-name').textContent = name;
@@ -1086,7 +1092,6 @@
             const phone = document.getElementById('form-input-phone').value;
             const message = document.getElementById('form-input-message').value;
 
-            // Odeslání dat do Google Sheets / Apps Scriptu (pokud váš skript podporuje POST požadavek)
             try {
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
@@ -1098,13 +1103,11 @@
                 console.error("Chyba při odesílání formuláře:", e);
             }
 
-            // Zobrazení úspěšné hlášky
             document.getElementById('painting-inquire-form').style.display = 'none';
             const successMsg = document.getElementById('form-success-msg');
             successMsg.textContent = txt.formSuccess;
             successMsg.style.display = 'block';
 
-            // Po 3 vteřinách formuláře zavřeme
             setTimeout(() => {
                 document.getElementById('inquire-form-modal').classList.remove('active');
                 document.getElementById('product-modal').classList.remove('active');
