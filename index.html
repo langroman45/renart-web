@@ -34,6 +34,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
         html, body { width: 100%; max-width: 100%; overflow-x: hidden; background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; position: relative; }
         
+        /* DESKTOP HEADER – zafixovaný, nehýbá se */
         header { padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: none; background: rgba(11, 11, 15, 0.95); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); width: 100%; }
         
         .logo-container { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
@@ -433,12 +434,44 @@
 
         .loading { text-align: center; color: var(--text-muted); grid-column: 1/-1; padding: 3rem; font-size: 1rem; }
 
-        /* PŮVODNÍ MOBILNÍ STYL */
+        /* SPECIÁLNÍ VÝJIMKA POUZE PRO MOBILY (do 768px): Logo vlevo, IG + CZ/EN vpravo na 1. řádku */
         @media (max-width: 768px) {
-            header { flex-wrap: wrap; gap: 0.8rem; padding: 1rem 4%; }
-            nav { width: 100%; justify-content: space-between; overflow-x: auto; padding-bottom: 0.3rem; gap: 1rem; }
-            nav a { font-size: 0.85rem; }
-            .lang-switch { margin-left: 0; }
+            header { 
+                flex-direction: column; 
+                align-items: stretch;
+                padding: 0.8rem 4%; 
+                gap: 0.6rem;
+            }
+
+            .mobile-top-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+
+            .desktop-right-items {
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+            }
+
+            /* Na mobilu schováme prvcům původní pozici v navigačním pruhu */
+            nav .social-icon-desktop,
+            nav .lang-switch-desktop {
+                display: none !important;
+            }
+
+            nav { 
+                width: 100%; 
+                justify-content: flex-start; 
+                overflow-x: auto; 
+                padding-bottom: 0.3rem; 
+                gap: 1.2rem;
+                -webkit-overflow-scrolling: touch;
+            }
+            nav a { font-size: 0.88rem; }
+            
             .hero { min-height: 45vh; padding: 3.5rem 4%; }
             .hero h1 { font-size: 2rem; margin-bottom: 0.6rem; }
             .hero p { font-size: 0.95rem; max-width: 100%; padding: 0 0.5rem; }
@@ -459,16 +492,40 @@
             .modal-thumb { width: 42px; height: 42px; }
         }
 
+        /* Na desktopu schováme mobilní horní řádek, aby fungovalo původní uspořádání */
+        @media (min-width: 769px) {
+            .mobile-top-row {
+                display: contents;
+            }
+        }
+
         footer { text-align: center; padding: 3rem 5%; color: var(--text-muted); border-top: none; font-size: 0.85rem; }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="#" class="logo-container">
-            <img src="./logo.jpg" alt="RenArt Logo" class="logo-img">
-            <span class="logo">RenArt</span>
-        </a>
+        <!-- Mobilní horní řádek (na desktopu se chová jako součástí původního flexu) -->
+        <div class="mobile-top-row">
+            <a href="#" class="logo-container">
+                <img src="./logo.jpg" alt="RenArt Logo" class="logo-img">
+                <span class="logo">RenArt</span>
+            </a>
+
+            <!-- Na mobilu se zkopíruje sem nahoru vedle loga -->
+            <div class="desktop-right-items" style="display: none;">
+                <a href="https://www.instagram.com/__renart__/" target="_blank" rel="noopener noreferrer" class="social-icon" title="Instagram">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="switchLang('cz', this)">CZ</button>
+                    <button class="lang-btn" onclick="switchLang('en', this)">EN</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Původní navigace pro desktop -->
         <nav>
             <a href="#obrazy" id="nav-obrazy">Obrazy</a>
             <a href="#mapa" id="nav-mapa">Kde tvořím radost</a>
@@ -477,11 +534,11 @@
             <a href="#faq" id="nav-faq">FAQ</a>
             <a href="#kontakt" id="nav-contact">Kontakt</a>
             
-            <a href="https://www.instagram.com/__renart__/" target="_blank" rel="noopener noreferrer" class="social-icon" title="Instagram">
+            <a href="https://www.instagram.com/__renart__/" target="_blank" rel="noopener noreferrer" class="social-icon social-icon-desktop" title="Instagram">
                 <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
             </a>
 
-            <div class="lang-switch">
+            <div class="lang-switch lang-switch-desktop">
                 <button class="lang-btn active" onclick="switchLang('cz', this)">CZ</button>
                 <button class="lang-btn" onclick="switchLang('en', this)">EN</button>
             </div>
@@ -696,6 +753,21 @@ Zasílám po celém světě prostřednictvím ověřených kurýrních služeb. 
     </footer>
 
     <script>
+        // Skript pro zkopírování Instagramu a jazyků do horního řádku na mobilu
+        document.addEventListener("DOMContentLoaded", function() {
+            if (window.innerWidth <= 768) {
+                const rightItems = document.querySelector('nav .social-icon-desktop').cloneNode(true);
+                const langSwitch = document.querySelector('nav .lang-switch-desktop').cloneNode(true);
+                const container = document.querySelector('.desktop-right-items');
+                if (container) {
+                    container.innerHTML = '';
+                    container.appendChild(rightItems);
+                    container.appendChild(langSwitch);
+                    container.style.display = 'flex';
+                }
+            }
+        });
+
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby4sO8KMXCJG9ZawXUnwuuaVR69FEoR-lherlvLEwZaJJ_JE4yz5u4G9x5EYtAGsvZb6g/exec';
         
         let products = [];
@@ -1200,9 +1272,13 @@ Zasílám po celém světě prostřednictvím ověřených kurýrních služeb. 
         function switchLang(lang, btnElement) {
             currentLang = lang;
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            if(btnElement) {
-                btnElement.classList.add('active');
-            }
+            
+            // Synchronizuje aktivní stav tlačítek na mobilu i desktopu
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if ((lang === 'cz' && btn.textContent === 'CZ') || (lang === 'en' && btn.textContent === 'EN')) {
+                    btn.classList.add('active');
+                }
+            });
 
             const txt = i18n[lang];
             
