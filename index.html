@@ -34,7 +34,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
         html, body { width: 100%; max-width: 100%; overflow-x: hidden; background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; position: relative; }
         
-        /* DESKTOP HEADER – zafixovaný, nehýbá se */
+        /* DESKTOP HEADER */
         header { padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: none; background: rgba(11, 11, 15, 0.95); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); width: 100%; }
         
         .logo-container { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
@@ -168,14 +168,14 @@
         .btn-toggle-about { background: transparent; color: var(--accent-gold); border: 1px solid var(--accent-gold); padding: 0.6rem 1.4rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.3s; margin-top: 1rem; display: inline-block; }
         .btn-toggle-about:hover { background: var(--accent-gold); color: #000; }
 
-        /* FAQ SEKCE */
+        /* FAQ SEKCE (Opravena výška, aby text nepatřil dolů přes okraj) */
         .faq-container { max-width: 850px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.8rem; }
         .faq-item { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; }
         .faq-question { padding: 1.2rem 1.5rem; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
         .faq-question::after { content: '+'; font-size: 1.4rem; color: var(--accent-gold); transition: transform 0.3s; }
         .faq-item.active .faq-question::after { transform: rotate(45deg); }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding: 0 1.5rem; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
-        .faq-item.active .faq-answer { max-height: 400px; padding: 0 1.5rem 1.2rem 1.5rem; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 1.5rem; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+        .faq-item.active .faq-answer { max-height: 1200px; padding: 0 1.5rem 1.2rem 1.5rem; }
 
         /* KONTAKT SEKCE */
         .contact-box { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 2.5rem 1.5rem; text-align: center; max-width: 700px; margin: 0 auto; }
@@ -434,7 +434,7 @@
 
         .loading { text-align: center; color: var(--text-muted); grid-column: 1/-1; padding: 3rem; font-size: 1rem; }
 
-        /* SPECIÁLNÍ VÝJIMKA POUZE PRO MOBILY (do 768px): Logo vlevo, IG + CZ/EN vpravo na 1. řádku */
+        /* SPECIÁLNÍ MOBILNÍ VÝJIMKA (Desktop zůstává naprosto původní) */
         @media (max-width: 768px) {
             header { 
                 flex-direction: column; 
@@ -456,7 +456,6 @@
                 gap: 0.8rem;
             }
 
-            /* Na mobilu schováme prvcům původní pozici v navigačním pruhu */
             nav .social-icon-desktop,
             nav .lang-switch-desktop {
                 display: none !important;
@@ -492,7 +491,6 @@
             .modal-thumb { width: 42px; height: 42px; }
         }
 
-        /* Na desktopu schováme mobilní horní řádek, aby fungovalo původní uspořádání */
         @media (min-width: 769px) {
             .mobile-top-row {
                 display: contents;
@@ -505,14 +503,12 @@
 <body>
 
     <header>
-        <!-- Mobilní horní řádek (na desktopu se chová jako součástí původního flexu) -->
         <div class="mobile-top-row">
             <a href="#" class="logo-container">
                 <img src="./logo.jpg" alt="RenArt Logo" class="logo-img">
                 <span class="logo">RenArt</span>
             </a>
 
-            <!-- Na mobilu se zkopíruje sem nahoru vedle loga -->
             <div class="desktop-right-items" style="display: none;">
                 <a href="https://www.instagram.com/__renart__/" target="_blank" rel="noopener noreferrer" class="social-icon" title="Instagram">
                     <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -525,7 +521,6 @@
             </div>
         </div>
 
-        <!-- Původní navigace pro desktop -->
         <nav>
             <a href="#obrazy" id="nav-obrazy">Obrazy</a>
             <a href="#mapa" id="nav-mapa">Kde tvořím radost</a>
@@ -753,7 +748,6 @@ Zasílám po celém světě prostřednictvím ověřených kurýrních služeb. 
     </footer>
 
     <script>
-        // Skript pro zkopírování Instagramu a jazyků do horního řádku na mobilu
         document.addEventListener("DOMContentLoaded", function() {
             if (window.innerWidth <= 768) {
                 const rightItems = document.querySelector('nav .social-icon-desktop').cloneNode(true);
@@ -814,7 +808,7 @@ Zasílám po celém světě prostřednictvím ověřených kurýrních služeb. 
 
                 faqQ1: "Jak probíhá zakoupení nebo rezervace díla?", faqA1: "U vybraného díla stačí kliknout na tlačítko „Mám zájem“ a vyplnit krátký formulář. Následně se vám ozvu s detaily.",
                 faqQ2: "Je možné vytvořit obraz na zakázku?", faqA2: "Ano! Velmi ráda tvořím osobitá díla přímo na míru vašim přáním nebo barevným preferencím vašeho interiéru. Neváhejte mě kontaktovat s vaší představou.",
-                faqQ3: "Jakým způsobem probíhá doručení obrazů?", faqA3: "Obrazy pečlivě balím tak, aby k vám dorazily v naprostém pořádku. Zasílám po celé ČR i do zahraničí přes ověřené kurýrní služby. Po dohodě je možné i osobní předání.",
+                faqQ3: "Jakým způsobem probíhá doručení obrazů?", faqA3: "Obrazy pečlivě balím tak, aby k vám dorazily v naprostém pořádku. Do České republiky a do ostatních evropských zemí zasílám obrazy napnuté na rámu.\n\nU zásilek mimo Evropu plátno z bezpečnostních důvodů sundávám z rámu a pečlivě srolované jej balím do speciálního ochranného tubusu, který zajišťuje bezpečnější přepravu na delší vzdálenosti. Po doručení si můžete nechat plátno znovu napnout na rám v nejbližší rámařské dílně.\n\nZasílám po celém světě prostřednictvím ověřených kurýrních služeb. Po předchozí domluvě je možné také osobní předání v Berouně a okolí.",
                 
                 contactHeading: "Máte zájem o dílo?", contactSub: "Napište mi a ráda s vámi proberu detaily, osobní předání nebo možnosti dopravy.",
                 
@@ -1273,7 +1267,6 @@ Zasílám po celém světě prostřednictvím ověřených kurýrních služeb. 
             currentLang = lang;
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             
-            // Synchronizuje aktivní stav tlačítek na mobilu i desktopu
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 if ((lang === 'cz' && btn.textContent === 'CZ') || (lang === 'en' && btn.textContent === 'EN')) {
                     btn.classList.add('active');
@@ -1282,7 +1275,6 @@ Zasílám po celém světě prostřednictvím ověřených kurýrních služeb. 
 
             const txt = i18n[lang];
             
-            // Navigace & Hero
             document.getElementById('nav-obrazy').textContent = txt.navObrazy;
             document.getElementById('nav-mapa').textContent = txt.navMapa;
             document.getElementById('nav-recenze').textContent = txt.navRecenze;
@@ -1307,7 +1299,6 @@ Zasílám po celém světě prostřednictvím ověřených kurýrních služeb. 
             document.getElementById('btn-price-asc').textContent = txt.btnPriceAsc;
             document.getElementById('btn-price-desc').textContent = txt.btnPriceDesc;
 
-            // O autorce
             document.getElementById('about-p1').innerHTML = `<strong>${txt.aboutP1}</strong>`;
             document.getElementById('about-p2').textContent = txt.aboutP2;
             document.getElementById('about-p3').textContent = txt.aboutP3;
@@ -1330,7 +1321,6 @@ Zasílám po celém světě prostřednictvím ověřených kurýrních služeb. 
             const moreContent = document.getElementById('more-about-content');
             document.getElementById('toggle-about-btn').textContent = moreContent.classList.contains('visible') ? txt.readLess : txt.readMore;
 
-            // FAQ
             document.getElementById('faq-q1').textContent = txt.faqQ1;
             document.getElementById('faq-a1').textContent = txt.faqA1;
             document.getElementById('faq-q2').textContent = txt.faqQ2;
@@ -1338,11 +1328,9 @@ Zasílám po celém světě prostřednictvím ověřených kurýrních služeb. 
             document.getElementById('faq-q3').textContent = txt.faqQ3;
             document.getElementById('faq-a3').textContent = txt.faqA3;
 
-            // Kontakt
             document.getElementById('contact-heading').textContent = txt.contactHeading;
             document.getElementById('contact-sub').textContent = txt.contactSub;
 
-            // Formulář
             document.getElementById('form-heading').textContent = txt.formHeading;
             document.getElementById('lbl-artwork').textContent = txt.lblArtwork;
             document.getElementById('lbl-email').textContent = txt.lblEmail;
